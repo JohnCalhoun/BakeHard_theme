@@ -1,3 +1,12 @@
 /*
-
+Theme Name: BakeHard
+Theme URI: johnmcalhoun.com
+Author: John M Calhoun
+Author URI: johnmcalhoun.com
+Description: Provide a simple blog for the BakeHard Bakery
+Version: 1.0
+License: Apache 2
+License URI: 
+Tags:flexible-width, custom-header, featured-images
+Text Domain: bakeHard
 */

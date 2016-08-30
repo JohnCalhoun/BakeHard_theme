@@ -1,6 +1,6 @@
 output_dir=../tmp/staging
 
-build: sass
+build: sass info.txt
 	cat info.txt > style.css && sass sass/style.scss >> style.css
 
 move: build
