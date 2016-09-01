@@ -1,7 +1,8 @@
 .PHONY: clean upload style js assets php stage
+.IGNORE: clean
 
 clean:
-	rm -r ./tmp/staging/*; rm -r ./tmp/bakehard/*
+	rm -r ./tmp/staging/*; rm -r ./tmp/bakehard/*; return 1
 
 style: 
 	cd ./style && make all 
@@ -24,6 +25,6 @@ package: stage
 	zip -r bakehard.zip ./bakehard	&& \
 	mv bakehard.zip .. 
 
-upload: package
-	scp -r -P 18765 ./tmp/staging/* johnmcal@johnmcalhoun.com:~/public_html/bakehard/wp-content/themes/bakehard
+upload: stage
+	rsync -r --port=18765 -e ssh ./tmp/staging johnmcal@johnmcalhoun.com:~/public_html/bakehard/wp-content/themes/bakehard
 	
