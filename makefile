@@ -26,5 +26,5 @@ package: stage
 	mv bakehard.zip .. 
 
 upload: stage
-	rsync -r -e 'ssh -p 18765' ./tmp/staging johnmcal@johnmcalhoun.com:~/public_html/bakehard/wp-content/themes/bakehard
+	rsync -r -e 'ssh -p 18765' ./tmp/staging/ johnmcal@johnmcalhoun.com:~/public_html/bakehard/wp-content/themes/bakehard
 	
