@@ -1,4 +1,5 @@
-<footer class="page-footer container">
+</main>
+<footer class="page-footer">
     <div class='title-name'><span class='flow-text'><?php bloginfo('name'); ?></span></div>
     <div class='title-descript'><?php bloginfo('description'); ?></div>
 </footer>

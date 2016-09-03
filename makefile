@@ -2,7 +2,7 @@
 .IGNORE: clean
 
 clean:
-	rm -r ./tmp/staging/*; rm -r ./tmp/bakehard/*; return 1
+	rm -r ./tmp/staging/*; rm -r ./tmp/bakehard/*
 
 style: 
 	cd ./style && make all 
@@ -26,5 +26,5 @@ package: stage
 	mv bakehard.zip .. 
 
 upload: stage
-	rsync -r -e 'ssh -p 18765' ./tmp/staging/ johnmcal@johnmcalhoun.com:~/public_html/bakehard/wp-content/themes/bakehard
+	rsync -r --delete -e 'ssh -p 18765' ./tmp/staging/ johnmcal@johnmcalhoun.com:~/public_html/bakehard/wp-content/themes/bakehard
 	

@@ -10,7 +10,25 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-
+<header>
+    <div>
+        <nav>
+            <div id="main-nav" class="nav-wrapper"> 
+                <h1 class="brand-logo"><? bloginfo('name'); ?></h1>
+                <?php wp_nav_menu( array(     
+                    'menu'=>'main_menu',
+                    'depth'=>1,
+                    'menu_class'=>'main_menu right',
+                    'before'=>'',
+                    'after'=> '',
+                    'theme_location'=>'main_menu'
+                    )); 
+                ?>    
+            </div>
+        </nav>
+    </div>
+</header>
+<main id="main-content">
 
 
 

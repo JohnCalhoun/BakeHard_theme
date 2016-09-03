@@ -13,8 +13,8 @@ function theme_script() {
                         null,
                         true);
     wp_register_script( "bake-hard",
-                        get_template_directory_uri().'/js/cljs.js',
-                        array(),
+                        get_template_directory_uri().'/js/bakehard.js',
+                        array('jquery'),
                         null,
                         true);
     wp_enqueue_script("materialize");
