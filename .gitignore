@@ -2,3 +2,5 @@
 tmp/*
 *.zip
 */*.sass-cache/*
+*.log
+plovr.jar
