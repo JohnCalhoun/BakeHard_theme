@@ -10,11 +10,12 @@ bakehard.js:./src
 ./test/bakehard_test.js:./test/bakehard_test.src.js
 	java -jar ../bin/plovr.jar build build_test.js > test/bakehard_test.js
 
-test:./test/bakehard_test.js ./test/bakehard_test.html
-	./run_test.py  && rm *.log
+test:./test/bakehard_test.js ./test/bakehard_test.html ./run_test.py
+	./run_test.py && rm *.log
 
 move:dir bakehard.js
-	cp bakehard.js $(output_dir) && cp materialize.min.js $(output_dir)
+	cp bakehard.js $(output_dir) && cp src/materialize.min.js $(output_dir)
+
 
 all: move
 	
