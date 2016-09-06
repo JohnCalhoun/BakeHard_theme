@@ -31,7 +31,7 @@ class bakehardjs_test(unittest.TestCase):
         self.assertTrue(self.driver.execute_script('return window.G_testRunner.isSuccess()'))
     
     def test(self):
-        self.driver.get("http://localhost:"+str(PORT)+"/test/bakehard_test.html")
+        self.driver.get("http://localhost:"+str(PORT)+"/src/test/html/pageLoad_test.html")
         self.wait()
         self.report()
         self.check_success() 

@@ -1,6 +1,7 @@
 {
     "id":"bakehard",
-    "paths":".",
-    "inputs":"bakehard.src.js",
+    "paths":[".","test"],
+    "inputs":["pageLoad.js","test/js/pageLoad_test.js"],
     "externs":"jquery-extern.js"
 }
+
