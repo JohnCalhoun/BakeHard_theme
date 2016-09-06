@@ -16,10 +16,16 @@ bakehard.view.extractInsert=function(data){
 bakehard.view.render=function(page_url){
     $.ajax(
         {   url:page_url,
+            beforeSend:function(){
+                $(document).trigger('page_rendering',{"page":page_url})
+            },
             success:function(result){
                 bakehard.view.clear();
                 bakehard.view.extractInsert(result);
-                $(document).trigger('page_rendered')
+                $(document).trigger('page_rendered',["success"])
+            },
+            error:function(result){
+                $(document).trigger('page_rendered',["fail"])
             }
         }
     )

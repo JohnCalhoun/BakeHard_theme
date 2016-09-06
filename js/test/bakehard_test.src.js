@@ -28,19 +28,57 @@ var testRender=function(){
     goog.events.listenOnce( event_target,
                             "page_rendered",
                             function(){});
+    goog.events.listenOnce( event_target,
+                            "page_rendering",
+                            function(){});
+
+    
+    var before_send_called=false; 
+    var result={} 
     waitForEvent(
         event_target,
         "page_rendered",
         function(){  
             assertNotEquals("data should be loaded and inserted",0,$(".content").children('#test-render').length)
+            assertTrue("before event should be called",before_send_called)
+            assertEquals("event should be success","success",result) 
         }
     );
-    $(document).on("page_rendered",function(){
+    
+    $(document).on("page_rendered",function(ev,arg1){
+        result=arg1
         event_target.dispatchEvent('page_rendered')
     });
+    $(document).on("page_rendering",function(){
+        event_target.dispatchEvent('page_rendering')
+        before_send_called=true;
+    });
+
     bakehard.view.render("data.html")   
+}
+var testRender_fail=function(){ 
+    setup()
+
+    var event_target=new goog.events.EventTarget() 
+    goog.events.listenOnce( event_target,
+                            "page_rendered",
+                            function(){});
     
-    clear()
+    var result={} 
+    waitForEvent(
+        event_target,
+        "page_rendered",
+        function(){  
+            assertEquals("event should be failed","fail",result) 
+        }
+    );
+    
+    $(document).on("page_rendered",function(ev,arg1){
+        result=arg1
+        event_target.dispatchEvent('page_rendered')
+    });
+
+    bakehard.view.render("not_here")   
 }
 
 var testCase=new goog.testing.ContinuationTestCase();
