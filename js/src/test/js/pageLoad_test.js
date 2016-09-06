@@ -4,6 +4,7 @@ goog.require('bakehard.pageLoad')
 goog.require('goog.events.EventTarget')
 goog.require('goog.events.EventTarget')
 
+if(typeof pageLoad_test_flag != 'undefined'){
 var clear=function(){
     $(bakehard.pageLoad.content_selector).empty();
     assertEquals("test should start out empty",0,$('#test').length)
@@ -85,4 +86,4 @@ var testCase=new goog.testing.ContinuationTestCase();
 testCase.autoDiscoverTests();
 G_testRunner.initialize(testCase);
 
-
+}

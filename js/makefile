@@ -4,7 +4,7 @@ output_dir=../tmp/staging/js
 dir: 
 	mkdir -p $(output_dir)
 
-bakehard.js:./src/*.js
+bakehard.js:./src
 	java -jar ../bin/plovr.jar build src/build.js > bakehard.js
 
 test:bakehard.js

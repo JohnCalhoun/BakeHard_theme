@@ -30,11 +30,19 @@ class bakehardjs_test(unittest.TestCase):
     def check_success(self):
         self.assertTrue(self.driver.execute_script('return window.G_testRunner.isSuccess()'))
     
-    def test(self):
+    def test_pageLoad(self):
         self.driver.get("http://localhost:"+str(PORT)+"/src/test/html/pageLoad_test.html")
         self.wait()
         self.report()
         self.check_success() 
+    
+    def test_scrollLoad(self):
+        self.driver.get("http://localhost:"+str(PORT)+"/src/test/html/scrollLoad_test.html")
+        self.wait()
+        self.report()
+        self.check_success() 
+
+
 
 
 if __name__ == '__main__':
