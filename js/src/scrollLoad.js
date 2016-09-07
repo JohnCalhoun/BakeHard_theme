@@ -1,10 +1,10 @@
 goog.provide('bakehard.scrollLoad');
 
-$(document).scroll(function(){
-    var scroll_bottom=$(window).scrollTop()+$(window).height();
-    var page_length=$(document).height()-30;
+jQuery(document).scroll(function(){
+    var scroll_bottom=jQuery(window).scrollTop()+jQuery(window).height();
+    var page_length=jQuery(document).height()-30;
     
     if( scroll_bottom >= page_length){
-        $(document).trigger('scrolled2Bottom');
+        jQuery(document).trigger('scrolled2Bottom');
     };
 })
