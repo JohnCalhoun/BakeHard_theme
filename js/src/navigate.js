@@ -14,12 +14,8 @@ bakehard.navigate.navigate=function(e){
     var base_url=nav.attr('data-local-url')
    
     if(path.indexOf(base_url) != -1){
-        e.preventDefault() 
-        
-        bakehard.pageLoad.swap(path,source_id,target_id)
-
-        var hash='#'+goog.uri.utils.getPath(path)
-        history.pushState(null,null,hash) 
+        e.preventDefault()  
+        page("/page/"+target_id+"/"+source_id+"/"+path)
     }
 };
 jQuery(document).on('click','.nav,.a',bakehard.navigate.navigate)
