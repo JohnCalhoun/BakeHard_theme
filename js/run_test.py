@@ -42,14 +42,18 @@ class bakehardjs_test(unittest.TestCase):
     def test_scrollLoad(self):
         self.url_test("scrollLoad_test.html")
 
-    def test_renderThumbnail(self):
-        self.url_test("renderThumbnail_test.html")
-
-    def test_swap(self):
-        self.url_test("swap_test.html")
-
     def test_routes(self):
         self.url_test("routes_test.html")
+
+    def test_thumbnail(self):
+        self.url_test("renderthumbnail_test.html")
+
+    def test_page(self):
+        self.url_test("page_test.html")
+
+    def test_post(self):
+        self.url_test("post_test.html")
+
 
 
 if __name__ == '__main__':

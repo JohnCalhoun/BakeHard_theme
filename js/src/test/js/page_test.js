@@ -1,10 +1,10 @@
 goog.require('goog.testing.ContinuationTestCase')
 goog.require('goog.testing.jsunit')
-goog.require('bakehard.pageLoad')
+goog.require('bakehard.render.page')
 goog.require('goog.events.EventTarget')
 goog.require('goog.events.EventTarget')
 
-if(typeof pageLoad_test_flag != 'undefined'){
+if(typeof page_test_flag != 'undefined'){
 var clear=function(){
     $(".content").empty();
     assertEquals("test should start out empty",0,$('#test').length)
@@ -17,7 +17,7 @@ var testInsert=function(){
     
     var data="<div class='content_selector'><p id='test'>test<p></div>" 
 
-    bakehard.pageLoad.extractInsert(data,".content_selector",".content")    
+    bakehard.render.page.extractInsert(data,".content_selector",".content")    
     assertNotEquals("data should be inserted",0,$(".content").children('#test').length)
     
     clear()
@@ -56,7 +56,7 @@ var testRender=function(){
         before_send_called=true;
     });
 
-    bakehard.pageLoad.swap("/src/test/html/data.html",".content_selector",".content")   
+    bakehard.render.page.load("/src/test/html/data.html",".content_selector",".content")   
 }
 var testRender_fail=function(){ 
     setup()
@@ -80,7 +80,7 @@ var testRender_fail=function(){
         event_target.dispatchEvent('page_rendered')
     });
 
-    bakehard.pageLoad.swap("not_here",".content_selector",".content")   
+    bakehard.render.page.load("not_here",".content_selector",".content")   
 }
 
 var testCase=new goog.testing.ContinuationTestCase();

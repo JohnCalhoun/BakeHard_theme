@@ -2,7 +2,6 @@ goog.provide('bakehard.navigate');
 
 goog.require('bakehard.routes');
 goog.require('bakehard.pageLoad');
-goog.require('goog.uri.utils');
 
 bakehard.navigate.navigate=function(e){    
     var link=$(e.target)

@@ -1,10 +1,10 @@
 goog.require('goog.testing.ContinuationTestCase')
 goog.require('goog.testing.jsunit')
 goog.require('goog.testing.PropertyReplacer')
-goog.require('bakehard.renderThumbnail')
+goog.require('bakehard.render.thumbnail')
 goog.require('goog.events.EventTarget')
 
-if(typeof renderThumbnail_test_flag != 'undefined'){
+if(typeof thumbnail_test_flag != 'undefined'){
 var stubs;
 
 var setUp=function(){
@@ -16,7 +16,7 @@ var tearDown=function(){
 }
 var testLoad=function(){
     stubs.set(
-        bakehard.renderThumbnail,
+        bakehard.render.thumbnail,
         "list_posts_url",
         function(){
             return("/src/test/json/post.json"); 
@@ -40,7 +40,7 @@ var testLoad=function(){
         event_target.dispatchEvent('check')
     });
   
-    bakehard.renderThumbnail.load()
+    bakehard.render.thumbnail.load()
 }
 
 var testCase=new goog.testing.ContinuationTestCase();
