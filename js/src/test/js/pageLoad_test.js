@@ -6,17 +6,18 @@ goog.require('goog.events.EventTarget')
 
 if(typeof pageLoad_test_flag != 'undefined'){
 var clear=function(){
-    $(bakehard.pageLoad.content_selector).empty();
+    $(".content").empty();
     assertEquals("test should start out empty",0,$('#test').length)
 }
+
 var setup=clear
 
 var testInsert=function(){
     setup()
     
-    var data="<div class='content_selector'><p id='test'>test<p></div>".replace("content_selector",bakehard.pageLoad.content_class) 
+    var data="<div class='content_selector'><p id='test'>test<p></div>" 
 
-    bakehard.pageLoad.extractInsert(data)    
+    bakehard.pageLoad.extractInsert(data,".content_selector",".content")    
     assertNotEquals("data should be inserted",0,$(".content").children('#test').length)
     
     clear()
@@ -55,7 +56,7 @@ var testRender=function(){
         before_send_called=true;
     });
 
-    bakehard.pageLoad.render("/src/test/html/data.html")   
+    bakehard.pageLoad.swap("/src/test/html/data.html",".content_selector",".content")   
 }
 var testRender_fail=function(){ 
     setup()
@@ -79,7 +80,7 @@ var testRender_fail=function(){
         event_target.dispatchEvent('page_rendered')
     });
 
-    bakehard.pageLoad.render("not_here")   
+    bakehard.pageLoad.swap("not_here",".content_selector",".content")   
 }
 
 var testCase=new goog.testing.ContinuationTestCase();

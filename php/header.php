@@ -13,7 +13,8 @@
 <header>
     <div>
         <nav>
-            <div id="main-nav" class="nav-wrapper"> 
+            <div id="main-nav" class="nav-wrapper nav" 
+            data-target-window="#main-content" data-local-url="<?php echo get_site_url() ?>"> 
                 <h1 class="brand-logo"><? bloginfo('name'); ?></h1>
                 <?php wp_nav_menu( array(     
                     'menu'=>'main_menu',
