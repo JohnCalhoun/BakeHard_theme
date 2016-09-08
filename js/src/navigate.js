@@ -1,9 +1,10 @@
-goog.provide('bakehard.navigation');
+goog.provide('bakehard.navigate');
 
+goog.require('bakehard.routes');
 goog.require('bakehard.pageLoad');
 goog.require('goog.uri.utils');
 
-bakehard.navigation.navigate=function(e){    
+bakehard.navigate.navigate=function(e){    
     var link=$(e.target)
     var path=link.attr('href')
     
@@ -14,10 +15,11 @@ bakehard.navigation.navigate=function(e){
    
     if(path.indexOf(base_url) != -1){
         e.preventDefault() 
+        
         bakehard.pageLoad.swap(path,source_id,target_id)
 
         var hash='#'+goog.uri.utils.getPath(path)
         history.pushState(null,null,hash) 
     }
 };
-jQuery(document).on('click','.nav,.a',bakehard.navigation.navigate)
+jQuery(document).on('click','.nav,.a',bakehard.navigate.navigate)

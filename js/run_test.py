@@ -36,8 +36,8 @@ class bakehardjs_test(unittest.TestCase):
         self.report()
         self.check_success() 
  
-    def test_pageLoad(self):
-        self.url_test("pageLoad_test.html")
+    def test_navigate(self):
+        self.url_test("navigate_test.html")
     
     def test_scrollLoad(self):
         self.url_test("scrollLoad_test.html")
@@ -45,8 +45,11 @@ class bakehardjs_test(unittest.TestCase):
     def test_renderThumbnail(self):
         self.url_test("renderThumbnail_test.html")
 
-    def test_navigation(self):
-        self.url_test("navigation_test.html")
+    def test_swap(self):
+        self.url_test("swap_test.html")
+
+    def test_routes(self):
+        self.url_test("routes_test.html")
 
 
 if __name__ == '__main__':

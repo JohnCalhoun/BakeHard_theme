@@ -2,10 +2,10 @@ goog.require('goog.testing.ContinuationTestCase')
 goog.require('goog.testing.jsunit')
 goog.require('goog.testing.PropertyReplacer')
 goog.require('goog.uri.utils')
-goog.require('bakehard.navigation')
+goog.require('bakehard.navigate')
 goog.require('goog.events.EventTarget')
 
-if(typeof navigation_test_flag != 'undefined'){
+if(typeof navigate_test_flag != 'undefined'){
 var setUp=function(){}
 
 var tearDown=function(){}
@@ -34,7 +34,6 @@ var testnavigate=function(){
     });
 
     $('#link-1').click()
-
 }
 
 var testCase=new goog.testing.ContinuationTestCase();
