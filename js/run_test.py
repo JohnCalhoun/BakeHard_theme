@@ -29,24 +29,25 @@ class bakehardjs_test(unittest.TestCase):
     
     def check_success(self):
         self.assertTrue(self.driver.execute_script('return window.G_testRunner.isSuccess()'))
-  
-    def test_pageLoad(self):
-        self.driver.get("http://localhost:"+str(PORT)+"/src/test/html/pageLoad_test.html")
+ 
+    def url_test(self,page):
+        self.driver.get("http://localhost:"+str(PORT)+"/src/test/html/"+page)
         self.wait()
         self.report()
         self.check_success() 
+ 
+    def test_pageLoad(self):
+        self.url_test("pageLoad_test.html")
     
     def test_scrollLoad(self):
-        self.driver.get("http://localhost:"+str(PORT)+"/src/test/html/scrollLoad_test.html")
-        self.wait()
-        self.report()
-        self.check_success() 
+        self.url_test("scrollLoad_test.html")
 
     def test_renderThumbnail(self):
-        self.driver.get("http://localhost:"+str(PORT)+"/src/test/html/renderThumbnail_test.html")
-        self.wait()
-        self.report()
-        self.check_success() 
+        self.url_test("renderThumbnail_test.html")
+
+    def test_navigation(self):
+        self.url_test("navigation_test.html")
+
 
 if __name__ == '__main__':
     Handler = SimpleHTTPServer.SimpleHTTPRequestHandler

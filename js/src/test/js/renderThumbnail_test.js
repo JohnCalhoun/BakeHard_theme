@@ -14,7 +14,7 @@ var setUp=function(){
 var tearDown=function(){
     stubs.reset();
 }
-var testEmpty=function(){
+var testLoad=function(){
     stubs.set(
         bakehard.renderThumbnail,
         "list_posts_url",
