@@ -7,8 +7,6 @@
                 "test/js/scrollLoad_test.js",
                 "page.js",
                 "test/js/page_test.js",
-                "post.js",
-                "test/js/post_test.js",
                 "routes.js",
                 "test/js/routes_test.js",
                 "thumbnail.js",

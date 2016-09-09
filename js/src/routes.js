@@ -1,7 +1,6 @@
 goog.provide('bakehard.routes')
 
 goog.require('bakehard.render.page')
-goog.require('bakehard.render.post')
 goog.require('bakehard.render.thumbnail')
 goog.require('goog.uri.utils');
 
@@ -39,7 +38,6 @@ bakehard.routes.init=function(ctx,next){
 
 page("#/*",bakehard.routes.init)
 page("#/page/:target_id/:source_id/*",bakehard.routes.page)
-page("#/post/post/:path",bakehard.routes.post)
 page("#/thumbnail/:per_page/:page/:url",bakehard.routes.thumbnail)
 
 

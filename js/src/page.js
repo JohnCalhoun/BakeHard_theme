@@ -28,8 +28,8 @@ bakehard.render.page.load=function(ctx){
         jQuery(document).trigger('page_rendering',{"page":page_url,"cached":true})
         render(ctx.state[page_url]) 
     }else{
-        jQuery.ajax(
-            {   url:page_url,
+        jQuery.ajax({
+                url:page_url,
                 beforeSend:function(){
                     jQuery(document).trigger('page_rendering',{"page":page_url,"cached":false})
                 },
@@ -40,8 +40,7 @@ bakehard.render.page.load=function(ctx){
                 error:function(result){
                     jQuery(document).trigger('page_rendered',["fail"])
                 }
-            }
-        )
+            })
     }
 };
 

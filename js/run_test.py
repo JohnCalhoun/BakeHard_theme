@@ -51,11 +51,6 @@ class bakehardjs_test(unittest.TestCase):
     def test_page(self):
         self.url_test("page_test.html")
 
-    def test_post(self):
-        self.url_test("post_test.html")
-
-
-
 if __name__ == '__main__':
     Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
     Handler.extensions_map.update({
