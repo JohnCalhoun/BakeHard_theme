@@ -2,15 +2,15 @@ goog.require('goog.testing.ContinuationTestCase')
 goog.require('goog.testing.jsunit')
 goog.require('goog.testing.PropertyReplacer')
 goog.require('goog.uri.utils')
-goog.require('bakehard.navigate')
+goog.require('bakehard.mainNav')
 goog.require('goog.events.EventTarget')
 
-if(typeof navigate_test_flag != 'undefined'){
+if(typeof mainNav_test_flag != 'undefined'){
 var setUp=function(){}
 
 var tearDown=function(){}
 
-var testnavigate=function(){
+var testMainNav=function(){
     var event_target=new goog.events.EventTarget() 
     goog.events.listenOnce( event_target,
                             "page_rendered",
@@ -21,7 +21,7 @@ var testnavigate=function(){
         "page_rendered",
         function(){       
             assertEquals(   "hash should have been changed",
-                            "/src/test/html/data.html",
+                            "/page/#target/#content/src/test/html/data.html",
                             goog.uri.utils.getFragment(window.location.href)
                         )
             assertNotEquals("data should be inserted",0,$("#test-render").length)

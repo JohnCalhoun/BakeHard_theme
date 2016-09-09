@@ -1,9 +1,6 @@
-goog.provide('bakehard.navigate');
+goog.provide('bakehard.mainNav');
 
-goog.require('bakehard.routes');
-goog.require('bakehard.pageLoad');
-
-bakehard.navigate.navigate=function(e){    
+bakehard.mainNav.navigate=function(e){    
     var link=$(e.target)
     var path=link.attr('href')
     
@@ -14,7 +11,7 @@ bakehard.navigate.navigate=function(e){
    
     if(path.indexOf(base_url) != -1){
         e.preventDefault()  
-        page("/page/"+target_id+"/"+source_id+"/"+path)
+        page("#/page/"+target_id+"/"+source_id+path)
     }
 };
-jQuery(document).on('click','.nav,.a',bakehard.navigate.navigate)
+jQuery(document).on('click','.nav,.a',bakehard.mainNav.navigate)

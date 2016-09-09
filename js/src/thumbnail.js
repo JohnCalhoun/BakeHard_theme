@@ -19,44 +19,45 @@ jQuery(window).load(
 )
 bakehard.render.thumbnail.per_page=10
 
-bakehard.render.thumbnail.render=function(posts){ 
+bakehard.render.thumbnail.render=function(posts,ctx){ 
     jQuery.each(    
         posts,
-        function(index,val){
-            bakehard.render.thumbnail.render(val);
+        function(index,post){
+            ctx.cache.posts[post['link']]=post
             jQuery(".grid").isotope(
                     'insert', 
                     soy.renderAsFragment(
                         bakehard.templates.thumbnail,
-                        val
+                        post
                     ) 
             );  
         }
     )
     jQuery(document).trigger('thumbnail_rendered',["success"])
 }
+
 bakehard.render.thumbnail.load=function(ctx){
     var api_url=ctx.params.path
     var page=ctx.params.page
 
     var request_url=api_url+"?/page="+page+"&per_page"+bakehard.render.thumbnail.per_page
     
-    if(ctx.state.posts[page]){  
-        bakehard.render.thumbnail.render(ctx.state.posts[page])
+    if(ctx.cache.posts_page[page]){  
+        bakehard.render.thumbnail.render(ctx.state.posts_page[page])
     }else{
         jQuery.ajax({   
-                url:request_url,
-                dataType:"json",
-                beforeSend:function(){
-                        jQuery(document).trigger('thumbnail_rendering')
-                },
-                success:function(response){
-                    bakehard.render.thumbnail.render(response)
-                    ctx.state.posts[page]=response
-                },
-                error:function(result){
-                    jQuery(document).trigger('thumbnail_rendered',["fail"])
-                }
+            url:request_url,
+            dataType:"json",
+            beforeSend:function(){
+                jQuery(document).trigger('thumbnail_rendering')
+            },
+            success:function(response){
+                bakehard.render.thumbnail.render(response,ctx)
+                ctx.cache.posts_page[page]=response
+            },
+            error:function(result){
+                jQuery(document).trigger('thumbnail_rendered',["fail"])
+            }
         })
     }
 }

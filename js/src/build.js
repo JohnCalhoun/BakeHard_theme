@@ -1,8 +1,8 @@
 {
     "id":"bakehard",
     "paths":[".","test","templates"],
-    "inputs":[  "navigate.js",
-                "test/js/navigate_test.js",
+    "inputs":[  "mainNav.js",
+                "test/js/mainNav_test.js",
                 "scrollLoad.js",
                 "test/js/scrollLoad_test.js",
                 "page.js",

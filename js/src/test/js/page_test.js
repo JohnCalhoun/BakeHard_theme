@@ -2,7 +2,6 @@ goog.require('goog.testing.ContinuationTestCase')
 goog.require('goog.testing.jsunit')
 goog.require('bakehard.render.page')
 goog.require('goog.events.EventTarget')
-goog.require('goog.events.EventTarget')
 
 if(typeof page_test_flag != 'undefined'){
 var clear=function(){
@@ -33,7 +32,6 @@ var testRender=function(){
     goog.events.listenOnce( event_target,
                             "page_rendering",
                             function(){});
-
     
     var before_send_called=false; 
     var result={} 
@@ -55,8 +53,16 @@ var testRender=function(){
         event_target.dispatchEvent('page_rendering')
         before_send_called=true;
     });
-
-    bakehard.render.page.load("/src/test/html/data.html",".content_selector",".content")   
+    var ctx={"params":{
+                "0":"/src/test/html/data.html",
+                "source_id":".content_selector",
+                "target_id":".content"
+                },
+            "cache":{
+                "pages":{} 
+                }
+            }
+    bakehard.render.page.load(ctx)   
 }
 var testRender_fail=function(){ 
     setup()
@@ -79,8 +85,17 @@ var testRender_fail=function(){
         result=arg1
         event_target.dispatchEvent('page_rendered')
     });
+    var ctx={"params":{
+                "0":"not_here",
+                "source_id":".content_selector",
+                "target_id":".content"
+                },
+            "cache":{
+                "pages":{} 
+                }
+            }
 
-    bakehard.render.page.load("not_here",".content_selector",".content")   
+    bakehard.render.page.load(ctx)   
 }
 
 var testCase=new goog.testing.ContinuationTestCase();

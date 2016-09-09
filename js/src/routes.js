@@ -6,8 +6,11 @@ goog.require('bakehard.render.thumbnail')
 goog.require('goog.uri.utils');
 
 $(document).ready(
-    var url=window.location.href
-    page.base(goog.uri.utils.getPath(url))
+    function(){
+        var url=window.location.href;
+        page.base(goog.uri.utils.getPath(url))
+        page({hashbang:true})
+    }
 )
 
 bakehard.routes.page=function(ctx,next){
@@ -25,6 +28,19 @@ bakehard.routes.thumbnail=function(ctx,next){
     next()
 }
 
-page("/page/:source_id/:target_id/:path(*)",bakehard.routes.page)
-page("/post/post/:path(*)",bakehard.routes.post)
-page("/thumbnail/:per_page/:page/:url(*)",bakehard.routes.thumbnail)
+bakehard.routes.init=function(ctx,next){
+    ctx.cache=ctx.cache||{};
+    ctx.cache.pages=ctx.cache.pages||{};
+    ctx.cache.post_pages=ctx.cache.post_pages||{};
+    ctx.cache.posts=ctx.cache.posts||{};
+
+    next()
+}
+
+page("#/*",bakehard.routes.init)
+page("#/page/:target_id/:source_id/*",bakehard.routes.page)
+page("#/post/post/:path",bakehard.routes.post)
+page("#/thumbnail/:per_page/:page/:url",bakehard.routes.thumbnail)
+
+
+

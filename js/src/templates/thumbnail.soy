@@ -1,9 +1,11 @@
 {namespace bakehard.templates}
 {template .thumbnail}
 <div class="card stick-action { $category_string}">
-    <div class="card-image">
-        <img class='activator' src='{ $img_url}'>
-    </div>
+    {if $img_url }
+        <div class="card-image">
+            <img class='activator' src='{ $img_url}'>
+        </div>
+    {/if}
     <div class="card-content">
         <span class="card-title activate">{ $title.rendered}</span>
     </div>

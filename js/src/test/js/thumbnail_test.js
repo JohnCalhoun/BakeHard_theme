@@ -15,13 +15,6 @@ var tearDown=function(){
     stubs.reset();
 }
 var testLoad=function(){
-    stubs.set(
-        bakehard.render.thumbnail,
-        "list_posts_url",
-        function(){
-            return("/src/test/json/post.json"); 
-        }
-    )
      
     var event_target=new goog.events.EventTarget();
     goog.events.listenOnce( event_target,
@@ -35,12 +28,22 @@ var testLoad=function(){
             assertNotEquals("data should be inserted",0,$('.card').length)
         }
     );
-    $(document).on("thumbnailLoaded",function(){
+    $(document).on("thumbnail_rendered",function(){
         triggered=true;
         event_target.dispatchEvent('check')
     });
-  
-    bakehard.render.thumbnail.load()
+    var ctx={"params":{
+                    "path":"/src/test/json/post.json",
+                    "page":"1"
+                },
+                    "cache":{
+                        "pages":{},
+                        "posts_page":{},
+                        "posts":{}
+                }
+    }
+
+    bakehard.render.thumbnail.load(ctx)
 }
 
 var testCase=new goog.testing.ContinuationTestCase();

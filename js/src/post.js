@@ -1,6 +1,5 @@
 goog.provide('bakehard.render.post');
 
-bakehard.render.post.find_post=function(ctx){}
 bakehard.render.post.render=function(ctx){
     //string to html
     //clear post area
@@ -8,13 +7,25 @@ bakehard.render.post.render=function(ctx){
 }
 
 bakehard.render.post.load=function(ctx){
-    post=bakehard.render.post.find_post(ctx.stat.posts)
+    var post_url=ctx.params.path 
 
-    if(post){  
-        bakehard.render.post.render(post) 
+    if(ctx.cache.posts[post_url]){  
+        bakehard.render.post.render(ctx.cache.posts[post_url])
     }else{
-        //get post
-        //make ajax call
+        jQuery.ajax({   
+            url:post_url,
+            dataType:"html",
+            beforeSend:function(){
+                jQuery(document).trigger('post_rendering')
+            },
+            success:function(response){
+                bakehard.render.post.render(response)
+                ctx.cache.posts[post_url]=response
+            },
+            error:function(result){
+                jQuery(document).trigger('post_rendered',["fail"])
+            }
+        }) 
     }
 };
 
