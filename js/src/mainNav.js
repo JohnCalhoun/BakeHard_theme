@@ -15,3 +15,4 @@ bakehard.mainNav.navigate=function(e){
     }
 };
 jQuery(document).on('click','.nav,.a',bakehard.mainNav.navigate)
+jQuery(document).on('click','.post-link',bakehard.mainNav.navigate)

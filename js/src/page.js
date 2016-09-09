@@ -30,6 +30,20 @@ bakehard.render.page.load=function(ctx){
     }else{
         jQuery.ajax({
                 url:page_url,
+                xhr:function(){
+                    var xhr= new window.XMLHttpRequest(); 
+                    jQuery(document).trigger('page_progress',{"percent":0})
+                    xhr.addEventListener(
+                    "progress", 
+                    function(evt){
+                        if (evt.lengthComputable) {  
+                            var percentComplete = evt.loaded / evt.total;
+                            jQuery(document).trigger('page_progress',{"percent":percentComplete})
+                        }
+                    }, 
+                    false); 
+                    return(xhr)
+                },
                 beforeSend:function(){
                     jQuery(document).trigger('page_rendering',{"page":page_url,"cached":false})
                 },
@@ -39,6 +53,9 @@ bakehard.render.page.load=function(ctx){
                 },
                 error:function(result){
                     jQuery(document).trigger('page_rendered',["fail"])
+                },
+                complete:function(){
+                    jQuery(document).trigger('page_progress',{"percent":100})
                 }
             })
     }

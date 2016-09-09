@@ -48,6 +48,19 @@ bakehard.render.thumbnail.load=function(ctx){
         jQuery.ajax({   
             url:request_url,
             dataType:"json",
+            xhr:function(){
+                var xhr= new window.XMLHttpRequest(); 
+                jQuery(document).trigger('thumbnail_progress',{"percent":0})
+                xhr.addEventListener(
+                "progress", 
+                function(evt){
+                    if (evt.lengthComputable) {  
+                        var percentComplete = evt.loaded / evt.total;
+                        jQuery(document).trigger('thumbnail_progress',{"percent":percentComplete})
+                    }}, 
+                false); 
+                return(xhr)
+            }, 
             beforeSend:function(){
                 jQuery(document).trigger('thumbnail_rendering')
             },
@@ -57,6 +70,9 @@ bakehard.render.thumbnail.load=function(ctx){
             },
             error:function(result){
                 jQuery(document).trigger('thumbnail_rendered',["fail"])
+            },
+            complete:function(){
+                jQuery(document).trigger('thumbnail_progress',{"percent":100})
             }
         })
     }
