@@ -1,12 +1,11 @@
 goog.provide('bakehard.render.page');
 
 bakehard.render.page.extractInsert=function(data,in_selector,out_selector){
-    console.log(in_selector) 
-    console.log(out_selector) 
-    
     jQuery(out_selector).empty();
-    var page=jQuery.parseHTML(data)
-    var content=jQuery(page).select(in_selector)
+    var body = '<div id="body-mock">' + data.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/ig, '') + '</div>';
+    var content=jQuery(body).children(in_selector)
+    console.log(body) 
+    console.log(content)
     jQuery(out_selector).append(content.children())
 };
 
@@ -18,12 +17,12 @@ bakehard.render.page.load=function(ctx){
     if(page_url[0]!="/"){
         page_url="/"+page_url
     }
-
+    
     render=function(data){ 
         bakehard.render.page.extractInsert(data,in_selector,out_selector);
         jQuery(document).trigger('page_rendered',["success"]) 
     } 
-
+    console.log(ctx)
     if( ctx.cache.pages[page_url] ){
         jQuery(document).trigger('page_rendering',{"page":page_url,"cached":true})
         render(ctx.state[page_url]) 

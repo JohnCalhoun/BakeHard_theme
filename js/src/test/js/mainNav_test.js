@@ -21,7 +21,7 @@ var testMainNav=function(){
         "page_rendered",
         function(){       
             assertEquals(   "hash should have been changed",
-                            "/page/#target/#content/src/test/html/data.html",
+                            "!/page/#target/#content//src/test/html/data.html",
                             goog.uri.utils.getFragment(window.location.href)
                         )
             assertNotEquals("data should be inserted",0,$("#test-render").length)

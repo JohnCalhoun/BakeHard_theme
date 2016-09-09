@@ -55,8 +55,8 @@ var testRender=function(){
     });
     var ctx={"params":{
                 "0":"/src/test/html/data.html",
-                "source_id":".content_selector",
-                "target_id":".content"
+                "source_id":"#content",
+                "target_id":"#content"
                 },
             "cache":{
                 "pages":{} 

@@ -4,7 +4,7 @@ goog.require('bakehard.render.page')
 goog.require('bakehard.render.thumbnail')
 goog.require('goog.uri.utils');
 
-$(document).ready(
+jQuery(document).ready(
     function(){
         var url=window.location.href;
         page.base(goog.uri.utils.getPath(url))
@@ -13,6 +13,7 @@ $(document).ready(
 )
 
 bakehard.routes.page=function(ctx,next){
+    console.log(ctx)
     bakehard.render.page.load(ctx)
     next()
 }
@@ -36,9 +37,9 @@ bakehard.routes.init=function(ctx,next){
     next()
 }
 
-page("#/*",bakehard.routes.init)
-page("#/page/:target_id/:source_id/*",bakehard.routes.page)
-page("#/thumbnail/:per_page/:page/:url",bakehard.routes.thumbnail)
+page("/*",bakehard.routes.init)
+page("/page/:target_id/:source_id/*",bakehard.routes.page)
+page("/thumbnail/:per_page/:page/:url",bakehard.routes.thumbnail)
 
 
 

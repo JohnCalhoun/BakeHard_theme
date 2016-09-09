@@ -7,13 +7,16 @@ dir:
 bakehard.min.js:./src
 	java -jar ../bin/plovr.jar build src/build.min.js > bakehard.min.js
 
+page.min.js:./page.js
+	closure-compiler --compilation_level WHITESPACE_ONLY --js page.js > page.min.js
+
 bakehard.js:./src
 	java -jar ../bin/plovr.jar build src/build.js > bakehard.js
 
 test:bakehard.js
 	./run_test.py && rm *.log
 
-move:dir bakehard.min.js
+move:dir bakehard.min.js page.min.js
 	cp ./*.min.js $(output_dir)	
 
 all: move
