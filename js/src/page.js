@@ -4,8 +4,6 @@ bakehard.render.page.extractInsert=function(data,in_selector,out_selector){
     jQuery(out_selector).empty();
     var body = '<div id="body-mock">' + data.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/ig, '') + '</div>';
     var content=jQuery(body).children(in_selector)
-    console.log(body) 
-    console.log(content)
     jQuery(out_selector).append(content.children())
 };
 

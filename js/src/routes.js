@@ -34,12 +34,13 @@ bakehard.routes.init=function(ctx,next){
     ctx.cache.post_pages=ctx.cache.post_pages||{};
     ctx.cache.posts=ctx.cache.posts||{};
 
+    jQuery(document).trigger('new_page') 
     next()
 }
 
 page("/*",bakehard.routes.init)
 page("/page/:target_id/:source_id/*",bakehard.routes.page)
-page("/thumbnail/:per_page/:page/:url",bakehard.routes.thumbnail)
+page("/thumbnail/:per_page/:page",bakehard.routes.thumbnail)
 
 
 

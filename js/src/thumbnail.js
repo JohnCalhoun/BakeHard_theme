@@ -1,13 +1,19 @@
 goog.provide('bakehard.render.thumbnail');
 
 goog.require('bakehard.templates');
+goog.require('bakehard.constants');
 goog.require('goog.net.XhrIo');
 goog.require('goog.net.XhrIoPool');
 goog.require('goog.net.EventType');
 goog.require('goog.events');
 goog.require('goog.Uri');
 
-jQuery(window).load(
+jQuery(window).load(function(){ 
+    jQuery(document).trigger('new_page') 
+})
+
+jQuery(window).on(
+    'new_page',
     function(){
         jQuery(".grid").isotope({
             itemSelector:".card",
@@ -17,7 +23,9 @@ jQuery(window).load(
         });
     }
 )
-bakehard.render.thumbnail.per_page=10
+
+bakehard.render.thumbnail.current_page=0
+bakehard.render.thumbnail.api_post_url=bakehard.constants.api_url+"posts"
 
 bakehard.render.thumbnail.render=function(posts,ctx){ 
     jQuery.each(    
@@ -37,10 +45,10 @@ bakehard.render.thumbnail.render=function(posts,ctx){
 }
 
 bakehard.render.thumbnail.load=function(ctx){
-    var api_url=ctx.params.path
+    var api_url=bakehard.render.thumbnail.api_post_url
     var page=ctx.params.page
 
-    var request_url=api_url+"?/page="+page+"&per_page"+bakehard.render.thumbnail.per_page
+    var request_url=api_url+"?/page="+page+"&per_page"+bakehard.constants.post_per_page
     
     if(ctx.cache.posts_page[page]){  
         bakehard.render.thumbnail.render(ctx.state.posts_page[page])
@@ -65,7 +73,8 @@ bakehard.render.thumbnail.load=function(ctx){
                 jQuery(document).trigger('thumbnail_rendering')
             },
             success:function(response){
-                bakehard.render.thumbnail.render(response,ctx)
+                bakehard.render.thumbnail.render(response,ctx) 
+                bakehard.render.thumbnail.current_page++
                 ctx.cache.posts_page[page]=response
             },
             error:function(result){

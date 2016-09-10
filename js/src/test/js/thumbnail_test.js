@@ -9,13 +9,18 @@ var stubs;
 
 var setUp=function(){
     stubs=new goog.testing.PropertyReplacer();
+    stubs.replace(  bakehard.render.thumbnail,
+                    "api_post_url", 
+                    "/src/test/json/post.json"
+                    )
 }
 
 var tearDown=function(){
     stubs.reset();
 }
 var testLoad=function(){
-     
+
+
     var event_target=new goog.events.EventTarget();
     goog.events.listenOnce( event_target,
                             "check",
