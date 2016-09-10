@@ -40,7 +40,7 @@ bakehard.routes.init=function(ctx,next){
 
 page("/*",bakehard.routes.init)
 page("/page/:target_id/:source_id/*",bakehard.routes.page)
-page("/thumbnail/:per_page/:page",bakehard.routes.thumbnail)
+page("/thumbnail/:page",bakehard.routes.thumbnail)
 
 
 

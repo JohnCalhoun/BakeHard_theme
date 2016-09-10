@@ -8,7 +8,7 @@ goog.require('goog.net.EventType');
 goog.require('goog.events');
 goog.require('goog.Uri');
 
-jQuery(window).load(function(){ 
+jQuery(window).ready(function(){ 
     jQuery(document).trigger('new_page') 
 })
 
@@ -26,6 +26,7 @@ jQuery(window).on(
 
 bakehard.render.thumbnail.current_page=0
 bakehard.render.thumbnail.api_post_url=bakehard.constants.api_url+"posts"
+bakehard.render.thumbnail.rendering=false
 
 bakehard.render.thumbnail.render=function(posts,ctx){ 
     jQuery.each(    
@@ -50,8 +51,9 @@ bakehard.render.thumbnail.load=function(ctx){
 
     var request_url=api_url+"?/page="+page+"&per_page"+bakehard.constants.post_per_page
     
-    if(ctx.cache.posts_page[page]){  
-        bakehard.render.thumbnail.render(ctx.state.posts_page[page])
+    if(ctx.cache.post_pages[page]){  
+        bakehard.render.thumbnail.render(ctx.state.post_pages[page])
+        bakehard.render.thumbnail.rendering=false
     }else{
         jQuery.ajax({   
             url:request_url,
@@ -75,19 +77,26 @@ bakehard.render.thumbnail.load=function(ctx){
             success:function(response){
                 bakehard.render.thumbnail.render(response,ctx) 
                 bakehard.render.thumbnail.current_page++
-                ctx.cache.posts_page[page]=response
+                ctx.cache.post_pages[page]=response
             },
             error:function(result){
                 jQuery(document).trigger('thumbnail_rendered',["fail"])
             },
             complete:function(){
                 jQuery(document).trigger('thumbnail_progress',{"percent":100})
+                bakehard.render.thumbnail.rendering=false
             }
         })
     }
 }
 
-
+jQuery(document).on("scrolled2Bottom",function(){
+    if(~bakehard.render.thumbnail.rendering){ 
+        if( jQuery('.grid').length){ 
+            page("/thumbnail/"+bakehard.render.thumbnail.current_page)
+        }
+    }
+})
 
 
 

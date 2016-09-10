@@ -43,7 +43,7 @@ var testLoad=function(){
                 },
                     "cache":{
                         "pages":{},
-                        "posts_page":{},
+                        "post_pages":{},
                         "posts":{}
                 }
     }

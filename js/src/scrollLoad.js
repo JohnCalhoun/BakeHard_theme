@@ -11,4 +11,4 @@ bakehard.scrollLoad.check=function(){
 }
 
 jQuery(document).scroll(bakehard.scrollLoad.check)
-jQuery(document).on('new_page',bakehard.scrollLoad.check)
+jQuery(document).on('page_rendered',bakehard.scrollLoad.check)
