@@ -11,7 +11,9 @@ var setUp=function(){
     stubs=new goog.testing.PropertyReplacer();
     stubs.replace(  bakehard.render.thumbnail,
                     "api_url", 
-                    "/src/test/json/post.json"
+                    function(page){
+                        return("/src/test/json/post.json")
+                    } 
                     )
 }
 

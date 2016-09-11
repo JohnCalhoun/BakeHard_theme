@@ -18,14 +18,13 @@ jQuery(window).on(
         jQuery(".thumbnail").isotope({
             itemSelector:".card",
             masonry:{
-                columnWidth:200
+                columnWidth:100
             }
         });
     }
 )
 
-bakehard.render.thumbnail.current_page=0
-bakehard.render.thumbnail.rendering=false
+bakehard.render.thumbnail.current_page=1
 
 bakehard.render.thumbnail.render=function(posts,ctx){  
     jQuery.each(    
@@ -44,12 +43,16 @@ bakehard.render.thumbnail.render=function(posts,ctx){
     jQuery(document).trigger('thumbnail_rendered',["success"])
     bakehard.render.thumbnail.rendering=false
 }
-bakehard.render.thumbnail.api_url=bakehard.constants.api_url+'posts/'
+bakehard.render.thumbnail.api_url=function(page){
+    var url=bakehard.constants.api_url+'posts'+"?page="+page+"&per_page="+bakehard.constants.post_per_page
+    return(url)
+}
 bakehard.render.thumbnail.load=function(ctx){
     var page=ctx.params.page
+    console.log(bakehard.constants.api_url) 
     
-    var request_url=bakehard.render.thumbnail.api_url+"?/page="+page+"&per_page="+bakehard.constants.post_per_page
-    
+    var request_url=bakehard.render.thumbnail.api_url(page)
+
     console.log(request_url)
     console.log(page)
     if(ctx.cache.post_pages[page]){  
@@ -94,22 +97,6 @@ bakehard.render.thumbnail.load=function(ctx){
 jQuery(document).on('click','.load-thumbnail',function(){
     page("/thumbnail/"+bakehard.render.thumbnail.current_page)
 })
-/*
-jQuery(document).on("scrolled2Bottom",function(){
-    if(~bakehard.render.thumbnail.rendering){ 
-        console.log('gothere') 
-        bakehard.render.thumbnail.rendering=true
-        if( jQuery('.grid').length){ 
-            page("/thumbnail/"+bakehard.render.thumbnail.current_page)
-        }else{
-            bakehard.render.thumbnail.rendering=false
-        }
-    }
-})
-*/
-
-
-
 
 
 
