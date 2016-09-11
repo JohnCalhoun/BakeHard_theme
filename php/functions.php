@@ -68,6 +68,17 @@ function api_get_category_string( $object, $field_name, $request ) {
     return(implode(' ',$output));
 };
 
+function api_get_site_url() {
+    return( get_site_url());
+};
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'bakehard/v1', '/site_url', array(
+		'methods' => 'GET',
+		'callback' => 'api_get_site_url',
+	) );
+} );
+
 
 
 

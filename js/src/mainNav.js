@@ -7,7 +7,7 @@ bakehard.mainNav.navigate=function(e){
     
     var nav=link.parents('.nav') 
     var target_id=nav.attr('data-target-window')
-    var source_id=nav.attr('data-source-window')
+    var source_id=nav.attr('data-source-window') 
     var base_url=goog.uri.utils.getPath(nav.attr('data-local-url'))
     
     if(path.indexOf(base_url) != -1){
@@ -17,4 +17,3 @@ bakehard.mainNav.navigate=function(e){
 };
 
 jQuery(document).on('click','.nav,.a',bakehard.mainNav.navigate)
-jQuery(document).on('click','.post-link',bakehard.mainNav.navigate)

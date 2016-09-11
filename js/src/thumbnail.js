@@ -27,19 +27,24 @@ jQuery(window).on(
 bakehard.render.thumbnail.current_page=1
 
 bakehard.render.thumbnail.render=function(posts,ctx){  
+    var elems=[]
     jQuery.each(    
         posts,
         function(index,post){
             ctx.cache.posts[post['link']]=post
-            jQuery(".thumbnail").isotope(
-                    'insert', 
-                    soy.renderAsFragment(
-                        bakehard.templates.thumbnail,
-                        post
-                    ) 
-            );  
+            elems.push(        
+                soy.renderAsFragment(
+                    bakehard.templates.thumbnail,
+                    post
+                )
+            )
         }
     )
+    jQuery(".thumbnail").isotope(
+        "insert",
+        elems
+    );
+
     jQuery(document).trigger('thumbnail_rendered',["success"])
     bakehard.render.thumbnail.rendering=false
 }
@@ -98,7 +103,19 @@ jQuery(document).on('click','.load-thumbnail',function(){
     page("/thumbnail/"+bakehard.render.thumbnail.current_page)
 })
 
-
+jQuery(document).on('click','.post-link',
+    function(e){
+        e.preventDefault()  
+        var link=jQuery(e.target)
+        var path=goog.uri.utils.getPath(link.attr('href'))
+        
+        var nav=link.parents('.thumbnail') 
+        var target_id=nav.attr('data-target-window')
+        var source_id=nav.attr('data-source-window') 
+        var base_url=bakehard.constants.site_url
+        page("/page/"+target_id+"/"+source_id+'/'+path)
+    }
+)
 
 
 
