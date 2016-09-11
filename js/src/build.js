@@ -3,8 +3,6 @@
     "paths":[".","test","templates"],
     "inputs":[  "mainNav.js",
                 "test/js/mainNav_test.js",
-                "scrollLoad.js",
-                "test/js/scrollLoad_test.js",
                 "page.js",
                 "test/js/page_test.js",
                 "routes.js",

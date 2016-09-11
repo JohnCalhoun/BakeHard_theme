@@ -44,12 +44,11 @@ bakehard.render.thumbnail.render=function(posts,ctx){
     jQuery(document).trigger('thumbnail_rendered',["success"])
     bakehard.render.thumbnail.rendering=false
 }
-
+bakehard.render.thumbnail.api_url=bakehard.constants.api_url+'posts/'
 bakehard.render.thumbnail.load=function(ctx){
-    var api_url=bakehard.constants.api_url+'posts/'
     var page=ctx.params.page
     
-    var request_url=api_url+"?/page="+page+"&per_page="+bakehard.constants.post_per_page
+    var request_url=bakehard.render.thumbnail.api_url+"?/page="+page+"&per_page="+bakehard.constants.post_per_page
     
     console.log(request_url)
     console.log(page)

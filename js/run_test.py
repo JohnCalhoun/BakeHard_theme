@@ -38,9 +38,6 @@ class bakehardjs_test(unittest.TestCase):
  
     def test_mainNav(self):
         self.url_test("mainNav_test.html")
-    
-    def test_scrollLoad(self):
-        self.url_test("scrollLoad_test.html")
 
     def test_routes(self):
         self.url_test("routes_test.html")
