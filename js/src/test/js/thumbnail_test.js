@@ -9,8 +9,8 @@ var stubs;
 
 var setUp=function(){
     stubs=new goog.testing.PropertyReplacer();
-    stubs.replace(  bakehard.render.thumbnail,
-                    "api_post_url", 
+    stubs.replace(  bakehard.constants,
+                    "api_url", 
                     "/src/test/json/post.json"
                     )
 }

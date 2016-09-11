@@ -13,7 +13,6 @@ jQuery(document).ready(
 )
 
 bakehard.routes.page=function(ctx,next){
-    console.log(ctx)
     bakehard.render.page.load(ctx)
     next()
 }

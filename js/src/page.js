@@ -20,7 +20,7 @@ bakehard.render.page.load=function(ctx){
         bakehard.render.page.extractInsert(data,in_selector,out_selector);
         jQuery(document).trigger('page_rendered',["success"]) 
     } 
-    console.log(ctx)
+    
     if( ctx.cache.pages[page_url] ){
         jQuery(document).trigger('page_rendering',{"page":page_url,"cached":true})
         render(ctx.state[page_url]) 

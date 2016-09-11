@@ -12,7 +12,6 @@ bakehard.mainNav.navigate=function(e){
     
     if(path.indexOf(base_url) != -1){
         e.preventDefault()  
-        console.log(path) 
         page("/page/"+target_id+"/"+source_id+'/'+path)
     }
 };
