@@ -1,8 +1,22 @@
 goog.provide('bakehard.render.page');
 
+goog.require('bakehard.loading')
+
+jQuery(window).ready(function(){ jQuery(window).trigger('show')})
+
+jQuery(window).on('page_rendering',bakehard.loading.start('#loading-screen','main',bakehard.templates.loading))
+jQuery(window).on('page_progress',bakehard.loading.progress('#loading-screen'))
+jQuery(window).on('page_rendered',bakehard.loading.stop('#loading-screen'))
+
+
 bakehard.render.page.hide_all=function(selector){
-    jQuery(selector).children().hide()
+    jQuery(selector).children().not('.loading').hide()
 }
+
+jQuery(window).on('page_rendering',function(){
+    bakehard.render.page.hide_all('main')
+})
+
 bakehard.render.page.show=function(selector){
     var div=jQuery('main').find(selector)
     div.show()
@@ -30,8 +44,7 @@ bakehard.render.page.load=function(ctx){
     }
    
     if( bakehard.render.page.check(selector) ){ 
-        jQuery(document).trigger('page_rendering',{"page":page_url,"cached":true})
-        bakehard.render.page.hide_all('main')   
+        jQuery(document).trigger('page_rendering',{"cached":true})
         bakehard.render.page.show(selector)   
         jQuery(document).trigger('page_rendered',["success"])
     }else{
@@ -52,10 +65,9 @@ bakehard.render.page.load=function(ctx){
                     return(xhr)
                 },
                 beforeSend:function(){
-                    jQuery(document).trigger('page_rendering',{"page":page_url,"cached":false})
+                    jQuery(document).trigger('page_rendering',{"cached":false})
                 },
                 success:function(page){
-                    bakehard.render.page.hide_all('main')   
                     var content=bakehard.render.page.render(page,page_url)//render page
                     bakehard.render.page.insert(content) 
                     jQuery(document).trigger('page_rendered',["success"])

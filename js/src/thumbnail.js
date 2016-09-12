@@ -2,6 +2,7 @@ goog.provide('bakehard.render.thumbnail');
 
 goog.require('bakehard.templates');
 goog.require('bakehard.constants');
+goog.require('bakehard.loading');
 goog.require('goog.net.XhrIo');
 goog.require('goog.net.XhrIoPool');
 goog.require('goog.net.EventType');
@@ -27,6 +28,7 @@ bakehard.render.thumbnail.render=function(posts){
             )
         }
     )
+    //loading  
     jQuery(".thumbnail").isotope(
         "insert",
         elems
@@ -93,25 +95,25 @@ jQuery(document).on('click','.post-link',
         var link=jQuery(e.target)
         var path=goog.uri.utils.getPath(link.attr('href'))
         
-        var nav=link.parents('.thumbnail') 
-        var target_id=nav.attr('data-target-window')
-        var source_id=nav.attr('data-source-window') 
-        var base_url=bakehard.constants.site_url
-        page("/page/"+target_id+"/"+source_id+'/'+path)
+        page("/page/"+path)
     }
 )
+bakehard.render.thumbnail.isotopeInit=function(){ 
+    jQuery(".thumbnail").isotope({
+        itemSelector:".card",
+        masonry:{
+            columnWidth:100
+        }
+    });
+}
 
-jQuery(window).on(
-    'show',
-    function(){
-        jQuery(".thumbnail").isotope({
-            itemSelector:".card",
-            masonry:{
-                columnWidth:100
-            }
-        });
-    }
-)
+jQuery(window).on('show','.content',bakehard.render.thumbnail.isotopeInit)
+jQuery(window).on('page_rendered',bakehard.render.thumbnail.isotopeInit)
+
+
+jQuery(window).on('thumbnail_rendering',bakehard.loading.start('#loading-thumbnail','#thumbnail-status',bakehard.templates.loadingThumbnail))
+jQuery(window).on('thumbnail_progress',bakehard.loading.progress('#loading-thumbnail'))
+jQuery(window).on('thumbnail_rendered',bakehard.loading.stop('#loading-thumbnail'))
 
 
 

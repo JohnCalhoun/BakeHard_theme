@@ -7,6 +7,8 @@
     <span class='waves-effect waves-light btn load-thumbnail'>
         Load More
     </span>
+    <div id="thumbnail-status">
+    </div>
 </div>
 
 <?php get_footer(); ?>

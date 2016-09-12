@@ -5,6 +5,8 @@
                 "test/js/mainNav_test.js",
                 "page.js",
                 "test/js/page_test.js",
+                "loading.js",
+                "test/js/loading_test.js",
                 "routes.js",
                 "test/js/routes_test.js",
                 "thumbnail.js",
