@@ -8,7 +8,10 @@ jQuery(document).ready(
     function(){
         var url=window.location.href;
         page.base(goog.uri.utils.getPath(url))
-        page({hashbang:true})
+        page(
+            {hashbang:true,
+            popstate:true}
+        )
     }
 )
 
@@ -26,7 +29,6 @@ bakehard.routes.init=function(ctx,next){
     jQuery(document).trigger('new_page') 
     next()
 }
-
 page("/*",bakehard.routes.init)
 page("/page/*",bakehard.routes.page)
 

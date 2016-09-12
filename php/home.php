@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class='content'> 
+<div class='content content-thumbnail'> 
     <div    class="thumbnail"
             data-isotope='{ "itemSelector": ".card", "layoutMode": "masonry" }' >
     </div>	

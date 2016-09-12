@@ -3,6 +3,7 @@ goog.provide('bakehard.mainNav');
 goog.require('bakehard.constants');
 goog.require('goog.uri.utils');
 
+
 bakehard.mainNav.navigate=function(e){    
     var link=jQuery(e.target)
     var path_full=link.attr('href')
@@ -16,3 +17,11 @@ bakehard.mainNav.navigate=function(e){
 };
 
 jQuery(document).on('click','.nav,.a',bakehard.mainNav.navigate)
+jQuery(document).on('click','.nav,.a',function(e){
+    var element=jQuery(e.target).parent()
+    var nav=element.parent()
+
+    nav.find('.active').removeClass('active')
+    element.addClass('active')
+})
+

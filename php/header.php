@@ -13,25 +13,22 @@
 <header>
     <div>
         <nav>
-            <div id="main-nav" class="nav-wrapper nav" 
-                    data-target-window="main" 
-                    data-source-window="main" 
-                    data-local-url="<?php echo get_site_url() ?>"> 
+            <div id="main-nav" class="nav-wrapper nav" >
                 <h1 class="brand-logo"><? bloginfo('name'); ?></h1>
                 <?php wp_nav_menu( array(     
                     'menu'=>'main_menu',
                     'depth'=>1,
-                    'menu_class'=>'main_menu right',
+                    'menu_class'=>'main_menu right hide-on-med-and-down',
                     'before'=>'',
                     'after'=> '',
                     'theme_location'=>'main_menu'
                     )); 
-                ?>    
+                ?>  
             </div>
         </nav>
     </div>
 </header>
-<main class='container'>
+<main class='container valign-wrapper'>
 
 
 

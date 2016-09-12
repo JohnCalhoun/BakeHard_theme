@@ -6345,3 +6345,6 @@ body {
 
 main {
   flex: 1 0 auto; }
+
+.content-thumbnail {
+  width: 100%; }

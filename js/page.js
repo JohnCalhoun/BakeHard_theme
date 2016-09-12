@@ -526,7 +526,7 @@
         }, 0);
       });
     }
-    return function (e) {
+    return(function (e) {
       if (!loaded) return;
       if (e.state) {
         var path = e.state.path;
@@ -534,7 +534,7 @@
       } else {
         page.show(location.pathname + location.hash, undefined, undefined, false);
       }
-    };
+    });
   })();
   /**
    * Handle "click" events.

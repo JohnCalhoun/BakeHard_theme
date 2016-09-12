@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class='content'> 
+<div class='content card-panel valign'> 
     <div class="post page" id="post-<?php the_ID(); ?>">
         <div class="entry">
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
