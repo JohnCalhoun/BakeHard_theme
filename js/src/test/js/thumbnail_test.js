@@ -39,18 +39,8 @@ var testLoad=function(){
         triggered=true;
         event_target.dispatchEvent('check')
     });
-    var ctx={"params":{
-                    "path":"/src/test/json/post.json",
-                    "page":"1"
-                },
-                    "cache":{
-                        "pages":{},
-                        "post_pages":{},
-                        "posts":{}
-                }
-    }
 
-    bakehard.render.thumbnail.load(ctx)
+    bakehard.render.thumbnail.load(1)
 }
 
 var testCase=new goog.testing.ContinuationTestCase();

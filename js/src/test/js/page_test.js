@@ -11,17 +11,6 @@ var clear=function(){
 
 var setup=clear
 
-var testInsert=function(){
-    setup()
-    
-    var data="<div class='content_selector'><p id='test'>test<p></div>" 
-
-    bakehard.render.page.extractInsert(data,".content_selector",".content")    
-    assertNotEquals("data should be inserted",0,$(".content").children('#test').length)
-    
-    clear()
-}
-
 var testRender=function(){ 
     setup()
 
@@ -54,9 +43,7 @@ var testRender=function(){
         before_send_called=true;
     });
     var ctx={"params":{
-                "0":"/src/test/html/data.html",
-                "source_id":"#content",
-                "target_id":"#content"
+                "0":"/src/test/html/data.html"
                 },
             "cache":{
                 "pages":{} 
@@ -86,9 +73,7 @@ var testRender_fail=function(){
         event_target.dispatchEvent('page_rendered')
     });
     var ctx={"params":{
-                "0":"not_here",
-                "source_id":".content_selector",
-                "target_id":".content"
+                "0":"not_here"
                 },
             "cache":{
                 "pages":{} 

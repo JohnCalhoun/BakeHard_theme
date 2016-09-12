@@ -526,7 +526,7 @@
         }, 0);
       });
     }
-    return function onpopstate(e) {
+    return function (e) {
       if (!loaded) return;
       if (e.state) {
         var path = e.state.path;

@@ -1,9 +1,8 @@
 <?php get_header(); ?>
 
-<div class='container'> 
+<div class='content'> 
     <div    class="thumbnail"
-            data-target-window="main"
-            data-source-window="main">
+            data-isotope='{ "itemSelector": ".card", "layoutMode": "masonry" }' >
     </div>	
     <span class='waves-effect waves-light btn load-thumbnail'>
         Load More

@@ -1,18 +1,17 @@
 goog.provide('bakehard.mainNav');
+
+goog.require('bakehard.constants');
 goog.require('goog.uri.utils');
 
 bakehard.mainNav.navigate=function(e){    
     var link=jQuery(e.target)
-    var path=goog.uri.utils.getPath(link.attr('href'))
+    var path_full=link.attr('href')
+    var base_url=bakehard.constants.site_url
     
-    var nav=link.parents('.nav') 
-    var target_id=nav.attr('data-target-window')
-    var source_id=nav.attr('data-source-window') 
-    var base_url=goog.uri.utils.getPath(nav.attr('data-local-url'))
-    
-    if(path.indexOf(base_url) != -1){
+    if(path_full.indexOf(base_url) != -1){
         e.preventDefault()  
-        page("/page/"+target_id+"/"+source_id+'/'+path)
+        var path=goog.uri.utils.getPath(link.attr('href')) 
+        page("/page/"+path)
     }
 };
 

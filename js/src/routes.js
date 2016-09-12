@@ -17,16 +17,6 @@ bakehard.routes.page=function(ctx,next){
     next()
 }
 
-bakehard.routes.post=function(ctx,next){
-    bakehard.render.post.load(ctx)
-    next()
-}
-
-bakehard.routes.thumbnail=function(ctx,next){
-    bakehard.render.thumbnail.load(ctx)
-    next()
-}
-
 bakehard.routes.init=function(ctx,next){
     ctx.cache=ctx.cache||{};
     ctx.cache.pages=ctx.cache.pages||{};
@@ -38,8 +28,6 @@ bakehard.routes.init=function(ctx,next){
 }
 
 page("/*",bakehard.routes.init)
-page("/page/:target_id/:source_id/*",bakehard.routes.page)
-page("/thumbnail/:page",bakehard.routes.thumbnail)
-
+page("/page/*",bakehard.routes.page)
 
 
