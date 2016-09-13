@@ -11,10 +11,8 @@ bakehard.loading.start=function(id,selector,template){
                     {}
                 )
             )
-        }else{
-            screen.show()
         }
-
+        screen.show()
     })
 }
 

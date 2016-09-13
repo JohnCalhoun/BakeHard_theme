@@ -1,12 +1,12 @@
 {namespace bakehard.templates}
 {template .thumbnail}
 {if $img_url }
-    <div class="card medium stick-action { $category_string}">
+    <div class="card medium stick-action hoverable { $category_string}">
         <div class="card-image">
             <img class='activator' src='{ $img_url}'>
         </div>
 {else}
-    <div class="card small stick-action { $category_string}">
+    <div class="card small stick-action hoverable { $category_string}">
 {/if}
     <div class="card-content">
         <span class="card-title activate">{ $title.rendered}</span>
@@ -21,14 +21,18 @@
 {/template}
 
 {template .loading}
-    <div class="content loading-screen" id="loading-screen">
-        loading
+    <div class="content loading-screen loading" id="loading-screen">
+         <div class="progress">
+            <div class="indeterminate"></div> 
+        </div> 
     </div>
 {/template}
 
 {template .loadingThumbnail}
-    <div class="loading-thumbnail" id="loading-thumbnail">
-        loading
+    <div class="loading-thumbnail loading" id="loading-thumbnail">
+        <div class="progress">
+            <div class="indeterminate"></div> 
+        </div>
     </div>
 {/template}
 

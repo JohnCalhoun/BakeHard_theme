@@ -2076,7 +2076,7 @@ a {
 .z-depth-0 {
   box-shadow: none !important; }
 
-.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+.z-depth-1, nav, .card-panel, .content, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
 .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
@@ -3316,7 +3316,7 @@ small {
     .flow-text {
       font-size: 1.2rem; } }
 
-.card-panel {
+.card-panel, .content {
   transition: box-shadow .25s;
   padding: 20px;
   margin: 0.5rem 0 1rem 0;
@@ -4001,7 +4001,7 @@ button.btn-floating {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
     margin: 16px 0; }
 
-.chip {
+.chip, .content-thumbnail ul li {
   display: inline-block;
   height: 32px;
   font-size: 13px;
@@ -4013,13 +4013,13 @@ button.btn-floating {
   background-color: #e4e4e4;
   margin-bottom: 5px;
   margin-right: 5px; }
-  .chip img {
+  .chip img, .content-thumbnail ul li img {
     float: left;
     margin: 0 8px 0 -12px;
     height: 32px;
     width: 32px;
     border-radius: 50%; }
-  .chip .close {
+  .chip .close, .content-thumbnail ul li .close {
     cursor: pointer;
     float: right;
     font-size: 16px;
@@ -4040,7 +4040,7 @@ button.btn-floating {
     box-shadow: 0 1px 0 0 #26a69a; }
   .chips:hover {
     cursor: text; }
-  .chips .chip.selected {
+  .chips .chip.selected, .chips .content-thumbnail ul li.selected, .content-thumbnail ul .chips li.selected {
     background-color: #26a69a;
     color: #fff; }
   .chips .input {
@@ -6347,4 +6347,21 @@ main {
   flex: 1 0 auto; }
 
 .content-thumbnail {
+  width: 100%;
+  margin: auto; }
+  .content-thumbnail .card {
+    width: 180px; }
+  .content-thumbnail .grid-sizer {
+    width: 180px; }
+  .content-thumbnail .gutter-sizer {
+    width: 4%; }
+  .content-thumbnail ul {
+    list-style-type: none; }
+  .content-thumbnail .btn, .content-thumbnail .btn-large, .content-thumbnail .load-thumbnail {
+    width: 100%; }
+
+.content {
+  margin: auto; }
+
+.loading {
   width: 100%; }

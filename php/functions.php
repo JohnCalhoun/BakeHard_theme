@@ -7,11 +7,6 @@ register_nav_menus( array(
 );
 
 function theme_script() {
-    wp_register_script( "page",
-                get_template_directory_uri().'/js/page.min.js',
-                array('jquery'),
-                null,
-                true);
     wp_register_script( "isotope",
                 get_template_directory_uri().'/js/isotope.min.js',
                 array('jquery'),
@@ -29,7 +24,6 @@ function theme_script() {
                         true);
     wp_enqueue_script("materialize");
     wp_enqueue_script("isotope");
-    wp_enqueue_script("page");
     wp_enqueue_script("bake-hard");
 };
 add_action("wp_enqueue_scripts","theme_script");

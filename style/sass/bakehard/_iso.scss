@@ -1,3 +1,38 @@
 .content-thumbnail{
     width:100%;
+    margin:auto;
+    
+    $card-width: 180px;
+    .card {
+        width:$card-width;
+    } 
+    
+    .grid-sizer {
+        width:$card-width;
+    }
+    .gutter-sizer{
+        width:4%;
+    }
+    
+    ul {
+        list-style-type: none; 
+        li {
+            @extend .chip;
+        }
+    }
+
+    .btn,.load-thumbnail{
+        width:100%;
+    }
 }
+
+.content {
+    margin:auto;
+    @extend .card-panel;
+}
+
+.loading {
+    width:100%;
+}
+
+

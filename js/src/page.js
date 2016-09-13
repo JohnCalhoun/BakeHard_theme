@@ -35,8 +35,7 @@ bakehard.render.page.check=function(check_selector){
     return( Boolean(jQuery('main').find(check_selector).length) ) 
 }
 
-bakehard.render.page.load=function(ctx){
-    var page_url=ctx.params[0] 
+bakehard.render.page.load=function(page_url){
     var selector='[data-url="'+page_url+'"]'
     
     if(page_url[0]!="/"){
@@ -44,40 +43,39 @@ bakehard.render.page.load=function(ctx){
     }
    
     if( bakehard.render.page.check(selector) ){ 
-        jQuery(document).trigger('page_rendering',{"cached":true})
+        jQuery(window).trigger('page_rendering',{"cached":true})
         bakehard.render.page.show(selector)   
-        jQuery(document).trigger('page_rendered',["success"])
+        jQuery(window).trigger('page_rendered',["success"])
     }else{
         jQuery.ajax({
                 url:page_url,
                 xhr:function(){
                     var xhr= new window.XMLHttpRequest(); 
-                    jQuery(document).trigger('page_progress',{"percent":0})
+                    jQuery(window).trigger('page_progress',{"percent":0})
                     xhr.addEventListener(
                     "progress", 
                     function(evt){
                         if (evt.lengthComputable) {  
                             var percentComplete = evt.loaded / evt.total;
-                            jQuery(document).trigger('page_progress',{"percent":percentComplete})
+                            jQuery(window).trigger('page_progress',{"percent":percentComplete})
                         }
                     }, 
                     false); 
                     return(xhr)
                 },
                 beforeSend:function(){
-                    jQuery(document).trigger('page_rendering',{"cached":false})
+                    jQuery(window).trigger('page_rendering',{"cached":false})
                 },
                 success:function(page){
                     var content=bakehard.render.page.render(page,page_url)//render page
                     bakehard.render.page.insert(content) 
-                    jQuery(document).trigger('page_rendered',["success"])
-                    ctx.cache.pages[page_url]=true
+                    jQuery(window).trigger('page_rendered',["success"])
                 },
                 error:function(result){
-                    jQuery(document).trigger('page_rendered',["fail"])
+                    jQuery(window).trigger('page_rendered',["fail"])
                 },
                 complete:function(){
-                    jQuery(document).trigger('page_progress',{"percent":100})
+                    jQuery(window).trigger('page_progress',{"percent":100})
                 }
             })
     }

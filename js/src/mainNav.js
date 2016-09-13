@@ -12,7 +12,7 @@ bakehard.mainNav.navigate=function(e){
     if(path_full.indexOf(base_url) != -1){
         e.preventDefault()  
         var path=goog.uri.utils.getPath(link.attr('href')) 
-        page("/page/"+path)
+        jQuery(window).trigger('change_page',path) 
     }
 };
 

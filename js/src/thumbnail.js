@@ -89,20 +89,31 @@ jQuery(document).on('click','.load-thumbnail',function(){
     bakehard.render.thumbnail.load(bakehard.render.thumbnail.current_page)
 })
 
+jQuery(document).on(    
+    'click',
+    '.content-thumbnail .cat-item a',
+    function(e){
+        e.preventDefault()  
+    }
+)
+                
+
 jQuery(document).on('click','.post-link',
     function(e){
         e.preventDefault()  
         var link=jQuery(e.target)
         var path=goog.uri.utils.getPath(link.attr('href'))
         
-        page("/page/"+path)
+        jQuery(window).trigger('change_page',page) 
     }
 )
 bakehard.render.thumbnail.isotopeInit=function(){ 
     jQuery(".thumbnail").isotope({
         itemSelector:".card",
         masonry:{
-            columnWidth:100
+            columnWidth:'.grid-sizer',
+            gutter:'.gutter-sizer',
+            stagger:10
         }
     });
 }
