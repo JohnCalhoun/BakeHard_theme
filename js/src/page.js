@@ -69,6 +69,7 @@ bakehard.render.page.load=function(page_url){
                 success:function(page){
                     var content=bakehard.render.page.render(page,page_url)//render page
                     bakehard.render.page.insert(content) 
+                    bakehard.render.page.show(selector)   
                     jQuery(window).trigger('page_rendered',["success"])
                 },
                 error:function(result){

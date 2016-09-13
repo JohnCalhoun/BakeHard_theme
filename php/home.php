@@ -5,7 +5,8 @@
     <ul>
         <?php wp_list_categories(array(
                         'depth'=>1,
-                        'title_li'=>''
+                        'title_li'=>'',
+                        'show_count'=>true
         )); ?>
     </ul>
     <h2>Posts</h2>

@@ -70,85 +70,85 @@ Text Domain: bakeHard
 .materialize-red-text.text-darken-4 {
   color: #8b1014 !important; }
 
-.red {
+.red, .content-thumbnail ul .filtered {
   background-color: #F44336 !important; }
 
 .red-text {
   color: #F44336 !important; }
 
-.red.lighten-5 {
+.red.lighten-5, .content-thumbnail ul .lighten-5.filtered {
   background-color: #FFEBEE !important; }
 
 .red-text.text-lighten-5 {
   color: #FFEBEE !important; }
 
-.red.lighten-4 {
+.red.lighten-4, .content-thumbnail ul .lighten-4.filtered {
   background-color: #FFCDD2 !important; }
 
 .red-text.text-lighten-4 {
   color: #FFCDD2 !important; }
 
-.red.lighten-3 {
+.red.lighten-3, .content-thumbnail ul .lighten-3.filtered {
   background-color: #EF9A9A !important; }
 
 .red-text.text-lighten-3 {
   color: #EF9A9A !important; }
 
-.red.lighten-2 {
+.red.lighten-2, .content-thumbnail ul .lighten-2.filtered {
   background-color: #E57373 !important; }
 
 .red-text.text-lighten-2 {
   color: #E57373 !important; }
 
-.red.lighten-1 {
+.red.lighten-1, .content-thumbnail ul .lighten-1.filtered {
   background-color: #EF5350 !important; }
 
 .red-text.text-lighten-1 {
   color: #EF5350 !important; }
 
-.red.darken-1 {
+.red.darken-1, .content-thumbnail ul .darken-1.filtered {
   background-color: #E53935 !important; }
 
 .red-text.text-darken-1 {
   color: #E53935 !important; }
 
-.red.darken-2 {
+.red.darken-2, .content-thumbnail ul .darken-2.filtered {
   background-color: #D32F2F !important; }
 
 .red-text.text-darken-2 {
   color: #D32F2F !important; }
 
-.red.darken-3 {
+.red.darken-3, .content-thumbnail ul .darken-3.filtered {
   background-color: #C62828 !important; }
 
 .red-text.text-darken-3 {
   color: #C62828 !important; }
 
-.red.darken-4 {
+.red.darken-4, .content-thumbnail ul .darken-4.filtered {
   background-color: #B71C1C !important; }
 
 .red-text.text-darken-4 {
   color: #B71C1C !important; }
 
-.red.accent-1 {
+.red.accent-1, .content-thumbnail ul .accent-1.filtered {
   background-color: #FF8A80 !important; }
 
 .red-text.text-accent-1 {
   color: #FF8A80 !important; }
 
-.red.accent-2 {
+.red.accent-2, .content-thumbnail ul .accent-2.filtered {
   background-color: #FF5252 !important; }
 
 .red-text.text-accent-2 {
   color: #FF5252 !important; }
 
-.red.accent-3 {
+.red.accent-3, .content-thumbnail ul .accent-3.filtered {
   background-color: #FF1744 !important; }
 
 .red-text.text-accent-3 {
   color: #FF1744 !important; }
 
-.red.accent-4 {
+.red.accent-4, .content-thumbnail ul .accent-4.filtered {
   background-color: #D50000 !important; }
 
 .red-text.text-accent-4 {
@@ -2076,7 +2076,7 @@ a {
 .z-depth-0 {
   box-shadow: none !important; }
 
-.z-depth-1, nav, .card-panel, .content, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+.z-depth-1, nav, .card-panel, .content, .card, .content-thumbnail .thumbnail-card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
 .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
@@ -3247,73 +3247,73 @@ small {
 .thin {
   font-weight: 200; }
 
-.flow-text {
+.flow-text, .content p {
   font-weight: 300; }
   @media only screen and (min-width: 360px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.2rem; } }
   @media only screen and (min-width: 390px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.224rem; } }
   @media only screen and (min-width: 420px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.248rem; } }
   @media only screen and (min-width: 450px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.272rem; } }
   @media only screen and (min-width: 480px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.296rem; } }
   @media only screen and (min-width: 510px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.32rem; } }
   @media only screen and (min-width: 540px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.344rem; } }
   @media only screen and (min-width: 570px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.368rem; } }
   @media only screen and (min-width: 600px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.392rem; } }
   @media only screen and (min-width: 630px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.416rem; } }
   @media only screen and (min-width: 660px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.44rem; } }
   @media only screen and (min-width: 690px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.464rem; } }
   @media only screen and (min-width: 720px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.488rem; } }
   @media only screen and (min-width: 750px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.512rem; } }
   @media only screen and (min-width: 780px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.536rem; } }
   @media only screen and (min-width: 810px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.56rem; } }
   @media only screen and (min-width: 840px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.584rem; } }
   @media only screen and (min-width: 870px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.608rem; } }
   @media only screen and (min-width: 900px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.632rem; } }
   @media only screen and (min-width: 930px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.656rem; } }
   @media only screen and (min-width: 960px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.68rem; } }
   @media only screen and (max-width: 360px) {
-    .flow-text {
+    .flow-text, .content p {
       font-size: 1.2rem; } }
 
 .card-panel, .content {
@@ -3323,66 +3323,66 @@ small {
   border-radius: 2px;
   background-color: #fff; }
 
-.card {
+.card, .content-thumbnail .thumbnail-card {
   position: relative;
   margin: 0.5rem 0 1rem 0;
   background-color: #fff;
   transition: box-shadow .25s;
   border-radius: 2px; }
-  .card .card-title {
+  .card .card-title, .content-thumbnail .thumbnail-card .card-title {
     font-size: 24px;
     font-weight: 300; }
-    .card .card-title.activator {
+    .card .card-title.activator, .content-thumbnail .thumbnail-card .card-title.activator {
       cursor: pointer; }
-  .card.small, .card.medium, .card.large {
+  .card.small, .content-thumbnail .small.thumbnail-card, .card.medium, .content-thumbnail .medium.thumbnail-card, .card.large, .content-thumbnail .large.thumbnail-card {
     position: relative; }
-    .card.small .card-image, .card.medium .card-image, .card.large .card-image {
+    .card.small .card-image, .content-thumbnail .small.thumbnail-card .card-image, .card.small .content-thumbnail .thumbnail-card .thumbnail-image, .content-thumbnail .thumbnail-card .card.small .thumbnail-image, .content-thumbnail .small.thumbnail-card .thumbnail-image, .card.medium .card-image, .content-thumbnail .medium.thumbnail-card .card-image, .card.medium .content-thumbnail .thumbnail-card .thumbnail-image, .content-thumbnail .thumbnail-card .card.medium .thumbnail-image, .content-thumbnail .medium.thumbnail-card .thumbnail-image, .card.large .card-image, .content-thumbnail .large.thumbnail-card .card-image, .card.large .content-thumbnail .thumbnail-card .thumbnail-image, .content-thumbnail .thumbnail-card .card.large .thumbnail-image, .content-thumbnail .large.thumbnail-card .thumbnail-image {
       max-height: 60%;
       overflow: hidden; }
-    .card.small .card-image + .card-content, .card.medium .card-image + .card-content, .card.large .card-image + .card-content {
+    .card.small .card-image + .card-content, .content-thumbnail .small.thumbnail-card .card-image + .card-content, .card.small .content-thumbnail .thumbnail-card .thumbnail-image + .card-content, .content-thumbnail .thumbnail-card .card.small .thumbnail-image + .card-content, .content-thumbnail .small.thumbnail-card .thumbnail-image + .card-content, .card.small .content-thumbnail .thumbnail-card .card-image + .thumbnail-content, .content-thumbnail .thumbnail-card .card.small .card-image + .thumbnail-content, .content-thumbnail .small.thumbnail-card .card-image + .thumbnail-content, .card.small .content-thumbnail .thumbnail-card .thumbnail-image + .thumbnail-content, .content-thumbnail .thumbnail-card .card.small .thumbnail-image + .thumbnail-content, .content-thumbnail .small.thumbnail-card .thumbnail-image + .thumbnail-content, .card.medium .card-image + .card-content, .content-thumbnail .medium.thumbnail-card .card-image + .card-content, .card.medium .content-thumbnail .thumbnail-card .thumbnail-image + .card-content, .content-thumbnail .thumbnail-card .card.medium .thumbnail-image + .card-content, .content-thumbnail .medium.thumbnail-card .thumbnail-image + .card-content, .card.medium .content-thumbnail .thumbnail-card .card-image + .thumbnail-content, .content-thumbnail .thumbnail-card .card.medium .card-image + .thumbnail-content, .content-thumbnail .medium.thumbnail-card .card-image + .thumbnail-content, .card.medium .content-thumbnail .thumbnail-card .thumbnail-image + .thumbnail-content, .content-thumbnail .thumbnail-card .card.medium .thumbnail-image + .thumbnail-content, .content-thumbnail .medium.thumbnail-card .thumbnail-image + .thumbnail-content, .card.large .card-image + .card-content, .content-thumbnail .large.thumbnail-card .card-image + .card-content, .card.large .content-thumbnail .thumbnail-card .thumbnail-image + .card-content, .content-thumbnail .thumbnail-card .card.large .thumbnail-image + .card-content, .content-thumbnail .large.thumbnail-card .thumbnail-image + .card-content, .card.large .content-thumbnail .thumbnail-card .card-image + .thumbnail-content, .content-thumbnail .thumbnail-card .card.large .card-image + .thumbnail-content, .content-thumbnail .large.thumbnail-card .card-image + .thumbnail-content, .card.large .content-thumbnail .thumbnail-card .thumbnail-image + .thumbnail-content, .content-thumbnail .thumbnail-card .card.large .thumbnail-image + .thumbnail-content, .content-thumbnail .large.thumbnail-card .thumbnail-image + .thumbnail-content {
       max-height: 40%; }
-    .card.small .card-content, .card.medium .card-content, .card.large .card-content {
+    .card.small .card-content, .content-thumbnail .small.thumbnail-card .card-content, .card.small .content-thumbnail .thumbnail-card .thumbnail-content, .content-thumbnail .thumbnail-card .card.small .thumbnail-content, .content-thumbnail .small.thumbnail-card .thumbnail-content, .card.medium .card-content, .content-thumbnail .medium.thumbnail-card .card-content, .card.medium .content-thumbnail .thumbnail-card .thumbnail-content, .content-thumbnail .thumbnail-card .card.medium .thumbnail-content, .content-thumbnail .medium.thumbnail-card .thumbnail-content, .card.large .card-content, .content-thumbnail .large.thumbnail-card .card-content, .card.large .content-thumbnail .thumbnail-card .thumbnail-content, .content-thumbnail .thumbnail-card .card.large .thumbnail-content, .content-thumbnail .large.thumbnail-card .thumbnail-content {
       max-height: 100%;
       overflow: hidden; }
-    .card.small .card-action, .card.medium .card-action, .card.large .card-action {
+    .card.small .card-action, .content-thumbnail .small.thumbnail-card .card-action, .card.small .content-thumbnail .thumbnail-card .thumbnail-action, .content-thumbnail .thumbnail-card .card.small .thumbnail-action, .content-thumbnail .small.thumbnail-card .thumbnail-action, .card.medium .card-action, .content-thumbnail .medium.thumbnail-card .card-action, .card.medium .content-thumbnail .thumbnail-card .thumbnail-action, .content-thumbnail .thumbnail-card .card.medium .thumbnail-action, .content-thumbnail .medium.thumbnail-card .thumbnail-action, .card.large .card-action, .content-thumbnail .large.thumbnail-card .card-action, .card.large .content-thumbnail .thumbnail-card .thumbnail-action, .content-thumbnail .thumbnail-card .card.large .thumbnail-action, .content-thumbnail .large.thumbnail-card .thumbnail-action {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0; }
-  .card.small {
+  .card.small, .content-thumbnail .small.thumbnail-card {
     height: 300px; }
-  .card.medium {
+  .card.medium, .content-thumbnail .medium.thumbnail-card {
     height: 400px; }
-  .card.large {
+  .card.large, .content-thumbnail .large.thumbnail-card {
     height: 500px; }
-  .card.horizontal {
+  .card.horizontal, .content-thumbnail .horizontal.thumbnail-card {
     display: flex; }
-    .card.horizontal.small .card-image, .card.horizontal.medium .card-image, .card.horizontal.large .card-image {
+    .card.horizontal.small .card-image, .content-thumbnail .horizontal.small.thumbnail-card .card-image, .card.horizontal.small .content-thumbnail .thumbnail-card .thumbnail-image, .content-thumbnail .thumbnail-card .card.horizontal.small .thumbnail-image, .content-thumbnail .horizontal.small.thumbnail-card .thumbnail-image, .card.horizontal.medium .card-image, .content-thumbnail .horizontal.medium.thumbnail-card .card-image, .card.horizontal.medium .content-thumbnail .thumbnail-card .thumbnail-image, .content-thumbnail .thumbnail-card .card.horizontal.medium .thumbnail-image, .content-thumbnail .horizontal.medium.thumbnail-card .thumbnail-image, .card.horizontal.large .card-image, .content-thumbnail .horizontal.large.thumbnail-card .card-image, .card.horizontal.large .content-thumbnail .thumbnail-card .thumbnail-image, .content-thumbnail .thumbnail-card .card.horizontal.large .thumbnail-image, .content-thumbnail .horizontal.large.thumbnail-card .thumbnail-image {
       height: 100%;
       max-height: none;
       overflow: visible; }
-      .card.horizontal.small .card-image img, .card.horizontal.medium .card-image img, .card.horizontal.large .card-image img {
+      .card.horizontal.small .card-image img, .content-thumbnail .horizontal.small.thumbnail-card .card-image img, .card.horizontal.small .content-thumbnail .thumbnail-card .thumbnail-image img, .content-thumbnail .thumbnail-card .card.horizontal.small .thumbnail-image img, .content-thumbnail .horizontal.small.thumbnail-card .thumbnail-image img, .card.horizontal.medium .card-image img, .content-thumbnail .horizontal.medium.thumbnail-card .card-image img, .card.horizontal.medium .content-thumbnail .thumbnail-card .thumbnail-image img, .content-thumbnail .thumbnail-card .card.horizontal.medium .thumbnail-image img, .content-thumbnail .horizontal.medium.thumbnail-card .thumbnail-image img, .card.horizontal.large .card-image img, .content-thumbnail .horizontal.large.thumbnail-card .card-image img, .card.horizontal.large .content-thumbnail .thumbnail-card .thumbnail-image img, .content-thumbnail .thumbnail-card .card.horizontal.large .thumbnail-image img, .content-thumbnail .horizontal.large.thumbnail-card .thumbnail-image img {
         height: 100%; }
-    .card.horizontal .card-image {
+    .card.horizontal .card-image, .content-thumbnail .horizontal.thumbnail-card .card-image, .card.horizontal .content-thumbnail .thumbnail-card .thumbnail-image, .content-thumbnail .thumbnail-card .card.horizontal .thumbnail-image, .content-thumbnail .horizontal.thumbnail-card .thumbnail-image {
       max-width: 50%; }
-      .card.horizontal .card-image img {
+      .card.horizontal .card-image img, .content-thumbnail .horizontal.thumbnail-card .card-image img, .card.horizontal .content-thumbnail .thumbnail-card .thumbnail-image img, .content-thumbnail .thumbnail-card .card.horizontal .thumbnail-image img, .content-thumbnail .horizontal.thumbnail-card .thumbnail-image img {
         max-width: 100%;
         width: auto; }
-    .card.horizontal .card-stacked {
+    .card.horizontal .card-stacked, .content-thumbnail .horizontal.thumbnail-card .card-stacked {
       display: flex;
       flex-direction: column;
       flex: 1;
       position: relative; }
-      .card.horizontal .card-stacked .card-content {
+      .card.horizontal .card-stacked .card-content, .content-thumbnail .horizontal.thumbnail-card .card-stacked .card-content, .card.horizontal .card-stacked .content-thumbnail .thumbnail-card .thumbnail-content, .content-thumbnail .thumbnail-card .card.horizontal .card-stacked .thumbnail-content, .content-thumbnail .horizontal.thumbnail-card .card-stacked .thumbnail-content {
         flex-grow: 1; }
-  .card.sticky-action .card-action {
+  .card.sticky-action .card-action, .content-thumbnail .sticky-action.thumbnail-card .card-action, .card.sticky-action .content-thumbnail .thumbnail-card .thumbnail-action, .content-thumbnail .thumbnail-card .card.sticky-action .thumbnail-action, .content-thumbnail .sticky-action.thumbnail-card .thumbnail-action {
     z-index: 2; }
-  .card.sticky-action .card-reveal {
+  .card.sticky-action .card-reveal, .content-thumbnail .sticky-action.thumbnail-card .card-reveal, .card.sticky-action .content-thumbnail .thumbnail-card .thumbnail-reveal, .content-thumbnail .thumbnail-card .card.sticky-action .thumbnail-reveal, .content-thumbnail .sticky-action.thumbnail-card .thumbnail-reveal {
     z-index: 1;
     padding-bottom: 64px; }
-  .card .card-image {
+  .card .card-image, .content-thumbnail .thumbnail-card .card-image, .content-thumbnail .thumbnail-card .thumbnail-image {
     position: relative; }
-    .card .card-image img {
+    .card .card-image img, .content-thumbnail .thumbnail-card .card-image img, .content-thumbnail .thumbnail-card .thumbnail-image img {
       display: block;
       border-radius: 2px 2px 0 0;
       position: relative;
@@ -3391,33 +3391,33 @@ small {
       top: 0;
       bottom: 0;
       width: 100%; }
-    .card .card-image .card-title {
+    .card .card-image .card-title, .content-thumbnail .thumbnail-card .card-image .card-title, .content-thumbnail .thumbnail-card .thumbnail-image .card-title {
       color: #fff;
       position: absolute;
       bottom: 0;
       left: 0;
       padding: 20px; }
-  .card .card-content {
+  .card .card-content, .content-thumbnail .thumbnail-card .card-content, .content-thumbnail .thumbnail-card .thumbnail-content {
     padding: 20px;
     border-radius: 0 0 2px 2px; }
-    .card .card-content p {
+    .card .card-content p, .content-thumbnail .thumbnail-card .card-content p, .content-thumbnail .thumbnail-card .thumbnail-content p {
       margin: 0;
       color: inherit; }
-    .card .card-content .card-title {
+    .card .card-content .card-title, .content-thumbnail .thumbnail-card .card-content .card-title, .content-thumbnail .thumbnail-card .thumbnail-content .card-title {
       line-height: 48px; }
-  .card .card-action {
+  .card .card-action, .content-thumbnail .thumbnail-card .card-action, .content-thumbnail .thumbnail-card .thumbnail-action {
     position: relative;
     background-color: inherit;
     border-top: 1px solid rgba(160, 160, 160, 0.2);
     padding: 20px; }
-    .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+    .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating), .content-thumbnail .thumbnail-card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating), .content-thumbnail .thumbnail-card .thumbnail-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
       color: #ffab40;
       margin-right: 20px;
       transition: color .3s ease;
       text-transform: uppercase; }
-      .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+      .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover, .content-thumbnail .thumbnail-card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover, .content-thumbnail .thumbnail-card .thumbnail-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
         color: #ffd8a6; }
-  .card .card-reveal {
+  .card .card-reveal, .content-thumbnail .thumbnail-card .card-reveal, .content-thumbnail .thumbnail-card .thumbnail-reveal {
     padding: 20px;
     position: absolute;
     background-color: #fff;
@@ -3427,7 +3427,7 @@ small {
     height: 100%;
     z-index: 3;
     display: none; }
-    .card .card-reveal .card-title {
+    .card .card-reveal .card-title, .content-thumbnail .thumbnail-card .card-reveal .card-title, .content-thumbnail .thumbnail-card .thumbnail-reveal .card-title {
       cursor: pointer;
       display: block; }
 
@@ -6349,7 +6349,9 @@ main {
 .content-thumbnail {
   width: 100%;
   margin: auto; }
-  .content-thumbnail .card {
+  .content-thumbnail .thumbnail-card-full {
+    width: 100%; }
+  .content-thumbnail .thumbnail-card-small {
     width: 180px; }
   .content-thumbnail .grid-sizer {
     width: 180px; }
@@ -6361,7 +6363,8 @@ main {
     width: 100%; }
 
 .content {
-  margin: auto; }
+  margin: auto;
+  margin-top: 10px; }
 
 .loading {
   width: 100%; }

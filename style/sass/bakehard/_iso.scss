@@ -3,9 +3,29 @@
     margin:auto;
     
     $card-width: 180px;
-    .card {
+
+    .thumbnail-card-full{
+        width:100%;
+    }
+
+    .thumbnail-card-small{
         width:$card-width;
-    } 
+    }
+    .thumbnail-card {
+        @extend .card;
+        .thumbnail-content{
+            @extend .card-content;
+        }
+        .thumbnail-image{
+            @extend .card-image;
+        }
+        .thumbnail-action{
+            @extend .card-action;
+        }
+        .thumbnail-reveal{
+            @extend .card-reveal;
+        }
+    }
     
     .grid-sizer {
         width:$card-width;
@@ -19,6 +39,9 @@
         li {
             @extend .chip;
         }
+        .filtered{
+            @extend .red;
+        }
     }
 
     .btn,.load-thumbnail{
@@ -28,7 +51,12 @@
 
 .content {
     margin:auto;
+    margin-top:10px;
     @extend .card-panel;
+
+    p {
+        @extend .flow-text;
+    }
 }
 
 .loading {

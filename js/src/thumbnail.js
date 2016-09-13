@@ -14,7 +14,6 @@ jQuery(window).ready(function(){
 })
 
 bakehard.render.thumbnail.current_page=1
-
 bakehard.render.thumbnail.render=function(posts){  
     var elems=[]
     jQuery.each(    
@@ -45,7 +44,7 @@ bakehard.render.thumbnail.load=function(page_number){
     var page=page_number
     
     var request_url=bakehard.render.thumbnail.api_url(page)
-
+    //dont load posts already loaded
     jQuery.ajax({   
         url:request_url,
         dataType:"json",
@@ -78,7 +77,8 @@ bakehard.render.thumbnail.load=function(page_number){
     })
 }
 jQuery(document).on('show','.content',function(e){
-    if(bakehard.render.thumbnail.current_page==1){
+    if(bakehard.render.thumbnail.current_page==1){  
+        //---load sticky 
         bakehard.render.thumbnail.load(bakehard.render.thumbnail.current_page)
     }else{
         jQuery(e.target).find('.thumbnail').isotope('layout')
@@ -89,11 +89,30 @@ jQuery(document).on('click','.load-thumbnail',function(){
     bakehard.render.thumbnail.load(bakehard.render.thumbnail.current_page)
 })
 
+
+bakehard.render.thumbnail.filter=[]
 jQuery(document).on(    
     'click',
     '.content-thumbnail .cat-item a',
-    function(e){
-        e.preventDefault()  
+    function(e){ 
+        e.preventDefault() 
+        var target=jQuery(e.target)
+        var category='.'+target.text()
+        
+        if( target.parent().hasClass('filtered') ){
+            target.parent().removeClass('filtered') 
+            var index=bakehard.render.thumbnail.filter.indexOf(category)
+            bakehard.render.thumbnail.filter.splice(index,1)
+        }else{ 
+            //load all from category
+            bakehard.render.thumbnail.filter.push(category)
+            target.parent().addClass('filtered')
+        }
+        var filter_string=bakehard.render.thumbnail.filter.join(',')
+        jQuery(".thumbnail").isotope(
+            {filter:filter_string}
+        );
+
     }
 )
                 
@@ -109,7 +128,7 @@ jQuery(document).on('click','.post-link',
 )
 bakehard.render.thumbnail.isotopeInit=function(){ 
     jQuery(".thumbnail").isotope({
-        itemSelector:".card",
+        itemSelector:".thumbnail-card",
         masonry:{
             columnWidth:'.grid-sizer',
             gutter:'.gutter-sizer',
