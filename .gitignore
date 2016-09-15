@@ -2,5 +2,8 @@
 tmp/*
 *.zip
 */*.sass-cache/*
+*.scss.map
 *.log
-plovr.jar
+.sass-cache
+node_modules
+build/*
