@@ -80,14 +80,6 @@ module.exports=function(grunt){
                 }
             }
         },
-        mochaTest:{
-            test:{
-                options:{
-                    timeout:11000
-                },
-                src:['js/*/runner.js']
-            }
-        },
         browserSync:{
             js:{
                 src:"./js",
@@ -104,6 +96,13 @@ module.exports=function(grunt){
                 options:{
                     port:8000,
                     base:"js"
+                }
+            },
+            dev:{
+                options:{
+                    port:8000,
+                    base:"js",
+                    keepalive:true
                 }
             }
         },
@@ -148,8 +147,8 @@ module.exports=function(grunt){
     grunt.registerTask('test',[ 'connect:js',
                                 'start-selenium-server:dev', 
                                 'browserify:testConstants',
-                                'webdriver:dev',
-                                'stop-selenium-server:dev']) 
+                                'force:webdriver:dev',
+                                'force:stop-selenium-server:dev']) 
 
     grunt.registerTask('default',[])
 }

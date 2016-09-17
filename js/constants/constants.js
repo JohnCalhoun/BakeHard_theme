@@ -13,10 +13,11 @@ var init=function(resolve,reject){
 
     jQuery.ajax({
             url:this.api_url+'site_url',
+            dataType:'json',
             success:function(url){
                 this.site_url=url+'/'
                 resolve()
-            },
+            }.bind(this),
             error:function(){
                 reject(Error('ajax failed'))
             }
