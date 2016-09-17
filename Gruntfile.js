@@ -56,6 +56,10 @@ module.exports=function(grunt){
             dist:{
                 src:"js/main.js",
                 dest:"tmp/main.js"
+            },
+            testConstants:{
+                src:"js/constants/test.js",
+                dest:"js/constants/data/test.js"
             }
         },
         uglify:{
@@ -78,7 +82,45 @@ module.exports=function(grunt){
         },
         mochaTest:{
             test:{
-                src:['js/*/test.js']
+                options:{
+                    timeout:11000
+                },
+                src:['js/*/runner.js']
+            }
+        },
+        browserSync:{
+            js:{
+                src:"./js",
+                options:{
+                    server:{
+                        baseDir:"./js",
+                        directory:true
+                    }
+                }, 
+            }
+        },
+        connect:{
+            js:{
+                options:{
+                    port:8000,
+                    base:"js"
+                }
+            }
+        },
+        "start-selenium-server":{
+            dev:{
+                options:{
+                    autostop:false,
+                    downloadUrl:"http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar"
+                }
+            }
+        },
+        "stop-selenium-server":{
+            dev:{}
+        },
+        webdriver:{
+            dev:{
+                configFile:"./wdio.conf.js"
             }
         }
     });
@@ -86,15 +128,29 @@ module.exports=function(grunt){
     require('time-grunt')(grunt);
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('style',["sass:dist","concat:css"])
+    grunt.registerTask('style',["sass:dist",
+                                "concat:css"])
     grunt.registerTask('php',["copy:php"])
     grunt.registerTask('assets',["copy:assets"])
-    grunt.registerTask('js',["handlebars","browserify:dist","uglify:dist"])
+    grunt.registerTask('js',[   "handlebars",
+                                "browserify:dist",
+                                "uglify:dist"])
     grunt.registerTask('Clean',["clean:tmp"])
-    grunt.registerTask('build',['clean:bakehard','style','php','assets','js'])
-    grunt.registerTask('package',['build','compress:build'])
-    grunt.registerTask('upload',['build','shell:rsync'])
-    grunt.registerTask('test',['mochaTest:test']) 
+    grunt.registerTask('build',[    'clean:bakehard',
+                                    'style',
+                                    'php',
+                                    'assets',
+                                    'js'])
+    grunt.registerTask('package',[  'build',
+                                    'compress:build'])
+    grunt.registerTask('upload',[   'build',
+                                    'shell:rsync'])
+    grunt.registerTask('test',[ 'connect:js',
+                                'start-selenium-server:dev', 
+                                'browserify:testConstants',
+                                'webdriver:dev',
+                                'stop-selenium-server:dev']) 
+
     grunt.registerTask('default',[])
 }
 

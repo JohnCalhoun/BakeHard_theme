@@ -1,28 +1,11 @@
-var constants=require('./constants.js')
+var Promise=require('promise-polyfill')
+console.log(Promise)
+var constants_tmp=require('./constants.js')
 
-var chai=require('chai')
-var mocha=require('mocha')
-var express=require('express')
-var webdriver=require('selenium-webdriver')
+var constants=new constants_tmp()
 
-
-
-describe('constants',function(){
-    var server
-    var driver
-    before(function(){
-            server=express().use(express.static(__dirname)).listen(8000);
-            driver=new webdriver.Builder().forBrowser('phantomjs').build()
-            console.log('1') 
-    })
-
-    it('get',function(){        
-        driver.get('localhost:8000/constants_test.html')
-    })
-
-    after(function(){
-        server.close()
-        driver.quit()
-    })
-
+constants.ready.then(function(){
+    window.constants_test=constants 
+    jQuery('main').append('<div id="done"></div>')
+    console.log('hi')
 })
