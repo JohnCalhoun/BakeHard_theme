@@ -71,7 +71,7 @@ exports.config = {
     baseUrl: 'http://localhost:8000',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 2000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -115,7 +115,7 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/testrunner/reporters.html
-    reporters: ['dot','spec'],
+    reporters: ['spec'],
     
     //
     // Options to be passed to Mocha.
