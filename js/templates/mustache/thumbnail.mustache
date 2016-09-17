@@ -1,0 +1,17 @@
+<div class="thumbnail-card thumbnail-card-small stick-action hoverable {{ category_string }}">
+    {{#if img_url }}
+        <div class="thumbnail-image">
+            <img class='activator' src='{{img_url }}'>
+        </div>
+    {{/if}}
+    <div class="thumbnail-content">
+        <span class="thumbnail-title activate"> {{ title.rendered }} </span>
+    </div>
+    <div    class="thumbnail-action">
+        <a  href="{{ link }}" class='post-link'>view</a>
+    </div>
+    <div class="thumbnail-reveal">
+        {{ excerpt.rendered }}
+    </div>
+</div>
+

@@ -68,6 +68,14 @@ module.exports=function(grunt){
             testNav:{
                 src:"js/nav/test.js",
                 dest:"js/nav/data/test.js"
+            },
+            testProgress:{
+                src:"js/progress/test.js",
+                dest:"js/progress/data/test.js"
+            },
+            testRoutes:{
+                src:"js/routes/test.js",
+                dest:"js/routes/data/test.js"
             }
         },
         uglify:{
@@ -84,7 +92,7 @@ module.exports=function(grunt){
                     node:true
                 },
                 files:{
-                    "js/templates/templates.js":"js/templates/*.hb"
+                    "js/templates/templates.js":"js/templates/mustache/*.mustache"
                 }
             }
         },
@@ -155,7 +163,11 @@ module.exports=function(grunt){
     grunt.registerTask('testBuild',[
                                 'browserify:testConstants',
                                 'browserify:testLoad',
-                                'browserify:testNav']) 
+                                'browserify:testProgress',
+                                'browserify:testNav',
+                                'browserify:testRoutes',
+                                'handlebars' 
+                                ]) 
     
     grunt.registerTask('test',[ 'connect:js',
                                 'testBuild',

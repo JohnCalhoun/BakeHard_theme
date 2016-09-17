@@ -1,0 +1,6 @@
+<div class="content loading-type loading" id="loading-type">
+     <div class="progress">
+        <div class="indeterminate"></div> 
+    </div> 
+</div>
+
