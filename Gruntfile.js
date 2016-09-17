@@ -57,6 +57,10 @@ module.exports=function(grunt){
                 src:"js/main.js",
                 dest:"tmp/main.js"
             },
+            testLoad:{
+                src:"js/load/test.js",
+                dest:"js/load/data/test.js"
+            },
             testConstants:{
                 src:"js/constants/test.js",
                 dest:"js/constants/data/test.js"
@@ -144,12 +148,21 @@ module.exports=function(grunt){
                                     'compress:build'])
     grunt.registerTask('upload',[   'build',
                                     'shell:rsync'])
-    grunt.registerTask('test',[ 'connect:js',
-                                'start-selenium-server:dev', 
+    grunt.registerTask('testAll',[ 
+                                'connect:js',
                                 'browserify:testConstants',
+                                'browserify:testLoad',
+                                'start-selenium-server:dev', 
                                 'force:webdriver:dev',
                                 'force:stop-selenium-server:dev']) 
 
+    grunt.registerTask('test',[ 'connect:js',
+                                'browserify:testLoad',
+                                'start-selenium-server:dev', 
+                                'force:webdriver:dev',
+                                'force:stop-selenium-server:dev']) 
+
+    grunt.registerTask('server','connect:dev')
     grunt.registerTask('default',[])
 }
 

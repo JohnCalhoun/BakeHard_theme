@@ -3,7 +3,7 @@ var expect=chai.expect
 var mocha=require('mocha')
 
 
-describe('constants in browser',function(){  
+describe('constants',function(){  
 
     before(function(){
         browser.url('/constants/test.html') 
