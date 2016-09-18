@@ -1,2 +1,3 @@
-var routes=require('./routes.js')
+var routes=new require('./routes.js')(function(){})
+
 

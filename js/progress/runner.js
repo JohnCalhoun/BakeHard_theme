@@ -9,6 +9,20 @@ describe('load',function(){
     })
 
     it('empty',function(){
+        browser.execute(function(){
+            return(window.progress_start())
+        })
+        
+        expect(browser.isExisting('#progress'))
+            .to
+            .equal(true)
+        
+        browser.execute(function(){
+            return(window.progress_stop())
+        })
+        expect(browser.isVisible('#progress'))
+            .to
+            .equal(false)    
     })
     
     after(function(){

@@ -1,24 +1,11 @@
-goog.require('goog.testing.ContinuationTestCase')
-goog.require('goog.testing.jsunit')
-goog.require('goog.events.EventTarget')
+var progress=require('./progress.js')
 
-goog.require('bh.progress')
-goog.require('bh.templates.components')
-
-if(typeof progress_test_flag != 'undefined'){
-
-var testprogress=function(){ 
-    bh.progress.start('#loading-screen','main',bh.templates.components.progress )()
-    assertTrue('should add loading screen', jQuery('#loading-screen').length !=0 )
-    assertTrue('screen should be visible', jQuery('main').children(':hidden').length == 0)
-
-    bh.progress.stop('#loading-screen')()
-    
-    assertTrue('screen should be hidden', jQuery('main').children(':hidden').length != 0)
+var template=function(){
+    return(
+        "<p id='progress'>test</p>"
+    )
 }
 
-var testCase=new goog.testing.ContinuationTestCase();
-testCase.autoDiscoverTests();
-G_testRunner.initialize(testCase);
+window.progress_start=progress.start('#progress','main',template)
 
-}
+window.progress_stop=progress.stop('#progress','main',template)
