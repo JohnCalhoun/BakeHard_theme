@@ -25,6 +25,11 @@ describe('templates',function(){
     it('home',compare('home',{}))
     it('pages',compare('pages',{}))
     it('posts',compare('posts',{}))
+    it('categories',compare('categories',{
+        count:1,
+        name:"Name",
+        slug:"name"
+    }))
     
     it('load',compare('load',{type:'type'}))
     it('thumbnail',compare('thumbnail',
