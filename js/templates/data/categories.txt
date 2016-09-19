@@ -1,9 +1,0 @@
-<div>
-    <span class='category-tag' data-cat='name'>
-        Name
-        <span class='category-count'>
-            1
-        </span>
-    </span>
-</div>
-

@@ -4,16 +4,22 @@ Handlebars = glob.Handlebars || require('handlebars');
 
 this["JST"] = this["JST"] || {};
 
-this["JST"]["js/templates/mustache/categories.mustache"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+this["JST"]["js/templates/mustache/cat_tag.mustache"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "<div>\n    <span class='category-tag' data-cat='"
-    + alias4(((helper = (helper = helpers.slug || (depth0 != null ? depth0.slug : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"slug","hash":{},"data":data}) : helper)))
-    + "'>\n        "
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "\n        <span class='category-count'>\n            "
-    + alias4(((helper = (helper = helpers.count || (depth0 != null ? depth0.count : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"count","hash":{},"data":data}) : helper)))
-    + "\n        </span>\n    </span>\n</div>\n\n";
+  return "        <li><span class='category-tag' data-cat='"
+    + alias2(alias1((depth0 != null ? depth0.slug : depth0), depth0))
+    + "'>\n            "
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "\n            <span class='category-count'>\n                "
+    + alias2(alias1((depth0 != null ? depth0.count : depth0), depth0))
+    + "\n            </span>\n        </span></li>\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<ul class='category-tags'>\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.categories : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</ul>\n";
 },"useData":true});
 
 this["JST"]["js/templates/mustache/home.mustache"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

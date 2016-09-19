@@ -25,10 +25,19 @@ describe('templates',function(){
     it('home',compare('home',{}))
     it('pages',compare('pages',{}))
     it('posts',compare('posts',{}))
-    it('categories',compare('categories',{
-        count:1,
-        name:"Name",
-        slug:"name"
+    it('cat_tag',compare('cat_tag',{
+        categories:[
+            {
+                count:1,
+                name:"Name_1",
+                slug:"name_1"
+            },
+            {
+                count:2,
+                name:"Name_2",
+                slug:"name_2"
+            }
+        ]
     }))
     
     it('load',compare('load',{type:'type'}))

@@ -1,0 +1,15 @@
+<ul class='category-tags'>
+    <li><span class='category-tag' data-cat='name_1'>
+            Name_1
+            <span class='category-count'>
+                1
+            </span>
+    </span></li>
+    <li><span class='category-tag' data-cat='name_2'>
+            Name_2
+            <span class='category-count'>
+                2
+            </span>
+    </span></li>
+</ul>
+
