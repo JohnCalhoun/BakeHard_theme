@@ -1,4 +1,30 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var jQuery=require('jquery-browserify')
+
+var constants={
+        api_url:'/thumbnails/data/',
+        post_per_page:10
+    }
+
+var thumbnail=require('./thumbnails.js')
+var template=function(post){
+    var out="<div class='thumbnail-card' data-sort='"
+            +Math.random() 
+            +"' >"
+            +post.title.rendered+"</div>"
+    return(out)
+}
+
+window.thumbnails_test=new thumbnail(constants,template)
+
+jQuery(window).ready(
+    function(){
+        window.thumbnails_test.IsotopeInit()
+    }
+)
+
+
+},{"./thumbnails.js":2,"jquery-browserify":16}],2:[function(require,module,exports){
 var Isotope=require('isotope-layout')
 var jQuery=require('jquery-browserify')
 
@@ -6,6 +32,25 @@ var posts=function(constants,thumbnail_template){
     this.current_page=1
     this.filter=[]
     this.thumbnail_template=thumbnail_template
+//--------------loading------------------------ 
+    this.IsotopeInit=function(){
+        var iso_settings={
+                itemSelector:".thumbnail-card",
+                masonry:{
+                    columnWidth:'.grid-sizer',
+                    gutter:'.gutter-sizer',
+                    stagger:10
+                },
+                getSortData:{
+                    target:'[data-sort]'
+                }
+                
+                };
+        this.iso=new Isotope(
+            '.thumbnail',
+            iso_settings
+        );
+    }.bind(this)
 
     this.api_url=function(page){
         var url=constants.api_url+'posts'+"?page="+page+"&per_page="+constants.post_per_page
@@ -26,7 +71,6 @@ var posts=function(constants,thumbnail_template){
                 )
             }.bind(this)
         )
-        console.log(elems)
         this.iso.insert(elems)
 
         this.emit('thumbnail_rendered',["success"])
@@ -64,73 +108,44 @@ var posts=function(constants,thumbnail_template){
             }.bind(this)
         })
     }.bind(this)
-    
-    this.IsotopeInit=function(){
-        var iso_settings={
-                itemSelector:".thumbnail-card",
-                masonry:{
-                    //columnWidth:'.grid-sizer',
-                    //gutter:'.gutter-sizer',
-                    stagger:10
-                }};
-        this.iso=new Isotope(
-            '.thumbnail',
-            iso_settings
-        );
-
-    }.bind(this)
-
+   
     this.load_new=function(){
         this.load(this.current_page)
     }.bind(this)
 
-    this.filter_category=
-        function(e){ 
-            e.preventDefault() 
-            var target=jQuery(e.target)
-            var category='.'+target.text()
-            
-            if( target.parent().hasClass('filtered') ){
-                target.parent().removeClass('filtered') 
-                var index=this.filter.indexOf(category)
-                filter.splice(index,1)
-            }else{ 
-                this.filter.push(category)
-                target.parent().addClass('filtered')
-            }
-            var filter_string=this.filter.join(',')
-            jQuery(".thumbnail").Isotope(
-                {filter:filter_string}
-            );
-        }.bind(this)
+//----------------------------------filtering
+    this.filter_array=[]
+
+    this.apply_filter=function(){
+        this.iso.arrange({filter:this.filter_array.join(', ')})
+    }.bind(this)
+
+    this.add_filter=function(type){
+        var sel='.'+type
+        
+        if( this.filter_array.indexOf(sel) === -1){
+            this.filter_array.push(sel)
+            this.apply_filter()
+        }
+    }.bind(this)
+    
+    this.remove_filter=function(type){
+        var sel='.'+type
+        var pos=this.filter_array.indexOf(sel)
+        if(pos !== -1){
+            this.filter_array.splice(pos,1)
+        } 
+        this.apply_filter()
+    }.bind(this)
+//-----------------------------sorting 
+    this.sort=function(){
+        this.iso.arrange({sortBy:'target'}) 
+    }.bind(this)
 }
 
 module.exports=posts
 
-},{"isotope-layout":3,"jquery-browserify":16}],2:[function(require,module,exports){
-var jQuery=require('jquery-browserify')
-
-var constants={
-        api_url:'/posts/data/',
-        post_per_page:10
-    }
-
-var posts=require('./posts.js')
-var template=function(post){
-    var out="<div class='thumbnail-card' >"+post.title.rendered+"</div>"
-    return(out)
-}
-
-window.posts_test=new posts(constants,template)
-
-jQuery(window).ready(
-    function(){
-        window.posts_test.IsotopeInit()
-    }
-)
-
-
-},{"./posts.js":1,"jquery-browserify":16}],3:[function(require,module,exports){
+},{"isotope-layout":3,"jquery-browserify":16}],3:[function(require,module,exports){
 /*!
  * Isotope v3.0.1
  *
@@ -12838,4 +12853,4 @@ return jQuery;
 
 })( window ); }));
 
-},{}]},{},[2]);
+},{}]},{},[1]);

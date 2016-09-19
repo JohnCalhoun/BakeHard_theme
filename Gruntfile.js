@@ -77,9 +77,9 @@ module.exports=function(grunt){
                 src:"js/routes/test.js",
                 dest:"js/routes/data/test.js"
             },
-            testPosts:{
-                src:"js/posts/test.js",
-                dest:"js/posts/data/test.js"
+            testThumbnail:{
+                src:"js/thumbnails/test.js",
+                dest:"js/thumbnails/data/test.js"
             }
         },
         uglify:{
@@ -170,7 +170,7 @@ module.exports=function(grunt){
                                 'browserify:testProgress',
                                 'browserify:testNav',
                                 'browserify:testRoutes',
-                                'browserify:testPosts',
+                                'browserify:testThumbnail',
                                 'handlebars' 
                                 ]) 
     

@@ -5,6 +5,25 @@ var posts=function(constants,thumbnail_template){
     this.current_page=1
     this.filter=[]
     this.thumbnail_template=thumbnail_template
+//--------------loading------------------------ 
+    this.IsotopeInit=function(){
+        var iso_settings={
+                itemSelector:".thumbnail-card",
+                masonry:{
+                    columnWidth:'.grid-sizer',
+                    gutter:'.gutter-sizer',
+                    stagger:10
+                },
+                getSortData:{
+                    target:'[data-sort]'
+                }
+                
+                };
+        this.iso=new Isotope(
+            '.thumbnail',
+            iso_settings
+        );
+    }.bind(this)
 
     this.api_url=function(page){
         var url=constants.api_url+'posts'+"?page="+page+"&per_page="+constants.post_per_page
@@ -25,7 +44,6 @@ var posts=function(constants,thumbnail_template){
                 )
             }.bind(this)
         )
-        console.log(elems)
         this.iso.insert(elems)
 
         this.emit('thumbnail_rendered',["success"])
@@ -63,45 +81,39 @@ var posts=function(constants,thumbnail_template){
             }.bind(this)
         })
     }.bind(this)
-    
-    this.IsotopeInit=function(){
-        var iso_settings={
-                itemSelector:".thumbnail-card",
-                masonry:{
-                    //columnWidth:'.grid-sizer',
-                    //gutter:'.gutter-sizer',
-                    stagger:10
-                }};
-        this.iso=new Isotope(
-            '.thumbnail',
-            iso_settings
-        );
-
-    }.bind(this)
-
+   
     this.load_new=function(){
         this.load(this.current_page)
     }.bind(this)
 
-    this.filter_category=
-        function(e){ 
-            e.preventDefault() 
-            var target=jQuery(e.target)
-            var category='.'+target.text()
-            
-            if( target.parent().hasClass('filtered') ){
-                target.parent().removeClass('filtered') 
-                var index=this.filter.indexOf(category)
-                filter.splice(index,1)
-            }else{ 
-                this.filter.push(category)
-                target.parent().addClass('filtered')
-            }
-            var filter_string=this.filter.join(',')
-            jQuery(".thumbnail").Isotope(
-                {filter:filter_string}
-            );
-        }.bind(this)
+//----------------------------------filtering
+    this.filter_array=[]
+
+    this.apply_filter=function(){
+        this.iso.arrange({filter:this.filter_array.join(', ')})
+    }.bind(this)
+
+    this.add_filter=function(type){
+        var sel='.'+type
+        
+        if( this.filter_array.indexOf(sel) === -1){
+            this.filter_array.push(sel)
+            this.apply_filter()
+        }
+    }.bind(this)
+    
+    this.remove_filter=function(type){
+        var sel='.'+type
+        var pos=this.filter_array.indexOf(sel)
+        if(pos !== -1){
+            this.filter_array.splice(pos,1)
+        } 
+        this.apply_filter()
+    }.bind(this)
+//-----------------------------sorting 
+    this.sort=function(){
+        this.iso.arrange({sortBy:'target'}) 
+    }.bind(this)
 }
 
 module.exports=posts
