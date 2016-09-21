@@ -12,6 +12,7 @@
         width:$card-width;
     }
     .thumbnail-card {
+        width:180px;
         @extend .card;
         .thumbnail-content{
             @extend .card-content;
@@ -26,14 +27,12 @@
             @extend .card-reveal;
         }
     }
-    
     .grid-sizer {
         width:$card-width;
     }
     .gutter-sizer{
         width:4%;
     }
-    
     ul {
         list-style-type: none; 
         li {
@@ -62,5 +61,3 @@
 .loading {
     width:100%;
 }
-
-

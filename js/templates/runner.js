@@ -21,10 +21,36 @@ var compare=
 describe('templates',function(){  
 
     before(function(){})
-
+/*
     it('home',compare('home',{}))
-    it('pages',compare('pages',{}))
-    it('posts',compare('posts',{}))
+    it('front',compare('front',{}))
+    it('blog',compare('home',{}))
+    it('page_thumbnail',compare('page_thumbnail',{
+            category_string:'category_string',
+            img_url:'img_url',
+            title:{
+                rendered:"title.rendered"
+            },
+            link:'link',
+            excerpt:{
+                rendered:"excerpt.rendered"
+            } 
+        }
+    ))
+    
+    it('post_thumbnail',compare('post_thumbnail',{
+            category_string:'category_string',
+            img_url:'img_url',
+            title:{
+                rendered:"title.rendered"
+            },
+            link:'link',
+            excerpt:{
+                rendered:"excerpt.rendered"
+            } 
+        }
+    ))
+
     it('cat_tag',compare('cat_tag',{
         categories:[
             {
@@ -41,20 +67,7 @@ describe('templates',function(){
     }))
     
     it('load',compare('load',{type:'type'}))
-    it('thumbnail',compare('thumbnail',
-        {
-            category_string:'category_string',
-            img_url:'img_url',
-            title:{
-                rendered:"title.rendered"
-            },
-            link:'link',
-            excerpt:{
-                rendered:"excerpt.rendered"
-            } 
-        }
-    ))
-    
+ */  
     after(function(){
         //console.log(browser.log('browser'))
     })

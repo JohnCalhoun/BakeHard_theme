@@ -14,15 +14,17 @@
     <div>
         <nav>
             <div id="main-nav" class="nav-wrapper nav" >
-                <a href=''>
-                    <h1 class="brand-logo"><? bloginfo('name'); ?></h1>
-                </a>
+                <h1 class="brand-logo">
+                    <a href='<?php echo site_url(); ?>/front'>
+                        <? bloginfo('name'); ?>
+                    </a>
+                </h1>
                 <ul class="main_menu right"> 
                     <li>
-                        <a href='' >Home</a>
+                        <a href='<?php echo site_url(); ?>/home' id='home-btn'>Home</a>
                     </li> 
                     <li>
-                        <a href='' >Blog</a>
+                        <a href='<?php echo site_url(); ?>/blog' id='blog-btn'>Blog</a>
                     </li> 
                 </ul>
             </div>

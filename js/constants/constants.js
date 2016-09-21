@@ -8,11 +8,11 @@ var init=function(resolve,reject){
     }
        
     this.api_url        =this.base_url+"wp/v2/"
-    this.bh_api_url     =this.base_url+"bh/v1/"
+    this.bh_api_url     =this.base_url+"bakehard/v1/"
     this.post_per_page  =10 
 
     jQuery.ajax({
-            url:this.api_url+'site_url',
+            url:this.bh_api_url+'site_url',
             dataType:'json',
             success:function(url){
                 this.site_url=url+'/'

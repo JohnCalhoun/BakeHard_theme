@@ -1,7 +1,6 @@
 var Isotope=require('isotope-layout')
-var jQuery=require('jquery-browserify')
 
-var posts=function(constants,thumbnail_template){
+var posts=function(constants,thumbnail_template,selector,type){
     this.current_page=1
     this.filter=[]
     this.thumbnail_template=thumbnail_template
@@ -20,14 +19,17 @@ var posts=function(constants,thumbnail_template){
                 
                 };
         this.iso=new Isotope(
-            '.thumbnail',
+            selector,
             iso_settings
         );
+        window.iso=this.iso 
     }.bind(this)
-
     this.api_url=function(page){
-        var url=constants.api_url+'posts'+"?page="+page+"&per_page="+constants.post_per_page
-        return(url)
+        if(page){
+            return(constants.api_url+type+"?page="+page+"&per_page="+constants.post_per_page)
+        }else{
+            return(constants.api_url+type)
+        }
     }
 
     this.emit=function(name,args){
@@ -45,7 +47,6 @@ var posts=function(constants,thumbnail_template){
             }.bind(this)
         )
         this.iso.insert(elems)
-
         this.emit('thumbnail_rendered',["success"])
     }.bind(this)
 
@@ -84,6 +85,10 @@ var posts=function(constants,thumbnail_template){
    
     this.load_new=function(){
         this.load(this.current_page)
+    }.bind(this)
+ 
+    this.load_all=function(){
+        this.load()
     }.bind(this)
 
 //----------------------------------filtering

@@ -1,75 +1,68 @@
-var constants=require('./constants/constants.js')
-var load=require('./load/load.js')
-var nav=require('./nav/nav.js')
-var pages=require('./pages/pages.js')
-var progress=require('./progress/progress.js')
-var posts=require('./posts/posts.js')
-var routes=require('./routes/routes.js')
-var templates=require('./templates/templates.js')
+//---------------------------core functions----------------
+jQuery(document).ready(function(){
+    var constants_mod=require('./constants/constants.js')
+    var constants=new constants_mod()
 
+    constants.ready.then(function(){
+        var nav=require('./nav/nav.js')(constants)
+        jQuery('.nav a').on('click',nav)
 
-jQuery(document).on('click','.nav,.a',function(e){
-    var element=jQuery(e.target).parent()
-    var nav=element.parent()
+        var load=require('./load/load.js')
 
-    nav.find('.active').removeClass('active')
-    element.addClass('active')
+        var routes_con=require('./routes/routes.js')
+        var routes=new routes_con(load) 
+         
+        var progress=require('./progress/progress.js')
+        var thumbnails=require('./thumbnails/thumbnails.js')
+        var JST=require('./templates/templates.js')
+        //-------------------------initial pages--------------------
+        var loading_func=JST['js/templates/mustache/load.mustache'] 
+      
+        jQuery('main').append(jQuery(
+            JST['js/templates/mustache/home.mustache'](
+                {url:constants.site_url}
+            )
+        ))
+        jQuery('main').append(jQuery(
+            JST['js/templates/mustache/blog.mustache'](
+                {url:constants.site_url,
+                loading:loading_func({type:"blog"})
+                })
+        ))
+        jQuery('main').append(jQuery(
+            loading_func({type:'main'})
+        ))
+ 
+        //-------------------------thumbnails--------------------
+       
+        var page_thumbnails=new thumbnails(
+                        constants,
+                        JST['js/templates/mustache/page_thumbnail.mustache'],
+                        '.page-thumbnails',
+                        'pages'
+        )
+        page_thumbnails.IsotopeInit()
+        page_thumbnails.load_all()  
+       
+        var post_thumbnails=new thumbnails(
+                        constants,
+                        JST['js/templates/mustache/post_thumbnail.mustache'],
+                        '.post-thumbnails',
+                        'posts'
+        )
+        post_thumbnails.IsotopeInit()
+        post_thumbnails.load_new()
+        
+        jQuery('.load-posts').on('click',function(){
+            post_thumbnails.load_new()
+        })
+
+        jQuery('main').on('page_ready','.content',
+            function(){
+                post_thumbnails.IsotopeInit()
+                page_thumbnails.IsotopeInit()
+            })
+
+        //-------------------------progress--------------------
+    })
 })
-
-jQuery(window).on('show','.content',isotopeInit)
-jQuery(window).on('page_rendered',isotopeInit)
-
-
-jQuery(window).on('thumbnail_rendering',bh.progress.start('#loading-thumbnail','#thumbnail-status',bh.templates.loadingThumbnail))
-jQuery(window).on('thumbnail_progress',bh.progress.progress('#loading-thumbnail'))
-jQuery(window).on('thumbnail_rendered',bh.progress.stop('#loading-thumbnail'))
-
-jQuery(window).ready(function(){ 
-    jQuery(document).trigger('new_page') 
-})
-
-
-jQuery(document).on('show','.content',function(e){
-    if(current_page==1){  
-        load(current_page)
-    }else{
-        jQuery(e.target).find('.thumbnail').isotope('layout')
-    }
-})
-
-    jQuery(document).on('click','.load-thumbnail',function(){
-        this.load(this.current_page)
-    }.bind(this))
-
-    jQuery(document).on(    
-        'click',
-        '.content-thumbnail .cat-item a',
-        function(e){ 
-            e.preventDefault() 
-            var target=jQuery(e.target)
-            var category='.'+target.text()
-            
-            if( target.parent().hasClass('filtered') ){
-                target.parent().removeClass('filtered') 
-                var index=this.filter.indexOf(category)
-                filter.splice(index,1)
-            }else{ 
-                this.filter.push(category)
-                target.parent().addClass('filtered')
-            }
-            var filter_string=this.filter.join(',')
-            jQuery(".thumbnail").isotope(
-                {this.filter:filter_string}
-            );
-
-        }.bind(this)
-    jQuery(document).on('click','.post-link',
-        function(e){
-            e.preventDefault()  
-            var link=jQuery(e.target)
-            var path=link.attr('href')
-            
-            jQuery(window).trigger('change_page',page) 
-        }
-    )
-

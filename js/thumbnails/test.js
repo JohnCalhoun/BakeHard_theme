@@ -14,7 +14,7 @@ var template=function(post){
     return(out)
 }
 
-window.thumbnails_test=new thumbnail(constants,template)
+window.thumbnails_test=new thumbnail(constants,template,'.thumbnail','posts')
 
 jQuery(window).ready(
     function(){

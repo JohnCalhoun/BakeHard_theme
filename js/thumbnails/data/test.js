@@ -26,7 +26,6 @@ jQuery(window).ready(
 
 },{"./thumbnails.js":2,"jquery-browserify":16}],2:[function(require,module,exports){
 var Isotope=require('isotope-layout')
-var jQuery=require('jquery-browserify')
 
 var posts=function(constants,thumbnail_template){
     this.current_page=1
@@ -145,7 +144,7 @@ var posts=function(constants,thumbnail_template){
 
 module.exports=posts
 
-},{"isotope-layout":3,"jquery-browserify":16}],3:[function(require,module,exports){
+},{"isotope-layout":3}],3:[function(require,module,exports){
 /*!
  * Isotope v3.0.1
  *

@@ -1,5 +1,5 @@
 var constants={
-    base_url:"/nav/data"
+    site_url:"/nav/data"
     }
 
 var nav=require('./nav.js')(constants)
@@ -7,6 +7,7 @@ var nav=require('./nav.js')(constants)
 jQuery(document).ready(function(){
     jQuery('.nav a').on('click',
         function(e){
+            e.preventDefault() 
             nav(e)
         })
     jQuery(window).on('change_page',

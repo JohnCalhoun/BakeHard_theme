@@ -2,9 +2,9 @@ var navigate=function(constants){
     var out=function(e){    
         var path=jQuery(e.target).attr('href')
         
-        if(path.indexOf(constants.base_url) != -1){
+        if(path.indexOf(constants.site_url) != -1){
             e.preventDefault()  
-            jQuery(window).trigger('change_page',path) 
+            jQuery('main').trigger('change_page',path) 
         }
     } 
     return(out)

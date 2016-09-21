@@ -25,8 +25,8 @@ module.exports=function(grunt){
             },
             assets:{
                 expand:true,
-                src:"assets",
-                dest:"build/bakehard/assets"
+                src:"assets/**",
+                dest:"build/bakehard"
             },
         },
         clean:{
@@ -49,7 +49,7 @@ module.exports=function(grunt){
         },
         shell:{
             rsync:{
-                command:"rsync -r --delete -e 'ssh -p 18765' ./build/bakehard johnmcal@johnmcalhoun.com:~/public_html/bakehard/wp-content/themes/bakehard",
+                command:"rsync -r --delete -e 'ssh -p 18765' ./build/bakehard/ johnmcal@johnmcalhoun.com:~/public_html/bakehard/wp-content/themes/bakehard"
             }
         },
         browserify:{
@@ -85,7 +85,7 @@ module.exports=function(grunt){
         uglify:{
             dist:{
                 files:{
-                    "build/bakehard/main.min.js":['tmp/main.js']
+                    "build/bakehard/js/bakehard.min.js":['tmp/main.js']
                 }
             }
         },
@@ -141,7 +141,7 @@ module.exports=function(grunt){
             dev:{
                 configFile:"./wdio.conf.js"
             }
-        }
+        },
     });
 
     require('time-grunt')(grunt);
