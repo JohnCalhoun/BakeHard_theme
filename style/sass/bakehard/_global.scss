@@ -1,0 +1,37 @@
+.load-posts{
+    width:100%;
+}
+.home{
+    margin:auto;
+}
+
+.blog{
+    @extend .card-panel;
+    margin:auto;
+}
+
+.content {
+    img{
+        @extend .responsive-img;
+    }
+    .wp-caption{
+        max-width:100%;
+    }
+}
+
+
+
+.content-other {
+    margin:auto;
+    overflow:auto;
+    //margin-top:10px;
+    @extend .card-panel;
+
+    p {
+        @extend .flow-text;
+    }
+}
+
+.loading {
+    width:100%;
+}

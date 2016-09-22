@@ -12,6 +12,7 @@
         width:$card-width;
     }
     .thumbnail-card {
+        @extend .hoverable;
         width:180px;
         @extend .card;
         .thumbnail-content{
@@ -42,22 +43,5 @@
             @extend .red;
         }
     }
-
-    .btn,.load-thumbnail{
-        width:100%;
-    }
 }
 
-.content {
-    margin:auto;
-    margin-top:10px;
-    @extend .card-panel;
-
-    p {
-        @extend .flow-text;
-    }
-}
-
-.loading {
-    width:100%;
-}

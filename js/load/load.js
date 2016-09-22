@@ -25,10 +25,7 @@ check=function(check_selector){
 load=function(page_url){
     var selector='[data-url="'+page_url+'"]'
     
-    if(page_url[0]!="/"){
-        page_url="/"+page_url
-    }
-    
+    console.log(page_url) 
     var ajax_call=function(resolve,reject){ 
         if( check(selector) ){ 
             hide_all('main')

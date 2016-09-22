@@ -7,9 +7,9 @@ this["JST"] = this["JST"] || {};
 this["JST"]["js/templates/mustache/blog.mustache"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function";
 
-  return "<div class='content container blog hide' data-url='"
+  return "<div class='container content blog' data-url='"
     + container.escapeExpression(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"url","hash":{},"data":data}) : helper)))
-    + "blog' style='display:none;'>\n\n    <div class='category-tags'></div>\n    <div class='post-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n    <div>\n        <span class='btn load-posts'>Load More</span>\n    </div>\n    "
+    + "Posts' style='display:none;'>\n\n    <div class='category-tags'></div>\n    <div class='post-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n    <div>\n        <span class='btn load-posts'>Load More</span>\n    </div>\n    "
     + ((stack1 = ((helper = (helper = helpers.loading || (depth0 != null ? depth0.loading : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"loading","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n\n</div>\n\n";
 },"useData":true});
@@ -39,9 +39,9 @@ this["JST"]["js/templates/mustache/front.mustache"] = Handlebars.template({"comp
 this["JST"]["js/templates/mustache/home.mustache"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "<div class='content container home hide' data-url=\""
+  return "<div class='content container home' data-url=\""
     + container.escapeExpression(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"url","hash":{},"data":data}) : helper)))
-    + "home\" style='display:none;'>\n    <div class='page-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n</div>\n\n";
+    + "Pages\" style='display:none;'>\n    <div class='page-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n</div>\n\n";
 },"useData":true});
 
 this["JST"]["js/templates/mustache/load.mustache"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

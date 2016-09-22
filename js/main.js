@@ -8,11 +8,7 @@ jQuery(document).ready(function(){
         jQuery('.nav a').on('click',nav)
 
         var load=require('./load/load.js')
-
-        var routes_con=require('./routes/routes.js')
-        var routes=new routes_con(load) 
-         
-        var progress=require('./progress/progress.js')
+   
         var thumbnails=require('./thumbnails/thumbnails.js')
         var JST=require('./templates/templates.js')
         //-------------------------initial pages--------------------
@@ -26,9 +22,13 @@ jQuery(document).ready(function(){
         jQuery('main').append(jQuery(
             JST['js/templates/mustache/blog.mustache'](
                 {url:constants.site_url,
-                loading:loading_func({type:"blog"})
+                loading:"<div class='valign-wrapper'>"+loading_func({type:"blog"})+"</div>"
                 })
         ))
+        
+        jQuery('.content').filter('.home').on('click',nav)
+        jQuery('.content').filter('.blog').on('click',nav)
+       
         jQuery('main').append(jQuery(
             loading_func({type:'main'})
         ))
@@ -62,7 +62,43 @@ jQuery(document).ready(function(){
                 post_thumbnails.IsotopeInit()
                 page_thumbnails.IsotopeInit()
             })
+        //-------------------------progress----------------------- 
+        var progress=require('./progress/progress.js')
+       
+        jQuery(window).on('page_rendering',
+                    progress.start(
+                        '#loading-main',
+                        'main',
+                        null
+                    )
+        )  
+        jQuery(window).on('page_rendered',
+                    progress.stop('#loading-main')
+        ) 
+        jQuery(window).on('thumbnail_rendering',
+                    progress.start(
+                        '#loading-blog',
+                        'main',
+                        null
+                    )
+        )  
+        jQuery(window).on('thumbnail_rendered',
+                    progress.stop('#loading-blog')
+        ) 
+     
+        //-------------------routing
 
-        //-------------------------progress--------------------
+        var routes_con=require('./routes/routes.js')
+        var routes=new routes_con(load) 
+        
+        routes.check_and_go() 
+        jQuery(window).on(  'popstate',
+                            routes.check_and_go)
+       
+        jQuery('main').on(  
+            'change_page',
+            routes.on_change_page
+        )
+
     })
 })

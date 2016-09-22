@@ -21,10 +21,10 @@
                 </h1>
                 <ul class="main_menu right"> 
                     <li>
-                        <a href='<?php echo site_url(); ?>/home' id='home-btn'>Home</a>
+                        <a href='<?php echo site_url(); ?>/Pages' id='home-btn'>Home</a>
                     </li> 
                     <li>
-                        <a href='<?php echo site_url(); ?>/blog' id='blog-btn'>Blog</a>
+                        <a href='<?php echo site_url(); ?>/Posts' id='blog-btn'>Blog</a>
                     </li> 
                 </ul>
             </div>
