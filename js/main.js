@@ -53,6 +53,13 @@ jQuery(document).ready(function(){
         post_thumbnails.IsotopeInit()
         post_thumbnails.load_new()
         
+        var tags=require('./tags/tags.js')
+        var category_tags=new tags(
+                        constants,
+                        JST['js/templates/mustache/cat_tag.mustache'],
+                        ".category-tags"); 
+        category_tags.load()  
+
         jQuery('.load-posts').on('click',function(){
             post_thumbnails.load_new()
         })

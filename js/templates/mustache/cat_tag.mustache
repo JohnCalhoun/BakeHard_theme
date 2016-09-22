@@ -1,10 +1,22 @@
 <ul class='category-tags'>
     {{#each categories}}
-        <li><span class='category-tag' data-cat='{{ this.slug }}'>
-            {{ this.name }}
-            <span class='category-count'>
-                {{ this.count }}
+        <li>
+            <span class='category-tag' data-cat='{{ this.slug }}'>
+                {{ this.name }}
+                <span class='category-count'>
+                    {{ this.count }}
+                </span>
             </span>
-        </span></li>
+        </li>
+        <li>
+            {{#each children}}
+                 <span class='category-tag' data-cat='{{ this.slug }}'>
+                    {{ ../name}}/{{ this.name }}
+                    <span class='category-count'>
+                        {{ this.count }}
+                    </span>
+                </span>
+            {{/each}}
+        </li>
     {{/each}}
 </ul>

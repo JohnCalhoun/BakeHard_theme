@@ -14,23 +14,37 @@ this["JST"]["js/templates/mustache/blog.mustache"] = Handlebars.template({"compi
     + "\n\n</div>\n\n";
 },"useData":true});
 
-this["JST"]["js/templates/mustache/cat_tag.mustache"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+this["JST"]["js/templates/mustache/cat_tag.mustache"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "        <li>\n            <span class='category-tag' data-cat='"
+    + alias2(alias1((depth0 != null ? depth0.slug : depth0), depth0))
+    + "'>\n                "
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "\n                <span class='category-count'>\n                    "
+    + alias2(alias1((depth0 != null ? depth0.count : depth0), depth0))
+    + "\n                </span>\n            </span>\n            <ul>\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.children : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "            </ul>\n        </li>\n";
+},"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "        <li><span class='category-tag' data-cat='"
+  return "                 <span class='category-tag' data-cat='"
     + alias2(alias1((depth0 != null ? depth0.slug : depth0), depth0))
-    + "'>\n            "
+    + "'>\n                    "
+    + alias2(alias1((depths[1] != null ? depths[1].name : depths[1]), depth0))
+    + "/"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
-    + "\n            <span class='category-count'>\n                "
+    + "\n                    <span class='category-count'>\n                        "
     + alias2(alias1((depth0 != null ? depth0.count : depth0), depth0))
-    + "\n            </span>\n        </span></li>\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    + "\n                    </span>\n                </span>\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
   return "<ul class='category-tags'>\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.categories : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.categories : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</ul>\n";
-},"useData":true});
+},"useData":true,"useDepths":true});
 
 this["JST"]["js/templates/mustache/front.mustache"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class='content front'>\n    \n</div>\n\n";
