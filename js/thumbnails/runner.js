@@ -4,7 +4,7 @@ var mocha=require('mocha')
 
 describe('load',function(){  
 
-    before(function(){
+    beforeEach(function(){
         browser.url('/thumbnails/test.html') 
           
     })

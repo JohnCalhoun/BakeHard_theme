@@ -1,5 +1,3 @@
-var jQuery=require('jquery-browserify')
-
 var constants={
         api_url:'/thumbnails/data/',
         post_per_page:10

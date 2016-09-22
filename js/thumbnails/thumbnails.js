@@ -31,7 +31,7 @@ var posts=function(constants,thumbnail_template,selector,type){
         )
         this.iso.on('arrangeComplete',function(){
             var grid=jQuery(selector)
-
+            
             var thumbnail=grid.find('.grid-sizer')[0].getBoundingClientRect().width
             var gutter=grid.find('.gutter-sizer')[0].getBoundingClientRect().width
             var parrent=grid.parent()[0].getBoundingClientRect().width

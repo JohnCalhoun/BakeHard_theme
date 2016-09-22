@@ -9,7 +9,7 @@ this["JST"]["js/templates/mustache/blog.mustache"] = Handlebars.template({"compi
 
   return "<div class='container content blog' data-url='"
     + container.escapeExpression(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"url","hash":{},"data":data}) : helper)))
-    + "Posts' style='display:none;'>\n\n    <div class='category-tags'></div>\n    <div class='post-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n    <div>\n        <span class='btn load-posts'>Load More</span>\n    </div>\n    "
+    + "Posts' style='display:none;'>\n\n    <div class='category-tags'>\n    </div>\n    <div class='post-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n    <div>\n        <span class='btn load-posts'>Load More</span>\n    </div>\n    "
     + ((stack1 = ((helper = (helper = helpers.loading || (depth0 != null ? depth0.loading : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"loading","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n\n</div>\n\n";
 },"useData":true});

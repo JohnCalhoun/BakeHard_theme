@@ -1,12 +1,12 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 //------------------------------utility functions-------------------
 hide_all=function(selector){
-    jQuery(selector).children().not('.loading').addClass('hide')
+    jQuery(selector).children().not('.loading').hide()
 }
 
 show=function(selector){
     var div=jQuery('main').find(selector)
-    div.removeClass('hide')
+    div.show()
     div.trigger('show') 
 }
 render=function(data,url){
@@ -26,16 +26,14 @@ check=function(check_selector){
 load=function(page_url){
     var selector='[data-url="'+page_url+'"]'
     
-    if(page_url[0]!="/"){
-        page_url="/"+page_url
-    }
-    
+    console.log(page_url) 
     var ajax_call=function(resolve,reject){ 
         if( check(selector) ){ 
             hide_all('main')
             jQuery(window).trigger('page_rendering',{"cached":true})
             show(selector)   
             jQuery(window).trigger('page_rendered',["success"])
+            jQuery(selector).trigger('page_ready')
             resolve()
         }else{
             jQuery.ajax({
@@ -72,6 +70,7 @@ load=function(page_url){
                     reject(Error('ajax failed'))
                 },
                 complete:function(){
+                    jQuery(selector).trigger('page_ready')
                     jQuery(window).trigger('page_progress',{"percent":100})
                 }
             })

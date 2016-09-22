@@ -77,6 +77,10 @@ module.exports=function(grunt){
                 src:"js/routes/test.js",
                 dest:"js/routes/data/test.js"
             },
+            testtags:{
+                src:"js/tags/test.js",
+                dest:"js/tags/data/test.js"
+            },
             testThumbnail:{
                 src:"js/thumbnails/test.js",
                 dest:"js/thumbnails/data/test.js"
@@ -171,6 +175,7 @@ module.exports=function(grunt){
                                 'browserify:testNav',
                                 'browserify:testRoutes',
                                 'browserify:testThumbnail',
+                                'browserify:testtags',
                                 'handlebars' 
                                 ]) 
     
