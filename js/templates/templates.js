@@ -9,7 +9,7 @@ this["JST"]["js/templates/mustache/blog.mustache"] = Handlebars.template({"compi
 
   return "<div class='container content blog' data-url='"
     + container.escapeExpression(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"url","hash":{},"data":data}) : helper)))
-    + "Posts' style='display:none;'>\n\n    <div class='category-tags'>\n    </div>\n    <div class='post-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n    <div>\n        <span class='btn load-posts'>Load More</span>\n    </div>\n    "
+    + "Posts' style='display:none;'>\n\n    <div class='controls'>\n        <ul class='collapsible' data-collapsible=\"accordian\">\n            <li> \n                <div class='collapsible-header'>Categories</div>\n                <div class='category-tags collapsible-body'></div>\n            </li>\n        </ul>\n    </div>\n    <div class='post-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n    <div>\n        <span class='btn load-posts'>Load More</span>\n    </div>\n    "
     + ((stack1 = ((helper = (helper = helpers.loading || (depth0 != null ? depth0.loading : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"loading","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n\n</div>\n\n";
 },"useData":true});
@@ -23,21 +23,20 @@ this["JST"]["js/templates/mustache/cat_tag.mustache"] = Handlebars.template({"1"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
     + "\n                <span class='category-count'>\n                    "
     + alias2(alias1((depth0 != null ? depth0.count : depth0), depth0))
-    + "\n                </span>\n            </span>\n            <ul>\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.children : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "            </ul>\n        </li>\n";
+    + "\n                </span>\n            </span>\n        </li>\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.children : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "                 <span class='category-tag' data-cat='"
+  return "        <li>\n             <span class='category-tag' data-cat='"
     + alias2(alias1((depth0 != null ? depth0.slug : depth0), depth0))
-    + "'>\n                    "
+    + "'>\n                "
     + alias2(alias1((depths[1] != null ? depths[1].name : depths[1]), depth0))
     + "/"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
-    + "\n                    <span class='category-count'>\n                        "
+    + "\n                <span class='category-count'>\n                    "
     + alias2(alias1((depth0 != null ? depth0.count : depth0), depth0))
-    + "\n                    </span>\n                </span>\n";
+    + "\n                </span>\n            </span>\n        </li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 

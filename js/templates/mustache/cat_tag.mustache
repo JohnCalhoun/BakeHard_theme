@@ -8,15 +8,15 @@
                 </span>
             </span>
         </li>
+        {{#each children}}
         <li>
-            {{#each children}}
-                 <span class='category-tag' data-cat='{{ this.slug }}'>
-                    {{ ../name}}/{{ this.name }}
-                    <span class='category-count'>
-                        {{ this.count }}
-                    </span>
+             <span class='category-tag' data-cat='{{ this.slug }}'>
+                {{ ../name}}/{{ this.name }}
+                <span class='category-count'>
+                    {{ this.count }}
                 </span>
-            {{/each}}
+            </span>
         </li>
+        {{/each}}
     {{/each}}
 </ul>

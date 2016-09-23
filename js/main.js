@@ -26,8 +26,8 @@ jQuery(document).ready(function(){
                 })
         ))
         
-        jQuery('.content').filter('.home').on('click',nav)
-        jQuery('.content').filter('.blog').on('click',nav)
+        jQuery('.content').filter('.home a').on('click',nav)
+        jQuery('.content').filter('.blog a').on('click',nav)
        
         jQuery('main').append(jQuery(
             loading_func({type:'main'})

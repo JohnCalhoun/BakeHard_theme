@@ -39,11 +39,9 @@ var init=function(constants,template,selector){
                     return(par.id === parentID)
                 })
                 if(parent[0]){
-                    console.log(parent[0])  
-                    console.log(parent[0].children.push(children[i]))  
+                    parent[0].children.push(children[i])
                 }
             }
-            console.log(parents) 
             var out=jQuery(template({categories:parents}) )
             
             
@@ -55,6 +53,7 @@ var init=function(constants,template,selector){
     this.insert=function(element){
         var out=new Promise(function(resolve,reject){ 
             jQuery(selector).append(element)
+            jQuery('.collapsible').collapsible()
             resolve() 
         })
         return(out)
