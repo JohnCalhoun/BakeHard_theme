@@ -5,7 +5,11 @@ jQuery(document).ready(function(){
 
     constants.ready.then(function(){
         var nav=require('./nav/nav.js')(constants)
-        jQuery('.nav a').on('click',nav)
+        jQuery('.nav a').on('click',function(e){
+            nav(e)
+            jQuery('.nav li').removeClass('active') 
+            jQuery(e.target).parent().addClass('active')
+        })
 
         var load=require('./load/load.js')
    
@@ -32,7 +36,7 @@ jQuery(document).ready(function(){
         jQuery('main').append(jQuery(
             loading_func({type:'main'})
         ))
- 
+         
         //-------------------------thumbnails--------------------
        
         var page_thumbnails=new thumbnails(
