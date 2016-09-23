@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var init=function(constants,template,selector){
     this.api_url=function(){
-        return(constants.api_url+'categories') 
+        return(constants.api_url+'categories?hide_empty=true&per_page=100') 
     }.bind(this)
 
     this.get=function(){
@@ -9,7 +9,7 @@ var init=function(constants,template,selector){
             jQuery.ajax({
                 url:this.api_url(),
                 dataType:'json',
-                success:function(response){
+                success:function(response){ 
                     resolve(response)
                 },
                 error:function(result){
@@ -22,7 +22,30 @@ var init=function(constants,template,selector){
 
     this.render=function(data){
         var out=new Promise(function(resolve,reject){
-            var out=jQuery(template(data) )
+            var parents=jQuery.grep(data,function(category){
+                return(category.parent === 0) 
+            }) 
+            
+            for(i=0;i<parents.length;i++){
+                parents[i]['children']=new Array()
+            }
+            
+            var children=jQuery.grep(data,function(category){
+                return(category.parent !== 0) 
+            })
+            
+            for(i=0;i<children.length;i++){
+                var parentID=children[i].parent
+                var parent=jQuery.grep(parents,function(par){
+                    return(par.id === parentID)
+                })
+                if(parent[0]){
+                    parent[0].children.push(children[i])
+                }
+            }
+            var out=jQuery(template({categories:parents}) )
+            
+            
             resolve(out)
         })
         return(out)
@@ -31,7 +54,8 @@ var init=function(constants,template,selector){
     this.insert=function(element){
         var out=new Promise(function(resolve,reject){ 
             jQuery(selector).append(element)
-            resolve()
+            jQuery('.collapsible').collapsible()
+            resolve() 
         })
         return(out)
     }.bind(this)

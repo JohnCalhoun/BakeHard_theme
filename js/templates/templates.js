@@ -90,6 +90,10 @@ this["JST"]["js/templates/mustache/page_thumbnail.mustache"] = Handlebars.templa
 },"useData":true});
 
 this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "1";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "0";
+},"5":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "        <div class=\"thumbnail-image\">\n            <img class='activator' src='"
@@ -98,8 +102,10 @@ this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.templa
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=container.lambda;
 
-  return "<div class=\"thumbnail-card \">\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+  return "<div class=\"thumbnail-card \" data-sticky='"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.sticky : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "'>\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    <div class=\"thumbnail-content\">\n        <span class=\"thumbnail-title activate\"> "
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
     + " </span>\n    </div>\n    <div    class=\"thumbnail-action\">\n        <a  href=\""

@@ -68,17 +68,19 @@ var posts=function(constants,thumbnail_template,selector,type){
         })
     }.bind(this)
     this.api_url=function(page){
+        var exclude='&exclude='+this.exclude.join(',')
         if(page){
-            return(constants.api_url+type+"?page="+page+"&per_page="+constants.post_per_page)
+            return(constants.api_url+type+"?page="+page+"&per_page="+constants.post_per_page+exclude)
         }else{
-            return(constants.api_url+type)
+            return(constants.api_url+type+"?per_page=100"+exclude)
         }
-    }
+    }.bind(this)
 
     this.emit=function(name,args){
         jQuery(document).trigger(name,args)
     }
-    
+    this.exclude=new Array()
+
     this.render=function(posts){  
         var elems=[]
         jQuery.each(    
@@ -87,15 +89,17 @@ var posts=function(constants,thumbnail_template,selector,type){
                 elems.push(        
                     jQuery(this.thumbnail_template(post))[0]
                 )
+                this.exclude.push(post.id)
             }.bind(this)
         )
         this.iso.insert(elems)
         this.emit('thumbnail_rendered',["success"])
     }.bind(this)
 
-    this.load=function(page){
+    this.load=function(page,url_function){
+        var url_function=(typeof url_function !== 'undefined') ? url_function : this.api_url;
         jQuery.ajax({   
-            url:this.api_url(page),
+            url:url_function(page),
             dataType:"json",
             xhr:function(){
                 var xhr= new window.XMLHttpRequest(); 
@@ -115,7 +119,6 @@ var posts=function(constants,thumbnail_template,selector,type){
             }.bind(this),
             success:function(response){
                 this.render(response) 
-                this.current_page++
             }.bind(this),
             error:function(result){
                 this.emit('thumbnail_rendered',["fail"])
@@ -125,9 +128,17 @@ var posts=function(constants,thumbnail_template,selector,type){
             }.bind(this)
         })
     }.bind(this)
-   
+
+    this.load_id=function(id){
+        var url_function=function(){
+            this.api_url()+'&include='+id 
+        }
+        this.load(0,url_function)
+    }.bind(this)
+
     this.load_new=function(){
         this.load(this.current_page)
+        this.current_page++
     }.bind(this)
  
     this.load_all=function(){

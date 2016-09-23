@@ -56,7 +56,8 @@ jQuery(document).ready(function(){
         )
         post_thumbnails.IsotopeInit()
         post_thumbnails.load_new()
-        
+        post_thumbnails.load_id(constants.sticky_posts)
+
         var tags=require('./tags/tags.js')
         var category_tags=new tags(
                         constants,
