@@ -46,7 +46,7 @@ var posts=function(constants,thumbnail_template,selector,type){
         if(page){
             return(constants.api_url+type+"?page="+page+"&per_page="+constants.post_per_page)
         }else{
-            return(constants.api_url+type)
+            return(constants.api_url+type+"?per_page=100")
         }
     }
 
