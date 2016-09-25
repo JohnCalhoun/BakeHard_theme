@@ -77,8 +77,17 @@ var posts=function(constants,thumbnail_template,selector,type){
         jQuery.each(    
             posts,
             function(index,post){
+                var thumb=jQuery(this.thumbnail_template(post))
+                thumb.find('.thumbnail-image')
+                    .find('img')
+                    .on(    'load',
+                            function(){
+                                this.iso.layout()
+                    }.bind(this))
+                
+                
                 elems.push(        
-                    jQuery(this.thumbnail_template(post))[0]
+                    thumb[0]
                 )
                 this.exclude.push(post.id)
             }.bind(this)

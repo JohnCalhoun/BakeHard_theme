@@ -6,33 +6,29 @@
 
     .thumbnail-full{
         width:100%;
-        .thumbnail-reveal{
+        .thumbnail-excerpt{
             margin:10px; 
-        }
-        .thumbnail-image{
-            @extend .card-image;
         }
     }
     
     .thumbnail-small{
         width:$card-width;
-        min-height:200px;
-        .thumbnail-reveal{
+        .thumbnail-excerpt{
             display:none;
-        }
-        .thumbnail-image{
-            @extend .card-image;
         }
     }
     .thumbnail-card {
         @extend .hoverable;
         @extend .card;
+        .thumbnail-image{
+            @extend .card-image;
+        }
         
-        .thumbnail-content{
+        .thumbnail-title{
             @extend .card-content;
         }
-        .thumbnail-action{
-            @extend .card-action;
+        .thumbnail-content{
+            display:none;
         }
     }
     .grid-sizer {

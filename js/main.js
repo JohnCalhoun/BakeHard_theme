@@ -91,16 +91,15 @@ jQuery(document).ready(function(){
         jQuery('.blog').on( 'click',    
                             '.thumbnail-card',
                             function(e){  
-                                var card=jQuery(e.target).parent('.thumbnail-card')
-                                     
+                                var card=jQuery(e.target).closest('.thumbnail-card')
                                 var others=card.parent().find('.thumbnail-full').not(card)
                                 
-                                    others.toggleClass('thumbnail-full')
-                                    others.toggleClass('thumbnail-small')
-                                     
-                                    card.toggleClass('thumbnail-full')
-                                    card.toggleClass('thumbnail-small')
-                                    post_thumbnails.resize()
+                                others.toggleClass('thumbnail-full')
+                                others.toggleClass('thumbnail-small')
+                                 
+                                card.toggleClass('thumbnail-full')
+                                card.toggleClass('thumbnail-small')
+                                post_thumbnails.resize()
                             })
            
         //-------------------routing

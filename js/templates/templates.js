@@ -96,23 +96,23 @@ this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.templa
 },"5":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <div class=\"thumbnail-image\">\n            <img class='activator' src='"
+  return "        <div class=\"thumbnail-image\">\n            <img src='"
     + container.escapeExpression(((helper = (helper = helpers.img_url || (depth0 != null ? depth0.img_url : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"img_url","hash":{},"data":data}) : helper)))
     + "'>\n        </div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=container.lambda;
+    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=container.lambda;
 
   return "<div class=\"thumbnail-card thumbnail-small\" data-sticky='"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.sticky : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "'>\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <div class=\"thumbnail-content\">\n        <span class=\"thumbnail-title activate\"> "
+    + "    <div class=\"thumbnail-title\">\n        <span class=\"thumbnail-title activate\"> \n            "
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + " </span>\n    </div>\n     <div class=\"thumbnail-reveal\">\n        "
+    + " \n        </span>\n    </div>\n     <div class=\"thumbnail-excerpt\">\n        "
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.excerpt : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + "\n    </div>\n    <div class=\"thumbnail-action\">\n        <a  href=\""
-    + container.escapeExpression(((helper = (helper = helpers.link || (depth0 != null ? depth0.link : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"link","hash":{},"data":data}) : helper)))
-    + "\" class='post-link'>view</a>\n    </div>\n</div>\n\n";
+    + "\n    </div>\n    <div class=\"thumbnail-content\">\n        "
+    + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
+    + "\n    </div>\n</div>\n\n";
 },"useData":true});
 
 if (typeof exports === 'object' && exports) {module.exports = this["JST"];}

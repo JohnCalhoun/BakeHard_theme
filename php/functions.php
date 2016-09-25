@@ -58,9 +58,9 @@ function api_get_page_meta( $object, $field_name, $request ) {
     return(get_post_meta( $object[ 'id' ]) );
 };
 
-add_action( 'rest_api_init', 'api_register_category_string' );
+add_action( 'rest_api_init', 'api_register_routes' );
 
-function api_register_category_string() {
+function api_register_routes() {
     register_rest_field( 'post',
         'category_string',
         array(
@@ -70,6 +70,7 @@ function api_register_category_string() {
         )
     );
 };
+
 function api_get_category_string( $object, $field_name, $request ) {
     $cats=get_the_category(  $object[ 'id' ]);
     $output=array();
@@ -78,6 +79,5 @@ function api_get_category_string( $object, $field_name, $request ) {
     }
     return(implode(' ',$output));
 };
-
 
 ?>

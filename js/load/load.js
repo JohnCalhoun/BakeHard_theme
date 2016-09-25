@@ -1,10 +1,10 @@
 //------------------------------utility functions-------------------
 hide_all=function(selector){
-    jQuery(selector).children().not('.loading').css('display','none')
+    jQuery(selector).children().not('.loading').hide()
 }
 
 show=function(selector){
-    var div=jQuery('main').find(selector).css('display','block')
+    var div=jQuery('main').find(selector).show()
     jQuery(window).trigger('page_rendered',["success"])
     jQuery(selector).trigger('page_ready')
 }
