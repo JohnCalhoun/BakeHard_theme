@@ -48,12 +48,13 @@ var posts=function(constants,thumbnail_template,selector,type){
             selector,
             iso_settings
         );
-        window.iso=this.iso 
         
-        jQuery(window).resize(function(){
+        this.resize=function(){
             this.iso.arrange()
-            }.bind(this)
-        )
+        }.bind(this)
+        
+        jQuery(window).resize(this.resize)
+
         this.iso.on('arrangeComplete',function(){
             var grid=jQuery(selector)
             
@@ -128,12 +129,15 @@ var posts=function(constants,thumbnail_template,selector,type){
             }.bind(this)
         })
     }.bind(this)
-
+//-------------------------------loads
     this.load_id=function(id){
         var url_function=function(){
-            this.api_url()+'&include='+id 
-        }
+            return(this.api_url()+'&include='+id.join(',') )
+        }.bind(this)
+
         this.load(0,url_function)
+
+        console.log(url_function())
     }.bind(this)
 
     this.load_new=function(){
@@ -144,7 +148,6 @@ var posts=function(constants,thumbnail_template,selector,type){
     this.load_all=function(){
         this.load()
     }.bind(this)
-//----------------------------------center
 //----------------------------------filtering
     this.filter_array=[]
 
@@ -174,10 +177,6 @@ var posts=function(constants,thumbnail_template,selector,type){
         this.iso.arrange({sortBy:'target'}) 
     }.bind(this)
 
-    jQuery(document).on('click','.thumbnail-card',function(e){
-        jQuery(e.target).css('width','100%')
-        this.iso.layout()
-    })
 }
 
 module.exports=posts

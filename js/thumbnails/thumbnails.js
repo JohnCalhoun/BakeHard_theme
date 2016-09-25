@@ -11,37 +11,53 @@ var posts=function(constants,thumbnail_template,selector,type){
                 masonry:{
                     columnWidth:'.grid-sizer',
                     gutter:'.gutter-sizer',
-                    stagger:10,
-                    isfitwidth:true
+                    stagger:10
+                    //isfitwidth:true
                 },
                 getSortData:{
                     target:'[data-sort]'
-                }
+                },
+                sortBy:'target'
                 
                 };
         this.iso=new Isotope(
             selector,
             iso_settings
         );
-        window.iso=this.iso 
-        
-        jQuery(window).resize(function(){
-            this.iso.arrange()
-            }.bind(this)
-        )
-        this.iso.on('arrangeComplete',function(){
+        var onResize=function(){
+            var window_width=window.innerWidth
             var grid=jQuery(selector)
-            
+            var old=grid[0].getBoundingClientRect().width
+
             var thumbnail=grid.find('.grid-sizer')[0].getBoundingClientRect().width
             var gutter=grid.find('.gutter-sizer')[0].getBoundingClientRect().width
-            var parrent=grid.parent()[0].getBoundingClientRect().width
+            var parrent=grid.parent()
+            
+            var parrent_w=parrent[0].getBoundingClientRect().width
+            var parrent_padding=parseInt(parrent.css('padding-left'))+parseInt(parrent.css('padding-right'))
+            parrent_w=parrent_w-parrent_padding 
 
-            var x=Math.floor( (parrent-thumbnail)/(thumbnail+gutter) )
+            var x=Math.floor( (parrent_w-thumbnail)/(thumbnail+gutter) )
             var width=thumbnail+x*(thumbnail+gutter)
-        
+            
             grid.css('width',width.toString()+'px') 
-        })
+            
+            var window_width2=window.innerWidth
+            if( window_width2 !== window_width ){
+                onResize() 
+            }
+        }.bind(this)
+
+        this.iso.on('arrangeComplete',onResize)
     }.bind(this)
+     
+    this.resize=function(){
+        this.iso.arrange()
+    }.bind(this)
+    
+    jQuery(window).resize(this.resize)
+
+   
     this.api_url=function(page){
         var exclude='&exclude='+this.exclude.join(',')
         if(page){
@@ -151,10 +167,6 @@ var posts=function(constants,thumbnail_template,selector,type){
         this.iso.arrange({sortBy:'target'}) 
     }.bind(this)
 
-    jQuery(document).on('click','.thumbnail-card',function(e){
-        jQuery(e.target).css('width','100%')
-        this.iso.layout()
-    })
 }
 
 module.exports=posts

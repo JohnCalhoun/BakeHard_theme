@@ -1,13 +1,15 @@
 //------------------------------utility functions-------------------
 hide_all=function(selector){
-    jQuery(selector).children().not('.loading').hide()
+    jQuery(selector).children().not('.loading').css('display','none')
 }
 
 show=function(selector){
-    var div=jQuery('main').find(selector)
-    div.show()
-    div.trigger('show') 
+    var div=jQuery('main').find(selector).css('display','block')
+    jQuery(window).trigger('page_rendered',["success"])
+    jQuery(selector).trigger('page_ready')
 }
+
+//--------------------------------------------------------------
 render=function(data,url){
     var body = '<div id="body-mock">' + data.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/ig, '') + '</div>';
     var content=jQuery(body).find('.content')
@@ -29,10 +31,8 @@ load=function(page_url){
     var ajax_call=function(resolve,reject){ 
         if( check(selector) ){ 
             hide_all('main')
-            jQuery(window).trigger('page_rendering',{"cached":true})
+            jQuery(window).trigger('page_rendering')
             show(selector)   
-            jQuery(window).trigger('page_rendered',["success"])
-            jQuery(selector).trigger('page_ready')
             resolve()
         }else{
             jQuery.ajax({
@@ -54,13 +54,12 @@ load=function(page_url){
                 },
                 beforeSend:function(){
                     hide_all('main')
-                    jQuery(window).trigger('page_rendering',{"cached":false})
+                    jQuery(window).trigger('page_rendering')
                 },
                 success:function(page){
                     var content=render(page,page_url)
                     insert(content) 
                     show(selector)   
-                    jQuery(window).trigger('page_rendered',["success"])
                     resolve()
                 },
                 error:function(result){

@@ -3,8 +3,11 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-    <meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen, print" />
+    <meta name="viewport" content="width=device-width"/>
+	<meta name='site_url' content='<?php echo get_site_url() ?>' /> 
+    <meta name='sticky_posts' content='<?php echo json_encode(get_option("sticky_posts")) ?>' /> 
+ 
+    <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen, print" />
 	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<?php wp_head(); ?>
@@ -31,7 +34,7 @@
         </nav>
     </div>
 </header>
-<main class='container valign-wrapper'>
+<main class='valign-wrapper'>
 
 
 

@@ -7,13 +7,13 @@ progress.start=function(id,selector,template){
             jQuery(selector)
                 .append(template())
         }
-        screen.show()
+        screen.show(0)
     })
 }
 
 progress.stop=function(id){
     return(function(){
-        jQuery(id).hide()
+        jQuery(id).hide(0)
     })
 }
 

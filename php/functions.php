@@ -80,35 +80,4 @@ function api_get_category_string( $object, $field_name, $request ) {
 };
 
 
-function api_get_site_url() {
-    return( get_site_url());
-};
-function api_get_sticky_posts() {
-    return( get_option('sticky_posts') );
-};
-
-add_action( 'rest_api_init', function () {
-	register_rest_route( 'bakehard/v1', '/site_url', array(
-		'methods' => 'GET',
-		'callback' => 'api_get_site_url',
-	) );
-} );
-
-add_action( 'rest_api_init', function () {
-	register_rest_route( 'bakehard/v1', '/sticky_posts', array(
-		'methods' => 'GET',
-		'callback' => 'api_get_sticky_posts',
-	) );
-} );
-
-
-
-
-
-
-
-
-
-
-
 ?>

@@ -1,7 +1,11 @@
+.body {
+    background-color: color('grey','lighten-5');
+}
+
 .load-posts{
     width:100%;
 }
-.home{
+.page{
     margin:auto;
 }
 
@@ -11,6 +15,8 @@
 }
 
 .content {
+    width:90%;
+    max-width:800px;
     img{
         @extend .responsive-img;
     }
@@ -18,8 +24,6 @@
         max-width:100%;
     }
 }
-
-
 
 .content-other {
     margin:auto;

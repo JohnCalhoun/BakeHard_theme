@@ -4,35 +4,42 @@
     
     $card-width: 180px;
 
-    .thumbnail-card-full{
+    .thumbnail-full{
         width:100%;
-    }
-
-    .thumbnail-card-small{
-        width:$card-width;
-    }
-    .thumbnail-card {
-        @extend .hoverable;
-        width:180px;
-        @extend .card;
-        .thumbnail-content{
-            @extend .card-content;
+        .thumbnail-reveal{
+            margin:10px; 
         }
         .thumbnail-image{
             @extend .card-image;
         }
+    }
+    
+    .thumbnail-small{
+        width:$card-width;
+        min-height:200px;
+        .thumbnail-reveal{
+            display:none;
+        }
+        .thumbnail-image{
+            @extend .card-image;
+        }
+    }
+    .thumbnail-card {
+        @extend .hoverable;
+        @extend .card;
+        
+        .thumbnail-content{
+            @extend .card-content;
+        }
         .thumbnail-action{
             @extend .card-action;
-        }
-        .thumbnail-reveal{
-            @extend .card-reveal;
         }
     }
     .grid-sizer {
         width:$card-width;
     }
     .gutter-sizer{
-        width:4%;
+        width:10px;
     }
     ul {
         list-style-type: none; 
