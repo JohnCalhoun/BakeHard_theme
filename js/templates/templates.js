@@ -100,9 +100,11 @@ this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.templa
     + container.escapeExpression(((helper = (helper = helpers.img_url || (depth0 != null ? depth0.img_url : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"img_url","hash":{},"data":data}) : helper)))
     + "'>\n        </div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=container.lambda;
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=container.lambda;
 
-  return "<div class=\"thumbnail-card thumbnail-small\" data-sticky='"
+  return "<div id='"
+    + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "' class=\"thumbnail-card thumbnail-small\" data-sticky='"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.sticky : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "'>\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -110,7 +112,7 @@ this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.templa
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
     + " \n        </span>\n    </div>\n     <div class=\"thumbnail-excerpt\">\n        "
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.excerpt : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + "\n    </div>\n    <div class=\"thumbnail-content\">\n        "
+    + "\n        <div>\n            <span class='btn post-view-button'>View</div>\n        </div>\n    </div>\n    <div class=\"thumbnail-content\">\n        "
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
     + "\n    </div>\n</div>\n\n";
 },"useData":true});

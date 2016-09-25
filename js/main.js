@@ -71,7 +71,7 @@ jQuery(document).ready(function(){
             post_thumbnails.load_new()
         })
 
-        window.thumb=page_thumbnails 
+        window.thumb=post_thumbnails 
         jQuery('[data-url="'+pages_url+'"]').on(
             'page_ready',
             function(e){
@@ -87,21 +87,20 @@ jQuery(document).ready(function(){
                 post_thumbnails.iso.arrange()
                 post_thumbnails.iso.arrange()
             })
-        
+
         jQuery('.blog').on( 'click',    
                             '.thumbnail-card',
                             function(e){  
-                                var card=jQuery(e.target).closest('.thumbnail-card')
-                                var others=card.parent().find('.thumbnail-full').not(card)
-                                
-                                others.toggleClass('thumbnail-full')
-                                others.toggleClass('thumbnail-small')
-                                 
-                                card.toggleClass('thumbnail-full')
-                                card.toggleClass('thumbnail-small')
-                                post_thumbnails.resize()
+                                var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
+                                post_thumbnails.open('#'+id)
                             })
-           
+        jQuery('.blog').on( 'click',    
+                            '.post-view-button',
+                            function(e){
+                                var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
+                                post_thumbnails.toggle_view('#'+id)
+                                e.stopPropagation()
+                            })
         //-------------------routing
 
         var routes_con=require('./routes/routes.js')

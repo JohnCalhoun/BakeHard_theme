@@ -54,10 +54,9 @@ var posts=function(constants,thumbnail_template,selector,type){
     this.resize=function(){
         this.iso.arrange()
     }.bind(this)
-    
+ 
     jQuery(window).resize(this.resize)
-
-   
+  
     this.api_url=function(page){
         var exclude='&exclude='+this.exclude.join(',')
         if(page){
@@ -171,9 +170,46 @@ var posts=function(constants,thumbnail_template,selector,type){
         } 
         this.apply_filter()
     }.bind(this)
+ 
+    this.isolate=function(id){
+        if(id){
+            this.iso.arrange({filter:id})
+        }else{
+            this.apply_filter()
+        }
+    }.bind(this)
+
 //-----------------------------sorting 
     this.sort=function(){
         this.iso.arrange({sortBy:'target'}) 
+    }.bind(this)
+//-----------------------------opening--------------
+    this.open=function(id){  
+        var card=jQuery(id)
+        var others=card.parent().find('.thumbnail-full').not(card)
+      
+        others.toggleClass('thumbnail-full')
+        others.toggleClass('thumbnail-small')
+         
+        card.toggleClass('thumbnail-full')
+        card.toggleClass('thumbnail-small')
+        this.resize()
+    }.bind(this)
+//-----------------------------viewing-------------- 
+    this.viewing_id=null
+    this.toggle_view=function(id){
+        var card=null
+        if(id){
+            this.viewing_id=id
+            card=jQuery(id)
+            this.isolate(id)
+        }else{
+            card=jQuery(this.viewing_id)
+            this.viewing_id=null
+            this.isolate()
+        }
+        card.toggleClass('thumbnail-full')
+        card.toggleClass('post-view')
     }.bind(this)
 
 }
