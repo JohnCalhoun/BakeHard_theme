@@ -99,6 +99,8 @@ jQuery(document).ready(function(){
                             function(e){
                                 var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
                                 post_thumbnails.toggle_view('#'+id)
+                                jQuery('.blog-load').hide()
+                                jQuery('.controls').hide()
                                 e.stopPropagation()
                             })
         //-------------------routing

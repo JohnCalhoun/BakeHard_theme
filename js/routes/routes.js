@@ -1,5 +1,17 @@
+var pathToRegex=require('path-to-regexp')
+
 var routes=function(page_render){
     this.current=''
+    this.routes=[]
+
+    this.register(path,fn){
+        var reg=pathToRegex(path,[])
+        routes.push(
+            {   regex:reg,
+                func:fn}
+            )
+    }
+
     this.check_and_go=function(){
         
         if( window.location.hash !=this.current){

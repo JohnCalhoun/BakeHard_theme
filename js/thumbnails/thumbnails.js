@@ -83,8 +83,6 @@ var posts=function(constants,thumbnail_template,selector,type){
                             function(){
                                 this.iso.layout()
                     }.bind(this))
-                
-                
                 elems.push(        
                     thumb[0]
                 )
@@ -210,6 +208,7 @@ var posts=function(constants,thumbnail_template,selector,type){
         }
         card.toggleClass('thumbnail-full')
         card.toggleClass('post-view')
+        this.iso.layout()
     }.bind(this)
 
 }

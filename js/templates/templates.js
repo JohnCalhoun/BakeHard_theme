@@ -9,7 +9,7 @@ this["JST"]["js/templates/mustache/blog.mustache"] = Handlebars.template({"compi
 
   return "<div class='content blog' data-url='"
     + container.escapeExpression(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"url","hash":{},"data":data}) : helper)))
-    + "' style='display:none;'>\n\n    <div class='controls'>\n        <ul class='collapsible' data-collapsible=\"accordian\">\n            <li> \n                <div class='collapsible-header'>Categories</div>\n                <div class='category-tags collapsible-body'></div>\n            </li>\n        </ul>\n    </div>\n    <div class='post-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n    <div>\n        <span class='btn load-posts'>Load More</span>\n    </div>\n    "
+    + "' style='display:none;'>\n\n    <div class='controls'>\n        <ul class='collapsible' data-collapsible=\"accordian\">\n            <li> \n                <div class='collapsible-header'>Categories</div>\n                <div class='category-tags collapsible-body'></div>\n            </li>\n        </ul>\n    </div>\n    <div class='post-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n    <div class='blog-load'>\n        <span class='btn load-posts'>Load More</span>\n    </div>\n    "
     + ((stack1 = ((helper = (helper = helpers.loading || (depth0 != null ? depth0.loading : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"loading","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n\n</div>\n\n";
 },"useData":true});
@@ -110,9 +110,9 @@ this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.templa
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    <div class=\"thumbnail-title\">\n        <span class=\"thumbnail-title activate\"> \n            "
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + " \n        </span>\n    </div>\n     <div class=\"thumbnail-excerpt\">\n        "
+    + " \n        </span>\n    </div>\n    <div class=\"thumbnail-excerpt\">\n        "
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.excerpt : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + "\n        <div>\n            <span class='btn post-view-button'>View</div>\n        </div>\n    </div>\n    <div class=\"thumbnail-content\">\n        "
+    + "\n        <div>\n            <span class='btn post-view-button'>View</span>\n        </div>\n    </div>\n    <div class=\"thumbnail-content\">\n        "
     + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
     + "\n    </div>\n</div>\n\n";
 },"useData":true});
