@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class='content content-other' id='front-page'> 
+<div class='content' id='front-page'> 
     <div class="post front-page" id="post-<?php the_ID(); ?>">
         <div class="entry">
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
