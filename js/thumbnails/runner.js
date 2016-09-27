@@ -10,12 +10,7 @@ describe('load',function(){
     })
 
     it('api_url',function(){
-        browser.execute(
-            function(){
-                window.thumbnails_test.load_new()  
-            }
-        )
-        var examplar='/thumbnails/data/posts?page=1&per_page=10' 
+        var examplar='/thumbnails/data/posts?page=1&per_page=10&exclude=' 
         var url=browser.execute(
             function(){
                 return(window.thumbnails_test.api_url(1))
@@ -51,7 +46,6 @@ describe('load',function(){
                 return(window.thumbnails_test.iso.getFilteredItemElements().length)
             }).value
 
-        console.log(filtered)
         expect(filtered)
             .to
             .equal(0)

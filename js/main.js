@@ -4,43 +4,25 @@ jQuery(document).ready(function(){
     var constants=new constants_mod()
 
     constants.ready.then(function(){
-        var nav=require('./nav/nav.js')(constants)
         jQuery('.nav a').on('click',function(e){
-            nav(e)
             jQuery('.nav li').removeClass('active') 
             jQuery(e.target).parent().addClass('active')
         })
-
-        var load=require('./load/load.js')
    
-        var thumbnails=require('./thumbnails/thumbnails.js')
-        var JST=require('./templates/templates.js')
         //-------------------------initial pages--------------------
-        var loading_func=JST['js/templates/mustache/load.mustache'] 
-        
+        var JST=require('./templates/templates.js')
         var pages_url=constants.site_url+'Pages' 
         var posts_url=constants.site_url+'Posts' 
 
         jQuery('main').append(jQuery(
-            JST['js/templates/mustache/home.mustache'](
-                {url:pages_url}
-            )
+            JST['js/templates/mustache/home.mustache']()
         ))
         jQuery('main').append(jQuery(
-            JST['js/templates/mustache/blog.mustache'](
-                {url:posts_url,
-                loading:"<div class='valign-wrapper'>"+loading_func({type:"blog"})+"</div>"
-                })
-        ))
-        
-        jQuery('.content').filter('.page').on('click','a',nav)
-        jQuery('.content').filter('.blog').on('click','a',nav)
-        jQuery('main').append(jQuery(
-            loading_func({type:'main'})
+            JST['js/templates/mustache/blog.mustache']()
         ))
          
         //-------------------------thumbnails--------------------
-       
+        var thumbnails=require('./thumbnails/thumbnails.js')
         var page_thumbnails=new thumbnails(
                         constants,
                         JST['js/templates/mustache/page_thumbnail.mustache'],
@@ -72,21 +54,6 @@ jQuery(document).ready(function(){
         })
 
         window.thumb=post_thumbnails 
-        jQuery('[data-url="'+pages_url+'"]').on(
-            'page_ready',
-            function(e){
-                page_thumbnails.IsotopeInit()
-                page_thumbnails.iso.arrange()
-                page_thumbnails.iso.arrange()
-            })
-
-        jQuery('[data-url="'+posts_url+'"]').on(
-            'page_ready',
-            function(){
-                post_thumbnails.IsotopeInit()
-                post_thumbnails.iso.arrange()
-                post_thumbnails.iso.arrange()
-            })
 
         jQuery('.blog').on( 'click',    
                             '.thumbnail-card',
@@ -94,28 +61,67 @@ jQuery(document).ready(function(){
                                 var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
                                 post_thumbnails.open('#'+id)
                             })
-        jQuery('.blog').on( 'click',    
-                            '.post-view-button',
-                            function(e){
-                                var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
-                                post_thumbnails.toggle_view('#'+id)
-                                jQuery('.blog-load').hide()
-                                jQuery('.controls').hide()
-                                e.stopPropagation()
-                            })
         //-------------------routing
-
         var routes_con=require('./routes/routes.js')
-        var routes=new routes_con(load) 
-        
-        routes.check_and_go() 
-        jQuery(window).on(  'popstate',
-                            routes.check_and_go)
-       
-        jQuery('main').on(  
-            'change_page',
-            routes.on_change_page
-        )
+        var routes=new routes_con() 
 
+        //register routes
+        var main=jQuery('main')
+        var page_show=function(id){
+            main.children().not(id).hide()  
+            main.children(id).show()  
+        }
+        routes.register('/front',function(){
+            page_show('#front-page') 
+        })
+
+        routes.register('/posts',function(){
+            page_show('#posts') 
+            post_thumbnails.iso.arrange({filter:'*'}) 
+            post_thumbnails.IsotopeInit()
+            post_thumbnails.iso.arrange()
+            post_thumbnails.iso.arrange()
+            jQuery('.blog-load').show()
+            jQuery('.controls').show()
+            post_thumbnails.toggle_view()
+        })
+        routes.register('/posts/filter/:Filter',function(Filter){
+            post_thumbnails.iso.arrange({filter:Filter}) 
+        })
+        routes.register('/posts/:id',function(id){
+            post_thumbnails.iso.arrange({filter:'#'+id}) 
+            post_thumbnails.toggle_view('#'+id)
+            jQuery('.blog-load').hide()
+            jQuery('.controls').hide()
+        })
+        
+        routes.register('/pages',function(){
+            page_show('#pages') 
+            page_thumbnails.IsotopeInit()
+            page_thumbnails.iso.arrange()
+            page_thumbnails.iso.arrange()
+            page_thumbnails.toggle_view()
+        })
+        routes.register('/pages/:id',function(id){
+            page_thumbnails.toggle_view('#'+id)
+        })
+
+        routes.onHashChange() 
+        jQuery(window).on('popstate',routes.onHashChange)
+        jQuery('body').on(
+            'click',
+            '.link-button',
+            function(e){
+                e.stopPropagation()
+                e.preventDefault()
+                history.pushState(null,null,'#'+jQuery(e.target).attr('href'))
+                routes.onHashChange()
+            }
+        )
     })
 })
+
+
+
+
+

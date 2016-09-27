@@ -148,33 +148,26 @@ var posts=function(constants,thumbnail_template,selector,type){
     this.filter_array=[]
 
     this.apply_filter=function(){
-        this.iso.arrange({filter:this.filter_array.join(', ')})
+        if(this.filter_array.length > 0){
+            this.iso.arrange({filter:this.filter_array.join(', ')})
+        }else{
+            this.iso.arrange({filter:'*'})
+        }
     }.bind(this)
 
-    this.add_filter=function(type){
-        var sel='.'+type
-        
-        if( this.filter_array.indexOf(sel) === -1){
-            this.filter_array.push(sel)
+    this.add_filter=function(selector){
+        if( this.filter_array.indexOf(selector) === -1){
+            this.filter_array.push(selector)
             this.apply_filter()
         }
     }.bind(this)
     
-    this.remove_filter=function(type){
-        var sel='.'+type
-        var pos=this.filter_array.indexOf(sel)
+    this.remove_filter=function(selector){
+        var pos=this.filter_array.indexOf(selector)
         if(pos !== -1){
             this.filter_array.splice(pos,1)
         } 
         this.apply_filter()
-    }.bind(this)
- 
-    this.isolate=function(id){
-        if(id){
-            this.iso.arrange({filter:id})
-        }else{
-            this.apply_filter()
-        }
     }.bind(this)
 
 //-----------------------------sorting 
@@ -200,14 +193,16 @@ var posts=function(constants,thumbnail_template,selector,type){
         if(id){
             this.viewing_id=id
             card=jQuery(id)
-            this.isolate(id)
+            card.removeClass('thumbnail-full')
+            card.removeClass('thumbnail-small')
+            card.addClass('post-view')
         }else{
             card=jQuery(this.viewing_id)
             this.viewing_id=null
-            this.isolate()
+            card.removeClass('thumbnail-full')
+            card.addClass('thumbnail-small')
+            card.removeClass('post-view')
         }
-        card.toggleClass('thumbnail-full')
-        card.toggleClass('post-view')
         this.iso.layout()
     }.bind(this)
 

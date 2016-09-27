@@ -18,16 +18,16 @@
         <nav>
             <div id="main-nav" class="nav-wrapper nav" >
                 <h1 class="brand-logo">
-                    <a href='<?php echo site_url(); ?>/front'>
+                    <a href='/front' class='link-button' id='font-btn'>
                         <? bloginfo('name'); ?>
                     </a>
                 </h1>
                 <ul class="main_menu right"> 
                     <li>
-                        <a href='<?php echo site_url(); ?>/Pages' id='home-btn'>Home</a>
+                        <a href='/pages' class='link-button' id='home-btn'>Home</a>
                     </li> 
                     <li>
-                        <a href='<?php echo site_url(); ?>/Posts' id='blog-btn'>Blog</a>
+                        <a href='/posts' class='link-button' id='blog-btn'>Blog</a>
                     </li> 
                 </ul>
             </div>

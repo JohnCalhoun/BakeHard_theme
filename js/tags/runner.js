@@ -4,12 +4,12 @@ var mocha=require('mocha')
 
 describe('load',function(){  
 
-    before(function(){
+    beforeEach(function(){
         browser.url('/tags/test.html')           
     })
 
     it('api_url',function(){        
-        var examplar='/tags/data/categories' 
+        var examplar='/tags/data/categories?hide_empty=true&per_page=100' 
         var url=browser.execute(
             function(){
                 return(window.tags_test.api_url(1))

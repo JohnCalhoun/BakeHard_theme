@@ -14,13 +14,12 @@ describe('routes',function(){
         expect(browser.getUrl()).to.equal(base) 
 
         browser.click('#link1') 
-        expect(browser.getUrl()).to.equal(base+'#link1') 
+        expect(browser.getUrl()).to.equal(base+'#/link1') 
         
-        browser.click('#link2') 
-        expect(browser.getUrl()).to.equal(base+'#link2') 
-        
-        browser.back()
-        expect(browser.getUrl()).to.equal(base+'#link1') 
+        expect(browser.isExisting('#target')).to.equal(true) 
+
+        browser.url('/routes/test.html#/link2')
+        expect(browser.isExisting('#target')).to.equal(true) 
     })
     
     after(function(){

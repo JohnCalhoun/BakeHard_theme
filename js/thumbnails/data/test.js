@@ -36,38 +36,52 @@ var posts=function(constants,thumbnail_template,selector,type){
                 masonry:{
                     columnWidth:'.grid-sizer',
                     gutter:'.gutter-sizer',
-                    stagger:10,
-                    isfitwidth:true
+                    stagger:10
+                    //isfitwidth:true
                 },
                 getSortData:{
                     target:'[data-sort]'
-                }
+                },
+                sortBy:'target'
                 
                 };
         this.iso=new Isotope(
             selector,
             iso_settings
         );
-        
-        this.resize=function(){
-            this.iso.arrange()
-        }.bind(this)
-        
-        jQuery(window).resize(this.resize)
-
-        this.iso.on('arrangeComplete',function(){
+        var onResize=function(){
+            var window_width=window.innerWidth
             var grid=jQuery(selector)
-            
+            var old=grid[0].getBoundingClientRect().width
+
             var thumbnail=grid.find('.grid-sizer')[0].getBoundingClientRect().width
             var gutter=grid.find('.gutter-sizer')[0].getBoundingClientRect().width
-            var parrent=grid.parent()[0].getBoundingClientRect().width
+            var parrent=grid.parent()
+            
+            var parrent_w=parrent[0].getBoundingClientRect().width
+            var parrent_padding=parseInt(parrent.css('padding-left'))+parseInt(parrent.css('padding-right'))
+            parrent_w=parrent_w-parrent_padding 
 
-            var x=Math.floor( (parrent-thumbnail)/(thumbnail+gutter) )
+            var x=Math.floor( (parrent_w-thumbnail)/(thumbnail+gutter) )
             var width=thumbnail+x*(thumbnail+gutter)
-        
+            
             grid.css('width',width.toString()+'px') 
-        })
+            
+            var window_width2=window.innerWidth
+            if( window_width2 !== window_width ){
+                onResize() 
+            }
+        }.bind(this)
+
+        this.iso.on('arrangeComplete',onResize)
     }.bind(this)
+     
+    this.resize=function(){
+        this.iso.arrange()
+    }.bind(this)
+ 
+    jQuery(window).resize(this.resize)
+  
     this.api_url=function(page){
         var exclude='&exclude='+this.exclude.join(',')
         if(page){
@@ -87,8 +101,15 @@ var posts=function(constants,thumbnail_template,selector,type){
         jQuery.each(    
             posts,
             function(index,post){
+                var thumb=jQuery(this.thumbnail_template(post))
+                thumb.find('.thumbnail-image')
+                    .find('img')
+                    .on(    'load',
+                            function(){
+                                this.iso.layout()
+                    }.bind(this))
                 elems.push(        
-                    jQuery(this.thumbnail_template(post))[0]
+                    thumb[0]
                 )
                 this.exclude.push(post.id)
             }.bind(this)
@@ -152,29 +173,62 @@ var posts=function(constants,thumbnail_template,selector,type){
     this.filter_array=[]
 
     this.apply_filter=function(){
-        this.iso.arrange({filter:this.filter_array.join(', ')})
+        if(this.filter_array.length > 0){
+            this.iso.arrange({filter:this.filter_array.join(', ')})
+        }else{
+            this.iso.arrange({filter:'*'})
+        }
     }.bind(this)
 
-    this.add_filter=function(type){
-        var sel='.'+type
-        
-        if( this.filter_array.indexOf(sel) === -1){
-            this.filter_array.push(sel)
+    this.add_filter=function(selector){
+        if( this.filter_array.indexOf(selector) === -1){
+            this.filter_array.push(selector)
             this.apply_filter()
         }
     }.bind(this)
     
-    this.remove_filter=function(type){
-        var sel='.'+type
-        var pos=this.filter_array.indexOf(sel)
+    this.remove_filter=function(selector){
+        var pos=this.filter_array.indexOf(selector)
         if(pos !== -1){
             this.filter_array.splice(pos,1)
         } 
         this.apply_filter()
     }.bind(this)
+
 //-----------------------------sorting 
     this.sort=function(){
         this.iso.arrange({sortBy:'target'}) 
+    }.bind(this)
+//-----------------------------opening--------------
+    this.open=function(id){  
+        var card=jQuery(id)
+        var others=card.parent().find('.thumbnail-full').not(card)
+      
+        others.toggleClass('thumbnail-full')
+        others.toggleClass('thumbnail-small')
+         
+        card.toggleClass('thumbnail-full')
+        card.toggleClass('thumbnail-small')
+        this.resize()
+    }.bind(this)
+//-----------------------------viewing-------------- 
+    this.viewing_id=null
+    this.toggle_view=function(id){
+        var card=null
+        if(id){
+            this.viewing_id=id
+            card=jQuery(id)
+            card.removeClass('thumbnail-full')
+            card.removeClass('thumbnail-small')
+            card.addClass('post-view')
+        }else{
+            card=jQuery(this.viewing_id)
+            this.viewing_id=null
+            card.removeClass('thumbnail-full')
+            card.addClass('thumbnail-small')
+            card.removeClass('post-view')
+        }
+        this.iso.layout()
     }.bind(this)
 
 }

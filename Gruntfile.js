@@ -57,21 +57,9 @@ module.exports=function(grunt){
                 src:"js/main.js",
                 dest:"tmp/main.js"
             },
-            testLoad:{
-                src:"js/load/test.js",
-                dest:"js/load/data/test.js"
-            },
             testConstants:{
                 src:"js/constants/test.js",
                 dest:"js/constants/data/test.js"
-            },
-            testNav:{
-                src:"js/nav/test.js",
-                dest:"js/nav/data/test.js"
-            },
-            testProgress:{
-                src:"js/progress/test.js",
-                dest:"js/progress/data/test.js"
             },
             testRoutes:{
                 src:"js/routes/test.js",
@@ -170,9 +158,6 @@ module.exports=function(grunt){
                                     'shell:rsync'])
     grunt.registerTask('testBuild',[
                                 'browserify:testConstants',
-                                'browserify:testLoad',
-                                'browserify:testProgress',
-                                'browserify:testNav',
                                 'browserify:testRoutes',
                                 'browserify:testThumbnail',
                                 'browserify:testtags',

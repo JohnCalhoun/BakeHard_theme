@@ -1,32 +1,35 @@
 var pathToRegex=require('path-to-regexp')
 
-var routes=function(page_render){
-    this.current=''
-    this.routes=[]
-
-    this.register(path,fn){
+var routes=function(){
+    this._current=''
+    this._routes=[]
+    window.routes=this
+    this.register=function(path,fn){
         var reg=pathToRegex(path,[])
-        routes.push(
+        this._routes.push(
             {   regex:reg,
                 func:fn}
             )
-    }
+    }.bind(this)
+     
+    this.dispatch=function(path){
+        for(var i=0; i<this._routes.length;i++){
+            var route=this._routes[i]
+            console.log(path)
+            var match=route.regex.exec(path)
+            if(match){
+                route.func.apply(this,match.splice(1))
+            }
+        }
+    }.bind(this)
 
-    this.check_and_go=function(){
-        
+    this.check_hash=function(){ 
         if( window.location.hash !=this.current){
-            page_render(window.location.hash.substring(1))
+            this.dispatch(window.location.hash.substring(1))
         }
     }.bind(this)
    
-    this.on_change_page=function(e,path){
-        
-        page_render(path)
-        this.current='#'+path
-        history.pushState(  null,
-                            null,
-                            '#'+path)
-    }.bind(this)
+    this.onHashChange=this.check_hash
 }
 
 module.exports=routes

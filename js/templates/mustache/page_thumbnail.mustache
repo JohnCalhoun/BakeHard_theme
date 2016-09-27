@@ -4,13 +4,13 @@
             <img class='activator' src='{{img_url }}'>
         </div>
     {{/if}}
-    <div class="thumbnail-content">
+    <div class="thumbnail-title">
         <span class="thumbnail-title activate"> {{{ title.rendered }}} </span>
     </div>
-    <div    class="thumbnail-action">
-        <a  href="{{ link }}" class='post-link'>view</a>
+    <div class="thumbnail-action">
+        <span class='btn page-view-button link-button' data-href='/pages/{{id}}' >View</span>
     </div>
-    <div class="thumbnail-reveal">
+    <div class="thumbnail-content">
         {{{ excerpt.rendered }}}
     </div>
 </div>
