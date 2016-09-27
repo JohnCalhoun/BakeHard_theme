@@ -22,7 +22,7 @@ function theme_script() {
                         array('jquery'),
                         null,
                         true);
-    wp_enqueue_script("materialize");
+//    wp_enqueue_script("materialize");
 //    wp_enqueue_script("isotope");
     wp_enqueue_script("bake-hard");
 };
@@ -75,7 +75,7 @@ function api_get_category_string( $object, $field_name, $request ) {
     $cats=get_the_category(  $object[ 'id' ]);
     $output=array();
     foreach($cats as $cat){
-        array_push($output,$cat->slug);
+        array_push($output,$cat->name);
     }
     return(implode(' ',$output));
 };

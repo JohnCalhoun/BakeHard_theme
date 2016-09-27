@@ -12,7 +12,7 @@ module.exports=function(grunt){
         },
         concat:{
             css:{
-                src:["style/info.txt","tmp/style.tmp.css"],
+                src:["style/info.txt","tmp/style.tmp.min.css"],
                 dest:"build/bakehard/style.css"
             }
         },
@@ -78,7 +78,22 @@ module.exports=function(grunt){
             dist:{
                 files:{
                     "build/bakehard/js/bakehard.min.js":['tmp/main.js']
+                },
+                options:{
+                    compress:{
+                        dead_code:true,
+                        unused:true,
+                        passes:2,
+                        unsafe:true
+                    },
+                    mangle:{
+                        except:['require','jQuery'],
+                        toplevel:true
+                    },
+                    preserveComments:false,
+                    report:'gzip'
                 }
+
             }
         },
         handlebars:{
@@ -134,12 +149,37 @@ module.exports=function(grunt){
                 configFile:"./wdio.conf.js"
             }
         },
+        autoprefixer:{
+            style:{
+                src:'tmp/style.tmp.css',
+                dest:'tmp/style-pre.tmp.css'
+            }
+        },
+        cssmin:{
+            style:{
+                files:{
+                    'tmp/style.tmp.min.css':['tmp/style-pre.tmp.css']
+                }
+            }
+        },
+        watch:{
+            style:{
+                files:['style/**'],
+                tasks:['style','shell:rsync']
+            },
+            js:{
+                files:['js/**'],
+                task:['js','shell:rsync']
+            }
+        }
     });
 
     require('time-grunt')(grunt);
     require('load-grunt-tasks')(grunt);
 
     grunt.registerTask('style',["sass:dist",
+                                "autoprefixer:style",
+                                "cssmin:style",
                                 "concat:css"])
     grunt.registerTask('php',["copy:php"])
     grunt.registerTask('assets',["copy:assets"])

@@ -53,7 +53,7 @@ var init=function(constants,template,selector){
     this.insert=function(element){
         var out=new Promise(function(resolve,reject){ 
             jQuery(selector).append(element)
-            jQuery('.collapsible').collapsible()
+            //jQuery('.collapsible').collapsible()
             resolve() 
         })
         return(out)
