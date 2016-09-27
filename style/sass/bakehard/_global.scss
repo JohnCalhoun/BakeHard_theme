@@ -5,11 +5,11 @@
 .load-posts{
     width:100%;
 }
-.page{
+#pages{
     margin:auto;
 }
 
-.blog{
+#posts{
     @extend .card-panel;
     margin:auto;
 }

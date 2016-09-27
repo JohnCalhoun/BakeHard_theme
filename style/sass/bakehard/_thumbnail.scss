@@ -4,6 +4,7 @@
     $card-width: 180px;
 
     .post-view{         
+        width:100%;
         .thumbnail-excerpt{
             display:none;
         }
@@ -59,6 +60,9 @@
         .filtered{
             @extend .red;
         }
+    }
+    .post-view-button{
+        width:100%; 
     }
 }
 

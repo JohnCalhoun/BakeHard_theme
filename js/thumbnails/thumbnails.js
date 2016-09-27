@@ -144,32 +144,6 @@ var posts=function(constants,thumbnail_template,selector,type){
     this.load_all=function(){
         this.load()
     }.bind(this)
-//----------------------------------filtering
-    this.filter_array=[]
-
-    this.apply_filter=function(){
-        if(this.filter_array.length > 0){
-            this.iso.arrange({filter:this.filter_array.join(', ')})
-        }else{
-            this.iso.arrange({filter:'*'})
-        }
-    }.bind(this)
-
-    this.add_filter=function(selector){
-        if( this.filter_array.indexOf(selector) === -1){
-            this.filter_array.push(selector)
-            this.apply_filter()
-        }
-    }.bind(this)
-    
-    this.remove_filter=function(selector){
-        var pos=this.filter_array.indexOf(selector)
-        if(pos !== -1){
-            this.filter_array.splice(pos,1)
-        } 
-        this.apply_filter()
-    }.bind(this)
-
 //-----------------------------sorting 
     this.sort=function(){
         this.iso.arrange({sortBy:'target'}) 

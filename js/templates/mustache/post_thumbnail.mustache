@@ -12,11 +12,14 @@
     <div class="thumbnail-excerpt">
         {{{ excerpt.rendered }}}
         <div>
-            <span class='btn post-view-button link-button' data-href='/posts/{{id}}' >View</span>
+            <a class='btn post-view-button link-button' href='/posts/{{id}}' >View</a>
         </div>
     </div>
     <div class="thumbnail-content">
+        <h2>{{{ title.rendered }}}</h2>
+        <hr>
         {{{ content.rendered }}}
+        <a class='btn post-view-button link-button' href='/posts' >Posts</a>
     </div>
 </div>
 

@@ -31,39 +31,6 @@ describe('load',function(){
             .to
             .equal(true) 
     })
-    it('filter',function(){
-        browser.execute(
-            function(){
-                window.thumbnails_test.load_new()  
-            }) 
-        browser.execute(
-            function(){
-                window.thumbnails_test.add_filter('thumbnail')  
-            })
-        
-        var filtered=browser.execute(
-            function(){
-                return(window.thumbnails_test.iso.getFilteredItemElements().length)
-            }).value
-
-        expect(filtered)
-            .to
-            .equal(0)
-        
-        browser.execute(
-            function(){
-                window.thumbnails_test.remove_filter('thumbnail')  
-            })
-        
-        var filtered=browser.execute(
-            function(){
-                return(window.thumbnails_test.iso.getFilteredItemElements().length)
-            }).value
-        expect(filtered)
-            .to
-            .not
-            .equal(0)
-    })
     it('sort',function(){
         browser.execute(
             function(){

@@ -50,22 +50,34 @@ jQuery(document).ready(function(){
         category_tags.load()  
 
         jQuery('.load-posts').on('click',function(){
+            var progress=jQuery('.blog .progress')
+            progress.show() 
             post_thumbnails.load_new()
+            jQuery(document).one('thumbnail_rendered',function(){
+                progress.hide() 
+            })
         })
 
         window.thumb=post_thumbnails 
 
-        jQuery('.blog').on( 'click',    
+        jQuery('.post-thumbnails').on( 'click',    
                             '.thumbnail-card',
                             function(e){  
                                 var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
                                 post_thumbnails.open('#'+id)
                             })
+
+        jQuery('.page-thumbnails').on( 'click',    
+                            '.thumbnail-card',
+                            function(e){  
+                                var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
+                                history.pushState(null,null,'#/pages/'+id)
+                                routes.onHashChange()
+                            })
         //-------------------routing
         var routes_con=require('./routes/routes.js')
         var routes=new routes_con() 
 
-        //register routes
         var main=jQuery('main')
         var page_show=function(id){
             main.children().not(id).hide()  
@@ -97,12 +109,14 @@ jQuery(document).ready(function(){
         
         routes.register('/pages',function(){
             page_show('#pages') 
+            page_thumbnails.iso.arrange({filter:'*'}) 
             page_thumbnails.IsotopeInit()
             page_thumbnails.iso.arrange()
             page_thumbnails.iso.arrange()
             page_thumbnails.toggle_view()
         })
         routes.register('/pages/:id',function(id){
+            page_thumbnails.iso.arrange({filter:'#'+id}) 
             page_thumbnails.toggle_view('#'+id)
         })
 
