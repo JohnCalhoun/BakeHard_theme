@@ -2,7 +2,9 @@
     {{#each categories}}
         <li>
             <span class='category-tag' data-cat='{{ this.slug }}'>
-                {{ this.name }}
+                <a class='link-button' href='/posts/filter/.{{this.slug}}'> 
+                    {{ this.name }}
+                </a>
                 <span class='category-count'>
                     {{ this.count }}
                 </span>

@@ -75,7 +75,7 @@ function api_get_category_string( $object, $field_name, $request ) {
     $cats=get_the_category(  $object[ 'id' ]);
     $output=array();
     foreach($cats as $cat){
-        array_push($output,$cat->name);
+        array_push($output,$cat->slug);
     }
     return(implode(' ',$output));
 };

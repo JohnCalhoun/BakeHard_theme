@@ -13,9 +13,11 @@ this["JST"]["js/templates/mustache/cat_tag.mustache"] = Handlebars.template({"1"
 
   return "        <li>\n            <span class='category-tag' data-cat='"
     + alias2(alias1((depth0 != null ? depth0.slug : depth0), depth0))
-    + "'>\n                "
+    + "'>\n                <a class='link-button' href='/posts/filter/."
+    + alias2(alias1((depth0 != null ? depth0.slug : depth0), depth0))
+    + "'> \n                    "
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
-    + "\n                <span class='category-count'>\n                    "
+    + "\n                </a>\n                <span class='category-count'>\n                    "
     + alias2(alias1((depth0 != null ? depth0.count : depth0), depth0))
     + "\n                </span>\n            </span>\n        </li>\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.children : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
@@ -92,7 +94,9 @@ this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.templa
 
   return "<div id='"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "' class=\"thumbnail-card thumbnail-small\" data-sticky='"
+    + "' class=\"thumbnail-card thumbnail-small "
+    + alias4(((helper = (helper = helpers.category_string || (depth0 != null ? depth0.category_string : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"category_string","hash":{},"data":data}) : helper)))
+    + "\" data-sticky='"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.sticky : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "'>\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
