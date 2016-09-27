@@ -78,22 +78,7 @@ module.exports=function(grunt){
             dist:{
                 files:{
                     "build/bakehard/js/bakehard.min.js":['tmp/main.js']
-                },
-                options:{
-                    compress:{
-                        dead_code:true,
-                        unused:true,
-                        passes:2,
-                        unsafe:true
-                    },
-                    mangle:{
-                        except:['require','jQuery'],
-                        toplevel:true
-                    },
-                    preserveComments:false,
-                    report:'gzip'
                 }
-
             }
         },
         handlebars:{

@@ -20,7 +20,8 @@ jQuery(document).ready(function(){
         jQuery('main').append(jQuery(
             JST['js/templates/mustache/blog.mustache']()
         ))
-         
+        //-------------------------bourbon------------------------ 
+        var bourbon=require('./bourbon/bourbon.js')
         //-------------------------thumbnails--------------------
         var thumbnails=require('./thumbnails/thumbnails.js')
         var page_thumbnails=new thumbnails(

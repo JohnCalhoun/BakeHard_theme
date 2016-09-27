@@ -1,0 +1,48 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+    height: 100%;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: white;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.content {
+    width:90%;
+    max-width:800px;
+    margin:auto;
+    img{
+        max-width:100%;
+        height:auto;
+    }
+    .wp-caption{
+        max-width:100%;
+    }
+}
+.hoverable {
+    transition: box-shadow .25s;
+    box-shadow: 0;
+}
+
+.hoverable:hover {
+    transition: box-shadow .25s;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hide{
+    display:none;
+}
