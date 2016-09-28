@@ -14,27 +14,24 @@
 </head>
 <body <?php body_class(); ?>>
 <header>
-    <div>
-        <nav>
-            <div id="main-nav" class="nav-wrapper nav" >
+    <nav id="main-nav">
+        <ul class="main_menu"> 
+            <li>
+                <a href='/pages' class='link-button' id='home-btn'>Home</a>
+            </li> 
+<li>
                 <h1 class="brand-logo">
                     <a href='/front' class='link-button' id='font-btn'>
                         <? bloginfo('name'); ?>
                     </a>
                 </h1>
-                <ul class="main_menu right"> 
-                    <li>
-                        <a href='/pages' class='link-button' id='home-btn'>Home</a>
-                    </li> 
-                    <li>
-                        <a href='/posts' class='link-button' id='blog-btn'>Blog</a>
-                    </li> 
-                </ul>
-            </div>
-        </nav>
-    </div>
+            </li>
+                        <li>
+                <a href='/posts' class='link-button' id='blog-btn'>Blog</a>
+            </li> 
+        </ul>
+    </nav>
 </header>
-<main class='valign-wrapper'>
 
 
 

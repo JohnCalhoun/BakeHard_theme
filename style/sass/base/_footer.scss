@@ -1,34 +1,12 @@
-.wrapper-for-content-outside-of-footer {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto -4em;
-}
-
-.wrapper-for-content-outside-of-footer::after {
-    content: "";
-    display: block;
-}
-
-.footer, .wrapper-for-content-outside-of-footer::after {
-    height: 17em;
-
-    @include media($large-screen) {
-        height: 4em;
-    }
-}
-
-.footer {
+footer {
   $base-spacing: 1.5em !default;
-  $action-color: #477DCA !default;
   $medium-screen: 40em !default;
   $large-screen: 53.75em !default;
   $footer-background: desaturate(darken($action-color, 20%), 30%);
-  $footer-color: white;
   $footer-link-color: transparentize($footer-color, 0.6);
   $footer-disclaimer-color: transparentize($footer-color, 0.6);
 
-  background: $footer-background;
+  border-top-style:solid; 
   display: inline-block;
   padding: $base-spacing;
   width: 100%;

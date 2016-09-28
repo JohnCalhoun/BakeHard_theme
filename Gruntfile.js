@@ -155,6 +155,10 @@ module.exports=function(grunt){
             js:{
                 files:['js/**'],
                 task:['js','shell:rsync']
+            },
+            php:{
+                files:['php/**'],
+                task:['php','shell:rsync']
             }
         }
     });
