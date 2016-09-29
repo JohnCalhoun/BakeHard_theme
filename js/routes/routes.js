@@ -15,7 +15,7 @@ var routes=function(){
     this.dispatch=function(path){
         for(var i=0; i<this._routes.length;i++){
             var route=this._routes[i]
-            console.log(path)
+            
             var match=route.regex.exec(path)
             if(match){
                 route.func.apply(this,match.splice(1))

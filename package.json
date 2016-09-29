@@ -45,6 +45,7 @@
     "grunt-webdriver": "^2.0.1",
     "handlebars": "^4.0.5",
     "install": "^0.8.1",
+    "isotope-packery": "^2.0.0",
     "jquery-browserify": "^1.8.1",
     "load-grunt-tasks": "^3.5.2",
     "materialize-css": "^0.97.7",

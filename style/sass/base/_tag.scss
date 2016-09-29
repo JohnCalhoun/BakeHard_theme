@@ -1,10 +1,10 @@
-.category-tags{
-    margin:10px;
-    li {
-        display: inline;
-    }
-    .category-tag {
+.category-list{
+  margin:10px;
+  li {
+    color:black;
+    display:inline; 
+  }
+  .category-tag {
 //        @extend .chip;
-    }
-
+  }
 }

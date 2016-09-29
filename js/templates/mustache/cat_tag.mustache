@@ -1,24 +1,11 @@
-<ul class='category-tags'>
+<ul class='category-list'>
     {{#each categories}}
         <li>
             <span class='category-tag' data-cat='{{ this.slug }}'>
                 <a class='link-button' href='/posts/filter/.{{this.slug}}'> 
                     {{ this.name }}
                 </a>
-                <span class='category-count'>
-                    {{ this.count }}
-                </span>
             </span>
         </li>
-        {{#each children}}
-        <li>
-             <span class='category-tag' data-cat='{{ this.slug }}'>
-                {{ ../name}}/{{ this.name }}
-                <span class='category-count'>
-                    {{ this.count }}
-                </span>
-            </span>
-        </li>
-        {{/each}}
     {{/each}}
 </ul>

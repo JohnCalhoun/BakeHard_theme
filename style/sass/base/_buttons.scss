@@ -39,6 +39,25 @@ btn.loading {
     width:100%
 }
 
+.blog-load{
+  text-align:center;
+  .btn.load-posts{
+    border-style:none solid;
+    padding:0px 4px;
+    &:hover {
+      cursor:pointer;
+      color:$primary;
+    }
+  }
+}
+
+.post-view-button{
+  text-align:center;
+  a{
+    color:black;
+  }
+}
+
 
 
 

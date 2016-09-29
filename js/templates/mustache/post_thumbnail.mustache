@@ -1,25 +1,26 @@
-<div id='{{id}}' class="thumbnail-card thumbnail-small {{ category_string }}" data-sticky='{{#if sticky }}1{{else}}0{{/if}}'>
+<div id='{{id}}' class="thumbnail thumbnail-small {{#if img_url}}thumbnail-image{{/if}} {{ category_string }}" data-sticky='{{#if sticky }}1{{else}}0{{/if}}'>
     {{#if img_url }}
-        <div class="thumbnail-image">
-            <img src='{{img_url }}'>
-        </div>
+        <img src='{{img_url }}' class="feature-image">
+    {{else}}
     {{/if}}
     <div class="thumbnail-title">
-        <span class="thumbnail-title activate"> 
-            {{{ title.rendered }}} 
-        </span>
+        {{{ title.rendered }}} 
     </div>
     <div class="thumbnail-excerpt">
         {{{ excerpt.rendered }}}
-        <div>
-            <a class='btn post-view-button link-button' href='/posts/{{id}}' >View</a>
+        <ul class='tag-list'>
+            {{#each tag_strings}}
+            <li> {{this}} </li>
+            {{/each}} 
+        </ul>
+        <div class='post-view-button' >
+            <a class='btn link-button' href='/posts/{{id}}' >View</a>
         </div>
     </div>
     <div class="thumbnail-content">
         <h2>{{{ title.rendered }}}</h2>
         <hr>
         {{{ content.rendered }}}
-        <a class='btn post-view-button link-button' href='/posts' >Posts</a>
     </div>
 </div>
 

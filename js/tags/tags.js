@@ -19,8 +19,10 @@ var init=function(constants,template,selector){
         return(out)
     }.bind(this)
 
-    this.render=function(data){
+    this.render=function(data_raw){
         var out=new Promise(function(resolve,reject){
+           
+            var data=data_raw.sort(function(a,b){return( a.count-b.count)}).slice(-10,-1)
             var parents=jQuery.grep(data,function(category){
                 return(category.parent === 0) 
             }) 
@@ -53,7 +55,6 @@ var init=function(constants,template,selector){
     this.insert=function(element){
         var out=new Promise(function(resolve,reject){ 
             jQuery(selector).append(element)
-            //jQuery('.collapsible').collapsible()
             resolve() 
         })
         return(out)

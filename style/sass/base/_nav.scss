@@ -1,12 +1,12 @@
 header {
-    $nav-background: desaturate(darken($action-color, 20%), 30%);
+    $nav-background: desaturate(darken($action-color, 20%), 30%);  
     nav {
         width:100%;
         ul {
             list-style-type:none;
             display:table;
             margin:auto;
-            border-bottom-style:solid;
+            border-bottom-style:$base-border-style;
             li {
                 padding:10px;
                 float:left;

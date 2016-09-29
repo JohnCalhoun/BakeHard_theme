@@ -43,6 +43,8 @@ jQuery(document).ready(function(){
         post_thumbnails.load_new()
         post_thumbnails.load_id(constants.sticky_posts)
 
+        window.thumb=post_thumbnails
+
         var tags=require('./tags/tags.js')
         var category_tags=new tags(
                         constants,
@@ -51,7 +53,7 @@ jQuery(document).ready(function(){
         category_tags.load()  
 
         jQuery('.load-posts').on('click',function(){
-            var progress=jQuery('.blog .progress')
+            var progress=jQuery('.loading-blog.progress')
             progress.show() 
             post_thumbnails.load_new()
             jQuery(document).one('thumbnail_rendered',function(){
@@ -62,16 +64,16 @@ jQuery(document).ready(function(){
         window.thumb=post_thumbnails 
 
         jQuery('.post-thumbnails').on( 'click',    
-                            '.thumbnail-card',
+                            '.thumbnail',
                             function(e){  
-                                var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
+                                var id=jQuery(e.target).closest('.thumbnail').attr('id')
                                 post_thumbnails.open('#'+id)
                             })
 
         jQuery('.page-thumbnails').on( 'click',    
-                            '.thumbnail-card',
+                            '.thumbnail',
                             function(e){  
-                                var id=jQuery(e.target).closest('.thumbnail-card').attr('id')
+                                var id=jQuery(e.target).closest('.thumbnail').attr('id')
                                 history.pushState(null,null,'#/pages/'+id)
                                 routes.onHashChange()
                             })

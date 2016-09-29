@@ -1,8 +1,6 @@
-<div id='{{id}}' class="thumbnail-card thumbnail-small {{ category_string }}">
+<div id='{{id}}' class="thumbnail thumbnail-small {{ category_string }} {{#if img_url}}thumbnail-image{{/if}}">
     {{#if img_url }}
-        <div class="thumbnail-image">
-            <img class='activator' src='{{img_url }}'>
-        </div>
+        <img class='thumbnail-image' src='{{img_url }}'>
     {{/if}}
     <div class="thumbnail-title">
         <span class="thumbnail-title activate"> {{{ title.rendered }}} </span>

@@ -1,18 +1,27 @@
+var packery=require('isotope-packery')
 var Isotope=require('isotope-layout')
 
-var posts=function(constants,thumbnail_template,selector,type){
+var posts=function(constants,thumbnail_template,selector,type){   
+    var thumbnail_class='.thumbnail'
+    var thumbnail_small ='thumbnail-small'
+    var thumbnail_medium='thumbnail-medium'
+    var thumbnail_large ='thumbnail-full'
+
     this.current_page=1
     this.filter=[]
     this.thumbnail_template=thumbnail_template
 //--------------loading------------------------ 
     this.IsotopeInit=function(){
         var iso_settings={
-                itemSelector:".thumbnail-card",
+                itemSelector:thumbnail_class,
+                layoutMode:'packery',
+                packery:{
+                    columnWidth:'.grid-sizer',
+                    gutter:'.gutter-sizer'
+                },
                 masonry:{
                     columnWidth:'.grid-sizer',
-                    gutter:'.gutter-sizer',
-                    stagger:10
-                    //isfitwidth:true
+                    gutter:'.gutter-sizer'
                 },
                 getSortData:{
                     target:'[data-sort]'
@@ -77,8 +86,7 @@ var posts=function(constants,thumbnail_template,selector,type){
             posts,
             function(index,post){
                 var thumb=jQuery(this.thumbnail_template(post))
-                thumb.find('.thumbnail-image')
-                    .find('img')
+                thumb.find('img.thumbnail-image')
                     .on(    'load',
                             function(){
                                 this.iso.layout()
@@ -95,6 +103,7 @@ var posts=function(constants,thumbnail_template,selector,type){
 
     this.load=function(page,url_function){
         var url_function=(typeof url_function !== 'undefined') ? url_function : this.api_url;
+        console.log(url_function(page)) 
         jQuery.ajax({   
             url:url_function(page),
             dataType:"json",
@@ -117,7 +126,7 @@ var posts=function(constants,thumbnail_template,selector,type){
             success:function(response){
                 this.render(response) 
             }.bind(this),
-            error:function(result){
+            error:function(result,stat,error){
                 this.emit('thumbnail_rendered',["fail"])
             }.bind(this),
             complete:function(){
@@ -133,7 +142,6 @@ var posts=function(constants,thumbnail_template,selector,type){
 
         this.load(0,url_function)
 
-        console.log(url_function())
     }.bind(this)
 
     this.load_new=function(){
@@ -150,14 +158,22 @@ var posts=function(constants,thumbnail_template,selector,type){
     }.bind(this)
 //-----------------------------opening--------------
     this.open=function(id){  
-        var card=jQuery(id)
-        var others=card.parent().find('.thumbnail-full').not(card)
+        var card=jQuery(id).not('.'+thumbnail_large)
+        var others=card.parent().find(thumbnail_medium).not(card)
       
-        others.toggleClass('thumbnail-full')
-        others.toggleClass('thumbnail-small')
+        others.removeClass(thumbnail_medium)
+        others.addClass(thumbnail_small)
+        
+        
+        card.toggleClass(thumbnail_medium)
+        card.toggleClass(thumbnail_small)
          
-        card.toggleClass('thumbnail-full')
-        card.toggleClass('thumbnail-small')
+        if( card.hasClass(thumbnail_medium) ){
+            card.css('left','0px')
+            this.iso.stamp(card)
+        }else{
+            this.iso.unstamp(card)
+        }
         this.resize()
     }.bind(this)
 //-----------------------------viewing-------------- 
@@ -167,15 +183,15 @@ var posts=function(constants,thumbnail_template,selector,type){
         if(id){
             this.viewing_id=id
             card=jQuery(id)
-            card.removeClass('thumbnail-full')
-            card.removeClass('thumbnail-small')
-            card.addClass('post-view')
+            card.removeClass(thumbnail_medium)
+            card.removeClass(thumbnail_small)
+            card.addClass(thumbnail_large)
         }else{
             card=jQuery(this.viewing_id)
             this.viewing_id=null
-            card.removeClass('thumbnail-full')
-            card.addClass('thumbnail-small')
-            card.removeClass('post-view')
+            card.removeClass(thumbnail_medium)
+            card.addClass(thumbnail_small)
+            card.removeClass(thumbnail_large)
         }
         this.iso.layout()
     }.bind(this)
