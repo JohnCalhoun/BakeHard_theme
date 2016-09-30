@@ -22,7 +22,7 @@ var routes=function(){
             }
         }
     }.bind(this)
-
+    this.redirect=this.dispatch
     this.check_hash=function(){ 
         if( window.location.hash !=this.current){
             this.dispatch(window.location.hash.substring(1))

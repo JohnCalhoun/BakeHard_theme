@@ -8,10 +8,10 @@ var posts=function(constants,thumbnail_template,selector,type){
     var thumbnail_large ='thumbnail-full'
 
     this.current_page=1
-    this.filter=[]
     this.thumbnail_template=thumbnail_template
 //--------------loading------------------------ 
-    this.IsotopeInit=function(){
+    this.IsotopeInit=function(f){
+        var filter_s = (typeof f !== 'undefined') ?  f : this.filter_string;
         var iso_settings={
                 itemSelector:thumbnail_class,
                 layoutMode:'packery',
@@ -26,9 +26,9 @@ var posts=function(constants,thumbnail_template,selector,type){
                 getSortData:{
                     target:'[data-sort]'
                 },
-                sortBy:'target'
-                
-                };
+                sortBy:'target',
+                filter:filter_s
+                }
         this.iso=new Isotope(
             selector,
             iso_settings
@@ -86,7 +86,7 @@ var posts=function(constants,thumbnail_template,selector,type){
             posts,
             function(index,post){
                 var thumb=jQuery(this.thumbnail_template(post))
-                thumb.find('img.thumbnail-image')
+                thumb.find('img.feature-image')
                     .on(    'load',
                             function(){
                                 this.iso.layout()
@@ -103,7 +103,7 @@ var posts=function(constants,thumbnail_template,selector,type){
 
     this.load=function(page,url_function){
         var url_function=(typeof url_function !== 'undefined') ? url_function : this.api_url;
-        console.log(url_function(page)) 
+        
         jQuery.ajax({   
             url:url_function(page),
             dataType:"json",
@@ -156,25 +156,47 @@ var posts=function(constants,thumbnail_template,selector,type){
     this.sort=function(){
         this.iso.arrange({sortBy:'target'}) 
     }.bind(this)
+    
+    this.filter_string="*"
+    this.filter=function(selector){
+        this.filter_string=selector;
+        this.IsotopeInit()
+    }.bind(this)
 //-----------------------------opening--------------
+    this.stamp_card=null
+    this.stamp=function(card){
+        console.log('open')
+        if(~this.stamp_card){
+            this.iso.unstamp(this.stamp_card)
+        }  
+        this.stamp_card=card
+        this.iso.stamp(this.stamp_card)
+        this.resize()
+    }.bind(this)
+    this.unstamp=function(card){
+        console.log('close')
+        this.iso.unstamp(card)
+        this.stamp_card=null
+        this.resize()
+    }.bind(this)
+
     this.open=function(id){  
         var card=jQuery(id).not('.'+thumbnail_large)
-        var others=card.parent().find(thumbnail_medium).not(card)
-      
+        var others=card.parent().children().not(card)
+
         others.removeClass(thumbnail_medium)
         others.addClass(thumbnail_small)
         
         
         card.toggleClass(thumbnail_medium)
         card.toggleClass(thumbnail_small)
-         
-        if( card.hasClass(thumbnail_medium) ){
+
+        if( card.hasClass(thumbnail_small) ){
             card.css('left','0px')
-            this.iso.stamp(card)
+            this.stamp(card)
         }else{
-            this.iso.unstamp(card)
+            this.unstamp(card)
         }
-        this.resize()
     }.bind(this)
 //-----------------------------viewing-------------- 
     this.viewing_id=null

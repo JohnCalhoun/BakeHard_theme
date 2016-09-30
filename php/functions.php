@@ -1,11 +1,5 @@
 <?php
 
-register_nav_menus( array(
-        "main_menu"=>"Main menu in header,use for pages",
-        "gallery_menu"=>"submenu for gallery page"
-        )
-);
-
 function theme_script() {
     wp_register_script( "bake-hard",
                         get_template_directory_uri().'/js/bakehard.min.js',
@@ -79,5 +73,15 @@ function api_get_tag_strings( $object, $field_name, $request ) {
 
     return($output);
 };
+
+//----------------------------------menus-------------------
+
+register_nav_menus( array(
+        "Main"=>"Header menu",
+        "Home"=>"Home page thumbnails,for pages",
+        "Blog"=>"submenu for gallery page,for categories",
+        "Footer"=>"footer menu"
+        )
+);
 
 ?>

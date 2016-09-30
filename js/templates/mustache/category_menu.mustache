@@ -1,0 +1,20 @@
+<ul class='category-list'>
+     <li>
+        <span class='category-tag' data-cat='*'>
+            <a class='link-button' href='/posts/filter/*'> 
+                All
+            </a>
+        </span>
+    </li>
+    {{#each categories}}
+    {{#if this.object_id}}
+        <li>
+            <span class='category-tag' data-cat='{{ this.title }}'>
+                <a class='link-button' href='/posts/filter/.{{this.title}}'> 
+                    {{ this.title }}
+                </a>
+            </span>
+        </li>
+    {{/if}}
+    {{/each}}
+</ul>

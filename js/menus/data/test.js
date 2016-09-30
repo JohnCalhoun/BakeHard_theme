@@ -1,92 +1,92 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var init=function(constants,template,selector){
-    this.api_url=function(){
-        return(constants.api_url+'categories?hide_empty=true&per_page=100') 
+var menu=function(constants,menu_location){
+    var menu_url=constants.base_url+"wp-api-menus/v2/menu-locations/"+menu_location
+
+    this.ready=new Promise(function(resolve,reject){
+        jQuery.ajax({
+            url:menu_url,
+            dataType:'json',
+            success:function(response){ 
+                resolve(response)
+            },
+            error:function(result){
+                reject(Error('ajax failed'))
+            },
+        })
+    })
+    this.render_insert=function(selector,template){
+        this.ready
+            .then(function(menu_object){
+                jQuery(selector).append(jQuery(template(menu_object))) 
+            })
     }.bind(this)
 
-    this.get=function(){
-        var out=new Promise(function(resolve,reject){
-            jQuery.ajax({
-                url:this.api_url(),
-                dataType:'json',
-                success:function(response){ 
-                    resolve(response)
-                },
-                error:function(result){
-                    reject(Error('ajax failed'))
-                },
-            })
-        }.bind(this))
-        return(out)
-    }.bind(this)
-
-    this.render=function(data){
-        var out=new Promise(function(resolve,reject){
-            var parents=jQuery.grep(data,function(category){
-                return(category.parent === 0) 
-            }) 
-            
-            for(i=0;i<parents.length;i++){
-                parents[i]['children']=new Array()
-            }
-            
-            var children=jQuery.grep(data,function(category){
-                return(category.parent !== 0) 
-            })
-            
-            for(i=0;i<children.length;i++){
-                var parentID=children[i].parent
-                var parent=jQuery.grep(parents,function(par){
-                    return(par.id === parentID)
-                })
-                if(parent[0]){
-                    parent[0].children.push(children[i])
+    this.get_ids=function(){
+        var out=this.ready
+            .then(function(menu_object){
+                var ids=new Array()
+                 
+                var dive=function(input){
+                    for(var i=0;i<input.length;i++){
+                        ids.push(input[i].object_id)
+                        dive(input[i].children)
+                    }
                 }
-            }
-            var out=jQuery(template({categories:parents}) )
-            
-            
-            resolve(out)
-        })
+                dive(menu_object)
+                return(ids)
+            })
         return(out)
-    }.bind(this)
-
-    this.insert=function(element){
-        var out=new Promise(function(resolve,reject){ 
-            jQuery(selector).append(element)
-            jQuery('.collapsible').collapsible()
-            resolve() 
-        })
-        return(out)
-    }.bind(this)
-    
-    this.load=function(){
-        this.get()
-            .then(this.render)
-            .then(this.insert)
     }.bind(this)
 }
-module.exports=init;
+
+module.exports=menu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 },{}],2:[function(require,module,exports){
 var jQuery=require('jquery-browserify')
-
 var constants={
-        api_url:'/tags/data/',
+        base_url:'/menus/data/',
     }
-
-var tags=require('./tags.js')
-var template=function(post){
-    var out="<div class='tag'>tag</div>"
-    return(out)
+var template=function(obj){
+    return("<p id='test'>"+obj[0].id+"</p>")
 }
+var menus=require('./menus.js')
+jQuery(window).ready(function(){
+    window.menu_test=new menus(constants,'menu')
+    window.menu_test.render_insert('.menus',template) 
+    
+    window.menu_test.get_ids().then(function(a){
+        window.ids=a
+    })
+    window.menu_test.ready.then(function(){
+        jQuery('main').append(jQuery("<p id='done'></p>")) 
+        })
+})
 
-jQuery(window).ready(
-    window.tags_test=new tags(constants,template,'.tags')
-)
 
-
-},{"./tags.js":1,"jquery-browserify":3}],3:[function(require,module,exports){
+},{"./menus.js":1,"jquery-browserify":3}],3:[function(require,module,exports){
 // Uses Node, AMD or browser globals to create a module.
 
 // If you want something that will work in other stricter CommonJS environments,

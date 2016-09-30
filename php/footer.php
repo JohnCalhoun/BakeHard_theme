@@ -12,6 +12,8 @@
             <a href='/posts' class='link-button' id='blog-btn'>Blog</a>
         </li> 
     </ul>
+    <div class="footer-menu">
+    </div>
     <div class='footer-secondary-links'>
         <ul class="footer-social">
             <li><a href="javascript:void(0)">

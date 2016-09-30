@@ -16,5 +16,20 @@ header {
             }
         }
     }
+    .header-menu{
+        width:100%;
+        ul {
+            list-style-type:none;
+            display:table;
+            margin:auto;
+            li {
+                padding:10px;
+                float:left;
+            }
+            a{
+                color:black;
+            }
+        }
+    }
 }
 

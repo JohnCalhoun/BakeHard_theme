@@ -1,8 +1,16 @@
 .category-list{
   margin:10px;
+  text-align:center;
   li {
     color:black;
     display:inline; 
+    a {
+      color:black;
+    }
+  }
+
+  li+li::before{
+    content:"|";
   }
   .category-tag {
 //        @extend .chip;

@@ -72,6 +72,10 @@ module.exports=function(grunt){
             testThumbnail:{
                 src:"js/thumbnails/test.js",
                 dest:"js/thumbnails/data/test.js"
+            },
+            testMenus:{
+                src:"js/menus/test.js",
+                dest:"js/menus/data/test.js"
             }
         },
         uglify:{
@@ -189,6 +193,7 @@ module.exports=function(grunt){
                                 'browserify:testConstants',
                                 'browserify:testRoutes',
                                 'browserify:testThumbnail',
+                                'browserify:testMenus',
                                 'browserify:testtags',
                                 'handlebars' 
                                 ]) 
