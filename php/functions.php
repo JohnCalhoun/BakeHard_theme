@@ -83,5 +83,6 @@ register_nav_menus( array(
         "Footer"=>"footer menu"
         )
 );
+include_once "nav_walker.php";
 
 ?>

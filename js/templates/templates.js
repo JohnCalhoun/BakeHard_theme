@@ -46,22 +46,6 @@ this["JST"]["js/templates/mustache/footer_menu.mustache"] = Handlebars.template(
     + "</ul>\n";
 },"useData":true});
 
-this["JST"]["js/templates/mustache/header_menu.mustache"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "    <li>\n        <a class='link-button' href='/pages/"
-    + alias2(alias1((depth0 != null ? depth0.object_id : depth0), depth0))
-    + "'> \n            "
-    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
-    + "\n        </a>\n    </li>\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "<ul>\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.items : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "</ul>\n";
-},"useData":true});
-
 this["JST"]["js/templates/mustache/home.mustache"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class='content' id=\"pages\" style='display:none;'>\n    <div class='page-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n</div>\n\n";
 },"useData":true});

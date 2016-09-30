@@ -68,35 +68,18 @@ jQuery(document).ready(function(){
                             })
         //--------------------------------menus--------------------
         var menu=require('./menus/menus.js') 
-       
-        var menu_header=new menu(constants,"Main")
-        menu_header.render_insert('.header-menu',
-                    function(obj){
-                        var out=JST['js/templates/mustache/header_menu.mustache']({items:obj})  
-                        return(out)
-                            })
-
-        var menu_footer=new menu(constants,"Footer")
-        menu_footer.render_insert('.footer-menu',
-                    function(obj){
-                        var out=JST['js/templates/mustache/footer_menu.mustache']({items:obj})  
-                        return(out)
-                            })
-
-       
+      
         var menu_blog=new menu(constants,"Blog")
         menu_blog.render_insert('.category-tags',
                     function(obj){
                         return(JST['js/templates/mustache/category_menu.mustache']({categories:obj})  )    
                             })
 
-        var menu_home=new menu(constants,"Home")
-        
+        var menu_home=new menu(constants,"Home") 
         menu_home.get_ids().then(function(ids){
             var selector='#'+ids.join(',#')
             page_thumbnails.filter(selector)
-        })
-        
+        })        
         
         //-------------------routing
         var routes_con=require('./routes/routes.js')
@@ -107,53 +90,52 @@ jQuery(document).ready(function(){
             main.children().not(id).hide()  
             main.children(id).show()  
         }
+            //------------front
         routes.register('/front',function(){
             page_show('#front-page') 
         })
+            //------------posts
 
         routes.register('/posts',function(){
             page_show('#posts') 
+                       
             jQuery('.post-thumbnails .thumbnail')
                 .removeClass('thumbnail-full')
                 .addClass('thumbnail-small')
-            post_thumbnails.iso.arrange({filter:'*'}) 
-            post_thumbnails.IsotopeInit()
-            post_thumbnails.iso.arrange()
-            post_thumbnails.iso.arrange()
+            post_thumbnails.iso.arrange({
+                filter:post_thumbnails.filter_string
+            })
+
             jQuery('.blog-load').show()
             jQuery('.controls').show()
             jQuery('.category-list').show()
-            post_thumbnails.toggle_view()
         })
         routes.register('/posts/filter/:Filter',function(Filter){
-            page_show('#posts') 
-            jQuery('.post-thumbnails .thumbnail')
-                .removeClass('thumbnail-full')
-                .addClass('thumbnail-small')
-
+            routes.redirect('/posts')
             post_thumbnails.iso.arrange({filter:Filter}) 
         })
         routes.register('/posts/:id',function(id){
-            page_show('#posts') 
+            routes.redirect('/posts')
             post_thumbnails.iso.arrange({filter:'#'+id}) 
             post_thumbnails.toggle_view('#'+id)
+            
             jQuery('.blog-load').hide()
             jQuery('.controls').hide()
             jQuery('.category-list').hide()
         })
-        window.thumb=page_thumbnails 
+            //------------page
+        window.thumb=post_thumbnails 
         routes.register('/pages',function(){
             page_show('#pages') 
-            page_thumbnails.iso.arrange({filter:'*'}) 
-            page_thumbnails.IsotopeInit(
-                page_thumbnails.filter_string 
-            )
-            page_thumbnails.iso.arrange()
-            page_thumbnails.iso.arrange()
-            page_thumbnails.toggle_view()
+            jQuery('.page-thumbnails .thumbnail')
+                .removeClass('thumbnail-full')
+                .addClass('thumbnail-small')
+            page_thumbnails.iso.arrange({
+                filter:page_thumbnails.filter_string
+            })
         })
         routes.register('/pages/:id',function(id){
-            page_show('#pages') 
+            routes.redirect('/pages')
             page_thumbnails.iso.arrange({filter:'#'+id}) 
             page_thumbnails.toggle_view('#'+id)
         })

@@ -8,6 +8,7 @@ var posts=function(constants,thumbnail_template,selector,type){
     var thumbnail_large ='thumbnail-full'
 
     this.current_page=1
+    this.filter_string="*"
     this.thumbnail_template=thumbnail_template
 //--------------loading------------------------ 
     this.IsotopeInit=function(f){
@@ -55,8 +56,7 @@ var posts=function(constants,thumbnail_template,selector,type){
             if( window_width2 !== window_width ){
                 onResize() 
             }
-        }.bind(this)
-
+        }
         this.iso.on('arrangeComplete',onResize)
     }.bind(this)
      
@@ -157,15 +157,14 @@ var posts=function(constants,thumbnail_template,selector,type){
         this.iso.arrange({sortBy:'target'}) 
     }.bind(this)
     
-    this.filter_string="*"
     this.filter=function(selector){
         this.filter_string=selector;
         this.IsotopeInit()
     }.bind(this)
 //-----------------------------opening--------------
     this.stamp_card=null
+    
     this.stamp=function(card){
-        console.log('open')
         if(~this.stamp_card){
             this.iso.unstamp(this.stamp_card)
         }  
@@ -173,8 +172,8 @@ var posts=function(constants,thumbnail_template,selector,type){
         this.iso.stamp(this.stamp_card)
         this.resize()
     }.bind(this)
+    
     this.unstamp=function(card){
-        console.log('close')
         this.iso.unstamp(card)
         this.stamp_card=null
         this.resize()
@@ -182,16 +181,14 @@ var posts=function(constants,thumbnail_template,selector,type){
 
     this.open=function(id){  
         var card=jQuery(id).not('.'+thumbnail_large)
-        var others=card.parent().children().not(card)
-
-        others.removeClass(thumbnail_medium)
-        others.addClass(thumbnail_small)
-        
+        var others=card.siblings(thumbnail_medium)
+                    .removeClass(thumbnail_medium)
+                    .addClass(thumbnail_small)
         
         card.toggleClass(thumbnail_medium)
-        card.toggleClass(thumbnail_small)
+                .toggleClass(thumbnail_small)
 
-        if( card.hasClass(thumbnail_small) ){
+        if( card.hasClass(thumbnail_medium) ){
             card.css('left','0px')
             this.stamp(card)
         }else{
@@ -201,21 +198,12 @@ var posts=function(constants,thumbnail_template,selector,type){
 //-----------------------------viewing-------------- 
     this.viewing_id=null
     this.toggle_view=function(id){
-        var card=null
-        if(id){
-            this.viewing_id=id
-            card=jQuery(id)
-            card.removeClass(thumbnail_medium)
-            card.removeClass(thumbnail_small)
-            card.addClass(thumbnail_large)
-        }else{
-            card=jQuery(this.viewing_id)
-            this.viewing_id=null
-            card.removeClass(thumbnail_medium)
-            card.addClass(thumbnail_small)
-            card.removeClass(thumbnail_large)
-        }
-        this.iso.layout()
+        this.viewing_id=id
+        var card=jQuery(id)
+        card.removeClass(thumbnail_medium)
+        card.removeClass(thumbnail_small)
+        card.addClass(thumbnail_large)
+        //this.iso.layout()
     }.bind(this)
 
 }

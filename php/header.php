@@ -31,8 +31,13 @@
             </li> 
         </ul>
     </nav>
-    <div class='header-menu'>
-    </div>
+    
+    <?php wp_nav_menu(array(
+            'theme_location'=>'Main',
+            'fallback_cb'=>false,
+            'container_class'=>'header-menu',
+            'walker'=>new spa_walker()
+        ))?>
 </header>
 
 

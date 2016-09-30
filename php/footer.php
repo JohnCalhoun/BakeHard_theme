@@ -12,8 +12,12 @@
             <a href='/posts' class='link-button' id='blog-btn'>Blog</a>
         </li> 
     </ul>
-    <div class="footer-menu">
-    </div>
+    <?php wp_nav_menu(array(
+            'theme_location'=>'Main',
+            'fallback_cb'=>false,
+            'container_class'=>'footer-menu',
+            'walker'=>new spa_walker()
+        ))?>
     <div class='footer-secondary-links'>
         <ul class="footer-social">
             <li><a href="javascript:void(0)">
