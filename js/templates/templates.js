@@ -30,22 +30,6 @@ this["JST"]["js/templates/mustache/category_menu.mustache"] = Handlebars.templat
     + "</ul>\n";
 },"useData":true});
 
-this["JST"]["js/templates/mustache/footer_menu.mustache"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "    <li>\n        <a class='link-button' href='/pages/"
-    + alias2(alias1((depth0 != null ? depth0.object_id : depth0), depth0))
-    + "'> \n            "
-    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
-    + "\n        </a>\n    </li>\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "<ul>\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.items : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "</ul>\n";
-},"useData":true});
-
 this["JST"]["js/templates/mustache/home.mustache"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class='content' id=\"pages\" style='display:none;'>\n    <div class='page-thumbnails content-thumbnail'>\n        <div class='grid-sizer'></div>\n        <div class='gutter-sizer'></div>\n    </div>\n</div>\n\n";
 },"useData":true});
@@ -83,7 +67,9 @@ this["JST"]["js/templates/mustache/page_thumbnail.mustache"] = Handlebars.templa
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
     + " </span>\n    </div>\n    <div class=\"thumbnail-excerpt\">\n        <a class='btn page-view-button link-button' href='/pages/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "' >View</a>\n    </div>\n    <div class=\"thumbnail-content\">\n        "
+    + "' >View</a>\n    </div>\n    <div class=\"thumbnail-content\">\n        <h2>"
+    + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
+    + "</h2>\n        <hr>\n        "
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.excerpt : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
     + "\n    </div>\n</div>\n\n";
 },"useData":true});

@@ -31,7 +31,7 @@ jQuery(document).ready(function(){
                         'pages'
         )
         page_thumbnails.IsotopeInit()
-        page_thumbnails.load_all()  
+        var page_load_promise=page_thumbnails.load_all()  
        
         var post_thumbnails=new thumbnails(
                         constants,
@@ -40,8 +40,8 @@ jQuery(document).ready(function(){
                         'posts'
         )
         post_thumbnails.IsotopeInit()
-        post_thumbnails.load_new()
-        post_thumbnails.load_id(constants.sticky_posts)
+        var post_load_promise=post_thumbnails.load_new()
+        var post_load_sticky_promise=post_thumbnails.load_id(constants.sticky_posts)
 
         jQuery('.load-posts').on('click',function(){
             var progress=jQuery('.loading-blog.progress')
@@ -98,13 +98,15 @@ jQuery(document).ready(function(){
 
         routes.register('/posts',function(){
             page_show('#posts') 
-                       
+            
             jQuery('.post-thumbnails .thumbnail')
                 .removeClass('thumbnail-full')
+                .removeClass('thumbnail-medium')
                 .addClass('thumbnail-small')
             post_thumbnails.iso.arrange({
                 filter:post_thumbnails.filter_string
             })
+            post_thumbnails.IsotopeInit()
 
             jQuery('.blog-load').show()
             jQuery('.controls').show()
@@ -116,12 +118,20 @@ jQuery(document).ready(function(){
         })
         routes.register('/posts/:id',function(id){
             routes.redirect('/posts')
-            post_thumbnails.iso.arrange({filter:'#'+id}) 
-            post_thumbnails.toggle_view('#'+id)
-            
-            jQuery('.blog-load').hide()
-            jQuery('.controls').hide()
-            jQuery('.category-list').hide()
+          
+            Promise.all([
+                post_load_promise,
+                post_load_sticky_promise]).then(function(){
+                    jQuery('#'+id)
+                        .removeClass('thumbnail-small')
+                        .removeClass('thumbanil-medium')
+                        .addClass('thumbnail-full')
+                    
+                    post_thumbnails.iso.arrange({filter:'#'+id})  
+                    jQuery('.blog-load').hide()
+                    jQuery('.controls').hide()
+                    jQuery('.category-list').hide()
+                }) 
         })
             //------------page
         window.thumb=post_thumbnails 
@@ -130,14 +140,20 @@ jQuery(document).ready(function(){
             jQuery('.page-thumbnails .thumbnail')
                 .removeClass('thumbnail-full')
                 .addClass('thumbnail-small')
+            
             page_thumbnails.iso.arrange({
                 filter:page_thumbnails.filter_string
             })
+            page_thumbnails.IsotopeInit()
         })
         routes.register('/pages/:id',function(id){
             routes.redirect('/pages')
-            page_thumbnails.iso.arrange({filter:'#'+id}) 
-            page_thumbnails.toggle_view('#'+id)
+            page_load_promise.then(function(){
+                jQuery('#'+id)
+                    .removeClass('thumbnail-small')
+                    .addClass('thumbnail-full')
+                page_thumbnails.iso.arrange({filter:'#'+id}) 
+            }) 
         })
 
         routes.onHashChange() 

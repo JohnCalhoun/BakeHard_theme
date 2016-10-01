@@ -7,7 +7,7 @@ var posts=function(constants,thumbnail_template,selector,type){
     var thumbnail_medium='thumbnail-medium'
     var thumbnail_large ='thumbnail-full'
 
-    this.current_page=1
+    this.current_page=0
     this.filter_string="*"
     this.thumbnail_template=thumbnail_template
 //--------------loading------------------------ 
@@ -67,11 +67,10 @@ var posts=function(constants,thumbnail_template,selector,type){
     jQuery(window).resize(this.resize)
   
     this.api_url=function(page){
-        var exclude='&exclude='+this.exclude.join(',')
         if(page){
-            return(constants.api_url+type+"?page="+page+"&per_page="+constants.post_per_page+exclude)
+            return(constants.api_url+type+"?page="+page+"&per_page="+constants.post_per_page)
         }else{
-            return(constants.api_url+type+"?per_page=100"+exclude)
+            return(constants.api_url+type+"?per_page=100")
         }
     }.bind(this)
 
@@ -91,10 +90,12 @@ var posts=function(constants,thumbnail_template,selector,type){
                             function(){
                                 this.iso.layout()
                     }.bind(this))
-                elems.push(        
-                    thumb[0]
-                )
-                this.exclude.push(post.id)
+                if( ~this.exclude.includes(post.id)){
+                    elems.push(        
+                        thumb[0]
+                    )
+                    this.exclude.push(post.id)
+                }
             }.bind(this)
         )
         this.iso.insert(elems)
@@ -103,36 +104,22 @@ var posts=function(constants,thumbnail_template,selector,type){
 
     this.load=function(page,url_function){
         var url_function=(typeof url_function !== 'undefined') ? url_function : this.api_url;
-        
-        jQuery.ajax({   
-            url:url_function(page),
-            dataType:"json",
-            xhr:function(){
-                var xhr= new window.XMLHttpRequest(); 
-                this.emit('thumbnail_progress',{"percent":0})
-                xhr.addEventListener(
-                "progress", 
-                function(evt){
-                    if (evt.lengthComputable) {  
-                        var percentComplete = evt.loaded / evt.total;
-                        this.emit('thumbnail_progress',{"percent":percentComplete})
-                    }}.bind(this), 
-                false); 
-                return(xhr)
-            }.bind(this), 
-            beforeSend:function(){
-                this.emit('thumbnail_rendering')
-            }.bind(this),
-            success:function(response){
-                this.render(response) 
-            }.bind(this),
-            error:function(result,stat,error){
-                this.emit('thumbnail_rendered',["fail"])
-            }.bind(this),
-            complete:function(){
-                this.emit('thumbnail_progress',{"percent":100})
-            }.bind(this)
+        var load_promise=new Promise(function(resolve,reject){ 
+            jQuery.ajax({   
+                url:url_function(page),
+                dataType:"json",
+                success:function(response){ 
+                    resolve(response)
+                },
+                error:function(result,stat,error){
+                    reject()
+                },
+            })
         })
+        return(load_promise.then(function(response){
+            this.render(response)
+        }.bind(this)))
+        
     }.bind(this)
 //-------------------------------loads
     this.load_id=function(id){
@@ -140,17 +127,17 @@ var posts=function(constants,thumbnail_template,selector,type){
             return(this.api_url()+'&include='+id.join(',') )
         }.bind(this)
 
-        this.load(0,url_function)
+        return(this.load(0,url_function))
 
     }.bind(this)
 
     this.load_new=function(){
-        this.load(this.current_page)
         this.current_page++
+        return(this.load(this.current_page))
     }.bind(this)
  
     this.load_all=function(){
-        this.load()
+        return(this.load())
     }.bind(this)
 //-----------------------------sorting 
     this.sort=function(){
@@ -203,7 +190,6 @@ var posts=function(constants,thumbnail_template,selector,type){
         card.removeClass(thumbnail_medium)
         card.removeClass(thumbnail_small)
         card.addClass(thumbnail_large)
-        //this.iso.layout()
     }.bind(this)
 
 }
