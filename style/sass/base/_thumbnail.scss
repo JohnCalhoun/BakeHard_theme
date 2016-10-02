@@ -5,17 +5,22 @@ $card-width: 180px;
     margin:auto;
    
     .grid-sizer {
-        width:$card-width;
+      width:$card-width;
     }
+    
     .gutter-sizer{
         width:10px;
     }
+}
+.content-thumbnail.single-lane .thumbnail{
+  width:100%;
 }
 
 .thumbnail {
   border-style:solid;
   border-width:2px;
   margin:10px 0 10px 0; 
+  
   width:$card-width;
   min-height:50px; 
 }

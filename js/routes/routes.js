@@ -23,9 +23,10 @@ var routes=function(){
         }
     }.bind(this)
     this.redirect=this.dispatch
-    this.check_hash=function(){ 
-        if( window.location.hash !=this.current){
+    this.check_hash=function(){
+        if( window.location.hash !=this._current){
             this.dispatch(window.location.hash.substring(1))
+            this._current=window.location.hash
         }
     }.bind(this)
    

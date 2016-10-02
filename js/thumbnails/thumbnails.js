@@ -18,7 +18,8 @@ var posts=function(constants,thumbnail_template,selector,type){
                 layoutMode:'packery',
                 packery:{
                     columnWidth:'.grid-sizer',
-                    gutter:'.gutter-sizer'
+                    gutter:'.gutter-sizer',
+                    percentPosition:true
                 },
                 masonry:{
                     columnWidth:'.grid-sizer',
@@ -35,9 +36,7 @@ var posts=function(constants,thumbnail_template,selector,type){
             iso_settings
         );
         var onResize=function(){
-            var window_width=window.innerWidth
             var grid=jQuery(selector)
-            var old=grid[0].getBoundingClientRect().width
 
             var thumbnail=grid.find('.grid-sizer')[0].getBoundingClientRect().width
             var gutter=grid.find('.gutter-sizer')[0].getBoundingClientRect().width
@@ -46,15 +45,16 @@ var posts=function(constants,thumbnail_template,selector,type){
             var parrent_w=parrent[0].getBoundingClientRect().width
             var parrent_padding=parseInt(parrent.css('padding-left'))+parseInt(parrent.css('padding-right'))
             parrent_w=parrent_w-parrent_padding 
-
+           
             var x=Math.floor( (parrent_w-thumbnail)/(thumbnail+gutter) )
             var width=thumbnail+x*(thumbnail+gutter)
             
-            grid.css('width',width.toString()+'px') 
-            
-            var window_width2=window.innerWidth
-            if( window_width2 !== window_width ){
-                onResize() 
+            if( (2*thumbnail+gutter)>parrent_w){
+                grid.css('width','100%') 
+                grid.addClass('single-lane')
+            }else{
+                grid.removeClass('single-lane')
+                grid.css('width',width.toString()+'px') 
             }
         }
         this.iso.on('arrangeComplete',onResize)

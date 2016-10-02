@@ -134,7 +134,6 @@ jQuery(document).ready(function(){
                 }) 
         })
             //------------page
-        window.thumb=post_thumbnails 
         routes.register('/pages',function(){
             page_show('#pages') 
             jQuery('.page-thumbnails .thumbnail')
