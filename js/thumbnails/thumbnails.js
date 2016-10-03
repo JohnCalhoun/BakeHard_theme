@@ -168,7 +168,7 @@ var posts=function(constants,thumbnail_template,selector,type){
 
     this.open=function(id){  
         var card=jQuery(id).not('.'+thumbnail_large)
-        var others=card.siblings(thumbnail_medium)
+        var others=card.siblings('.'+thumbnail_medium)
                     .removeClass(thumbnail_medium)
                     .addClass(thumbnail_small)
         
