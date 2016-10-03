@@ -51,14 +51,13 @@ jQuery(document).ready(function(){
                 progress.hide() 
             })
         })
-
+        
         jQuery('.post-thumbnails').on( 'click',    
                             '.thumbnail',
                             function(e){  
                                 var id=jQuery(e.target).closest('.thumbnail').attr('id')
                                 post_thumbnails.open('#'+id)
                             })
-
         jQuery('.page-thumbnails').on( 'click',    
                             '.thumbnail',
                             function(e){  
@@ -97,6 +96,7 @@ jQuery(document).ready(function(){
             //------------posts
 
         routes.register('/posts',function(){
+            page_thumbnails.initialized=false 
             page_show('#posts') 
             
             jQuery('.post-thumbnails .thumbnail')
@@ -118,14 +118,13 @@ jQuery(document).ready(function(){
         })
         routes.register('/posts/:id',function(id){
             routes.redirect('/posts')
-          
             Promise.all([
                 post_load_promise,
                 post_load_sticky_promise]).then(function(){
                     jQuery('#'+id)
+                        .addClass('thumbnail-full')
                         .removeClass('thumbnail-small')
                         .removeClass('thumbanil-medium')
-                        .addClass('thumbnail-full')
                     
                     post_thumbnails.iso.arrange({filter:'#'+id})  
                     jQuery('.blog-load').hide()
@@ -135,6 +134,7 @@ jQuery(document).ready(function(){
         })
             //------------page
         routes.register('/pages',function(){
+            post_thumbnails.initialized=false 
             page_show('#pages') 
             jQuery('.page-thumbnails .thumbnail')
                 .removeClass('thumbnail-full')

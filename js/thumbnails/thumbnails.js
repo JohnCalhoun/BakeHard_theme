@@ -6,7 +6,8 @@ var posts=function(constants,thumbnail_template,selector,type){
     var thumbnail_small ='thumbnail-small'
     var thumbnail_medium='thumbnail-medium'
     var thumbnail_large ='thumbnail-full'
-
+     
+    this.initialized=false
     this.current_page=0
     this.filter_string="*"
     this.thumbnail_template=thumbnail_template
@@ -31,10 +32,13 @@ var posts=function(constants,thumbnail_template,selector,type){
                 sortBy:'target',
                 filter:filter_s
                 }
-        this.iso=new Isotope(
-            selector,
-            iso_settings
-        );
+        if(!this.initialized){
+            this.iso=new Isotope(
+                selector,
+                iso_settings
+            );
+            this.initialized=true
+        }
         var onResize=function(){
             var grid=jQuery(selector)
 
@@ -171,10 +175,12 @@ var posts=function(constants,thumbnail_template,selector,type){
         var others=card.siblings('.'+thumbnail_medium)
                     .removeClass(thumbnail_medium)
                     .addClass(thumbnail_small)
+        var height=card.height() 
         
         card.toggleClass(thumbnail_medium)
                 .toggleClass(thumbnail_small)
-
+        
+        window.iso=this.iso
         if( card.hasClass(thumbnail_medium) ){
             card.css('left','0px')
             this.stamp(card)
