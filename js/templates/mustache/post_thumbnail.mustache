@@ -1,26 +1,27 @@
-<div id='{{id}}' class="thumbnail thumbnail-small {{#if img_url}}thumbnail-image{{/if}} {{ category_string }}" data-sticky='{{#if sticky }}1{{else}}0{{/if}}'>
-    {{#if img_url }}
-        <img src='{{img_url }}' class="feature-image">
-    {{else}}
-    {{/if}}
-    <div class="thumbnail-title">
-        {{{ title.rendered }}} 
-    </div>
-    <div class="thumbnail-excerpt">
-        {{{ excerpt.rendered }}}
-        <ul class='tag-list'>
-            {{#each tag_strings}}
-            <li> {{this}} </li>
-            {{/each}} 
-        </ul>
-        <div class='post-view-button' >
-            <a class='btn link-button' href='/posts/{{id}}' >View</a>
+<div id='{{id}}' class="thumbnail-container {{ category_string }}" data-sticky='{{#if sticky }}1{{else}}0{{/if}}'>
+    <div  class="thumbnail thumbnail-small hoverable {{#if img_url}}thumbnail-image{{/if}} " >
+        {{#if img_url }}
+            <img src='{{img_url }}' class="feature-image">
+        {{else}}
+        {{/if}}
+        <div class="thumbnail-title">
+            {{{ title.rendered }}} 
+        </div>
+        <div class="thumbnail-excerpt">
+            {{{ excerpt.rendered }}}
+            <ul class='tag-list'>
+                {{#each tag_strings}}
+                <li> {{this}} </li>
+                {{/each}} 
+            </ul>
+            <div class='post-view-button' >
+                <a class='btn link-button' href='/posts/{{id}}' >View</a>
+            </div>
+        </div>
+        <div class="thumbnail-content">
+            <h2>{{{ title.rendered }}}</h2>
+            <hr>
+            {{{ content.rendered }}}
         </div>
     </div>
-    <div class="thumbnail-content">
-        <h2>{{{ title.rendered }}}</h2>
-        <hr>
-        {{{ content.rendered }}}
-    </div>
 </div>
-

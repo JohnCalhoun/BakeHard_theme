@@ -2,12 +2,13 @@ var packery=require('isotope-packery')
 var Isotope=require('isotope-layout')
 
 var posts=function(constants,thumbnail_template,selector,type){   
-    var thumbnail_class='.thumbnail'
+    var thumbnail_class='.thumbnail-container'
     var thumbnail_small ='thumbnail-small'
     var thumbnail_medium='thumbnail-medium'
     var thumbnail_large ='thumbnail-full'
      
     this.initialized=false
+    this.transitioning=true
     this.current_page=0
     this.filter_string="*"
     this.thumbnail_template=thumbnail_template
@@ -62,9 +63,13 @@ var posts=function(constants,thumbnail_template,selector,type){
             }
         }
         this.iso.on('arrangeComplete',onResize)
+        this.iso.on('arrangeComplete',function(){
+            this.transitioning=false
+        }.bind(this))
     }.bind(this)
-     
+    
     this.resize=function(){
+        this.transitioning=true
         this.iso.arrange()
     }.bind(this)
  
@@ -169,35 +174,96 @@ var posts=function(constants,thumbnail_template,selector,type){
         this.stamp_card=null
         this.resize()
     }.bind(this)
-
+    
+    this.old_height={}
     this.open=function(id){  
-        var card=jQuery(id).not('.'+thumbnail_large)
-        var others=card.siblings('.'+thumbnail_medium)
+        if(this.transitioning){
+            return 
+        }
+        var container=jQuery(id)
+        var starting={}
+        var ending={}
+        starting.height=container.outerHeight(true)
+        starting.width=container.outerWidth(true)
+        container.toggleClass('thumbnail-container-full')
+        ending.width=container.outerWidth(true) 
+
+        var card=jQuery(id+' .thumbnail').not('.'+thumbnail_large)
+        var others=container.siblings()
+                    .removeClass('thumbnail-container-full')
+                    .css('height','')
+                    .children('.'+thumbnail_medium)
                     .removeClass(thumbnail_medium)
                     .addClass(thumbnail_small)
-        var height=card.height() 
+                    .css('height','')
+                    .css('width','')
         
-        card.toggleClass(thumbnail_medium)
-                .toggleClass(thumbnail_small)
-        
-        window.iso=this.iso
-        if( card.hasClass(thumbnail_medium) ){
+        if( card.hasClass(thumbnail_small) ){
+            var excerpt=card.children('.thumbnail-excerpt')
+            this.old_height=card.height() 
+            card.removeClass(thumbnail_small)
+                .addClass(thumbnail_medium)
+            
+            card.outerHeight(starting.height) 
+            card.outerWidth(starting.width) 
+
+            excerpt.outerWidth(
+                ending.width
+                -parseInt(excerpt.css('margin-left'))
+                -parseInt(excerpt.css('margin-right'))
+                ) 
+            
+            ending.height=excerpt.outerHeight(true)
+                            +excerpt.siblings('.feature-image').outerHeight(true)
+            container.css('height',ending.height)
+
+            card.outerHeight(ending.height) 
+            card.outerWidth(ending.width) 
+            
+            var left=container.css('left')
+            
+            card.css('left',left)
+            container.css('left','0px') 
+             
+            card.on('transitionend',function(e){
+                var prop=e.originalEvent.propertyName 
+                if(prop != 'box-shadow'){ 
+                    console.log(prop)
+                    container.css('height','')
+                    container.css('width','')
+                    card.css('height','')
+                    card.css('left','')
+                    excerpt.css('width','') 
+                    card.off('transitionend')
+                }
+            })
+
+            this.stamp(container)
             card.css('left','0px')
-            this.stamp(card)
+        
         }else{
-            this.unstamp(card)
+            card.css('height',card.height())
+                .removeClass(thumbnail_medium)
+                .removeClass('hoverable')
+                .addClass(thumbnail_small)
+                .css('width',card.parent().siblings('.grid-sizer').width())
+                .css('height',this.old_height) 
+                .children('.thumbnail-title')
+                .css('width',card.parent().siblings('.grid-sizer').width())
+
+            container.css('height',this.old_height) 
+            
+            card.one('transitionend',function(){
+                card.css('width','')
+                    .css('height','')
+                    .addClass('hoverable')
+                    .children('.thumbnail-title')
+                    .css('width','')
+            
+            })
+            this.unstamp(container)
         }
     }.bind(this)
-//-----------------------------viewing-------------- 
-    this.viewing_id=null
-    this.toggle_view=function(id){
-        this.viewing_id=id
-        var card=jQuery(id)
-        card.removeClass(thumbnail_medium)
-        card.removeClass(thumbnail_small)
-        card.addClass(thumbnail_large)
-    }.bind(this)
-
 }
 
 module.exports=posts

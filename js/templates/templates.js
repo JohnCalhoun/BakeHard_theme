@@ -75,21 +75,21 @@ this["JST"]["js/templates/mustache/page_thumbnail.mustache"] = Handlebars.templa
 },"useData":true});
 
 this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "thumbnail-image";
-},"3":function(container,depth0,helpers,partials,data) {
     return "1";
-},"5":function(container,depth0,helpers,partials,data) {
+},"3":function(container,depth0,helpers,partials,data) {
     return "0";
+},"5":function(container,depth0,helpers,partials,data) {
+    return "thumbnail-image";
 },"7":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <img src='"
+  return "            <img src='"
     + container.escapeExpression(((helper = (helper = helpers.img_url || (depth0 != null ? depth0.img_url : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"img_url","hash":{},"data":data}) : helper)))
     + "' class=\"feature-image\">\n";
 },"9":function(container,depth0,helpers,partials,data) {
     return "";
 },"11":function(container,depth0,helpers,partials,data) {
-    return "            <li> "
+    return "                <li> "
     + container.escapeExpression(container.lambda(depth0, depth0))
     + " </li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -97,27 +97,27 @@ this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.templa
 
   return "<div id='"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "' class=\"thumbnail thumbnail-small "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + " "
+    + "' class=\"thumbnail-container "
     + alias4(((helper = (helper = helpers.category_string || (depth0 != null ? depth0.category_string : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"category_string","hash":{},"data":data}) : helper)))
     + "\" data-sticky='"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.sticky : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.program(5, data, 0),"data":data})) != null ? stack1 : "")
-    + "'>\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.sticky : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "'>\n    <div  class=\"thumbnail thumbnail-small hoverable "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + " \" >\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.program(9, data, 0),"data":data})) != null ? stack1 : "")
-    + "    <div class=\"thumbnail-title\">\n        "
+    + "        <div class=\"thumbnail-title\">\n            "
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + " \n    </div>\n    <div class=\"thumbnail-excerpt\">\n        "
+    + " \n        </div>\n        <div class=\"thumbnail-excerpt\">\n            "
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.excerpt : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + "\n        <ul class='tag-list'>\n"
+    + "\n            <ul class='tag-list'>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tag_strings : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </ul>\n        <div class='post-view-button' >\n            <a class='btn link-button' href='/posts/"
+    + "            </ul>\n            <div class='post-view-button' >\n                <a class='btn link-button' href='/posts/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "' >View</a>\n        </div>\n    </div>\n    <div class=\"thumbnail-content\">\n        <h2>"
+    + "' >View</a>\n            </div>\n        </div>\n        <div class=\"thumbnail-content\">\n            <h2>"
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + "</h2>\n        <hr>\n        "
+    + "</h2>\n            <hr>\n            "
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + "\n    </div>\n</div>\n\n";
+    + "\n        </div>\n    </div>\n</div>\n";
 },"useData":true});
 
 if (typeof exports === 'object' && exports) {module.exports = this["JST"];}

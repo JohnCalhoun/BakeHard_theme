@@ -53,9 +53,12 @@ jQuery(document).ready(function(){
         })
         
         jQuery('.post-thumbnails').on( 'click',    
-                            '.thumbnail',
+                            '.thumbnail-container:has(.thumbnail-small,.thumbnail-medium)',
                             function(e){  
-                                var id=jQuery(e.target).closest('.thumbnail').attr('id')
+                                var id=jQuery(e.target)
+                                            .filter(':not(a)')
+                                            .closest('.thumbnail-container') 
+                                            .attr('id')
                                 post_thumbnails.open('#'+id)
                             })
         jQuery('.page-thumbnails').on( 'click',    
@@ -91,18 +94,25 @@ jQuery(document).ready(function(){
         }
             //------------front
         routes.register('/front',function(){
+            page_thumbnails.initialized=false 
+            post_thumbnails.initialized=false 
             page_show('#front-page') 
         })
             //------------posts
-
         routes.register('/posts',function(){
             page_thumbnails.initialized=false 
             page_show('#posts') 
-            
-            jQuery('.post-thumbnails .thumbnail')
-                .removeClass('thumbnail-full')
-                .removeClass('thumbnail-medium')
+            jQuery('.post-thumbnails .thumbnail-container')
+                .not('.thumbnail-container-full')
+                .children('.thumbnail')
                 .addClass('thumbnail-small')
+                .removeClass('thumbnail-medium')
+                .removeClass('thumbnail-full')
+
+            jQuery('.post-thumbnails .thumbnail-container-full .thumbnail')
+                .removeClass('thumbnail-full')
+                .addClass('thumbnail-medium')
+                
             post_thumbnails.iso.arrange({
                 filter:post_thumbnails.filter_string
             })
@@ -121,10 +131,17 @@ jQuery(document).ready(function(){
             Promise.all([
                 post_load_promise,
                 post_load_sticky_promise]).then(function(){
-                    jQuery('#'+id)
+                    var container=jQuery('#'+id)
+                    container.addClass('thumbnail-container-full')
+                        .css('height','') 
+                        .children('.thumbnail')
                         .addClass('thumbnail-full')
                         .removeClass('thumbnail-small')
-                        .removeClass('thumbanil-medium')
+                        .removeClass('thumbnail-medium')
+                        .css('height','')
+                        .css('width','')
+                        .css('top','0px')
+                        
                     
                     post_thumbnails.iso.arrange({filter:'#'+id})  
                     jQuery('.blog-load').hide()
