@@ -101,21 +101,19 @@ this["JST"]["js/templates/mustache/post_thumbnail.mustache"] = Handlebars.templa
     + alias4(((helper = (helper = helpers.category_string || (depth0 != null ? depth0.category_string : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"category_string","hash":{},"data":data}) : helper)))
     + "\" data-sticky='"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.sticky : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + "'>\n    <div  class=\"thumbnail thumbnail-small hoverable "
+    + "'>\n    <div  class=\"thumbnail thumbnail-small "
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + " \" >\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.img_url : depth0),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.program(9, data, 0),"data":data})) != null ? stack1 : "")
     + "        <div class=\"thumbnail-title\">\n            "
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + " \n        </div>\n        <div class=\"thumbnail-excerpt\">\n            "
+    + "\n        </div>\n        <div class=\"thumbnail-excerpt\">\n            "
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.excerpt : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
     + "\n            <ul class='tag-list'>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tag_strings : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "            </ul>\n            <div class='post-view-button' >\n                <a class='btn link-button' href='/posts/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "' >View</a>\n            </div>\n        </div>\n        <div class=\"thumbnail-content\">\n            <h2>"
-    + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.title : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
-    + "</h2>\n            <hr>\n            "
+    + "' >View</a>\n            </div>\n        </div>\n        <div class=\"thumbnail-content\">\n            <hr>\n            "
     + ((stack1 = alias5(((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.rendered : stack1), depth0)) != null ? stack1 : "")
     + "\n        </div>\n    </div>\n</div>\n";
 },"useData":true});

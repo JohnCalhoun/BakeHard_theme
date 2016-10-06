@@ -140,9 +140,10 @@ jQuery(document).ready(function(){
                         .removeClass('thumbnail-medium')
                         .css('height','')
                         .css('width','')
-                        .css('top','0px')
-                        
                     
+                    if(post_thumbnails.stamp_card){
+                        post_thumbnails.iso.unstamp(container)
+                    }
                     post_thumbnails.iso.arrange({filter:'#'+id})  
                     jQuery('.blog-load').hide()
                     jQuery('.controls').hide()
