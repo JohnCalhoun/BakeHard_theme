@@ -2,17 +2,18 @@
   margin:10px;
   text-align:center;
   li {
+    a{
+      font-family:'Varela Round';
+      font-size:20px;
+    }
     color:black;
     display:inline; 
-    a {
-      color:black;
-    }
+  }
+  li+li:before{
+    content:'| ';
+    font-family:'Varela Round';
   }
 
-  li+li::before{
-    content:"|";
-  }
   .category-tag {
-//        @extend .chip;
   }
 }

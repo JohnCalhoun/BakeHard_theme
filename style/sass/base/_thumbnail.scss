@@ -5,9 +5,14 @@ $card-width: 180px;
     margin:auto;
    
     .grid-sizer {
-      width:$card-width;
+      @media only screen and (max-width:365px){
+        width:100%;
+      }
+      @media only screen and (min-width:365px){
+        width:$card-width;
+      }
     }
-    
+      
     .gutter-sizer{
         width:10px;
     }
@@ -20,10 +25,10 @@ $card-width: 180px;
 .thumbnail-container{ 
   z-index:0; 
 
-  @media only screen and (max-width:360px){
+  @media only screen and (max-width:365px){
     width:100%;
   }
-  @media only screen and (min-width:360px){
+  @media only screen and (min-width:365px){
     width:$card-width;
   }
 }
@@ -47,6 +52,9 @@ $card-width: 180px;
     border-color .4s,
     border-width .1s;
   .thumbnail-title{
+    font-size:20px; 
+    padding:5px 5px 5px 20px;
+    text-align:right;
   }
 }
 
@@ -100,8 +108,6 @@ $card-width: 180px;
 .thumbnail-small{
   width:$card-width;
   .thumbnail-title{
-    padding:5px 5px 5px 20px;
-    text-align:right;
     overflow-wrap:break-word;
   }
   .thumbnail-excerpt{ display:none; }
@@ -120,20 +126,22 @@ $card-width: 180px;
     height:150px; 
   } 
   .thumbnail-title{ 
-    padding:5px 5px 5px 20px;
-    text-align:right;
   }
   .thumbnail-content{ display:none; }
 }
 
 .thumbnail-full{         
+  overflow-x:hidden; 
+  overflow-y:hidden; 
   width:100%;
   border-width:4px;
   .thumbnail-content{
       padding:10px;
   }
-  .feature-image{ display:none; } 
-  .thumbnail-title{}
+  .feature-image{ 
+  } 
+  .thumbnail-title{
+  }
   .thumbnail-excerpt{ display:none; }
 }
 .thumbnail-small:hover,.thumbnail-medium:hover{
@@ -143,12 +151,15 @@ $card-width: 180px;
 .tag-list{
   padding:10px;
   li{
+    a{
+      font-family:'Varela Round';
+      font-size:20px;
+    } 
     display:inline;
     background-color: grey;
     border-radius: 20px;
     color: darken(grey, 60%);
     display: inline-block;
-    font-size:x-small;
     line-height: 1;
     padding: 0.4em 1.2em;
   }

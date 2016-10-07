@@ -183,11 +183,7 @@ var posts=function(constants,thumbnail_template,selector,type){
     
     this.old_height={}
     this.old_container_height={}
-    this.open=function(id){  
-        var content='.thumbnail-excerpt'
-        var starting_class=thumbnail_small
-        var ending_class=thumbnail_medium
-
+    this._toggle=function(id,content,starting_class,ending_class){  
         if(this.transitioning){
             return 
         }
@@ -207,8 +203,8 @@ var posts=function(constants,thumbnail_template,selector,type){
         if( card.hasClass(starting_class) ){
             var ending={} 
             container.addClass('thumbnail-container-full')
+            
             ending.width=container.outerWidth(true) 
-
             this.old_height=card.outerHeight()
             this.old_container_height=container.outerHeight()
                    
@@ -246,32 +242,38 @@ var posts=function(constants,thumbnail_template,selector,type){
 
             card.on('transitionend',function(e){
                 var prop=e.originalEvent.propertyName 
-                if(['width','height'].includes(prop)){
-                    container.css('height','')
-                    container.css('width','')
+                if(['height'].includes(prop)){
+                    container
+                        .css('height','')
+                        .css('width','')
+                    
                     card.css('height','')
-                    card.css('width','')
-                    card.css('left','')
-                    card.off('transitionend')
+                        .css('width','')
+                        .css('left','')
+                        .off('transitionend')
+                    
                     excerpt.css('width','') 
                 }
             })
 
-            this.stamp(container)
             card.css('left','0px') 
+            this.stamp(container)
         }else{
-            card.on('transitionend',function(e){
+            var reset_container=function(e){
                     var prop=e.originalEvent.propertyName 
                     console.log(1,prop) 
                     if(['border-top-width'].includes(prop)){
-                        container.css('height',this.old_container_height) 
-                        container.removeClass('thumbnail-container-full')
+                        container.css('height',this.old_container_height)
+                        
+                        if( starting_class===thumbnail_small){
+                            container.removeClass('thumbnail-container-full')
+                        }
                         this.unstamp(container)
+                        card.off('transitionend',reset_container)
                     }
-                }.bind(this))
-                .on('transitionend',function(e){
+                }.bind(this)
+            var reset_card=function(e){
                     var prop=e.originalEvent.propertyName 
-                    console.log(2,prop) 
                     if(['width','height'].includes(prop)){
                         card.css('width','')
                             .css('height','')
@@ -279,11 +281,18 @@ var posts=function(constants,thumbnail_template,selector,type){
                             .removeClass(ending_class)
                             .addClass(starting_class)
                         card.children('.thumbnail-title').css('height','')
-                        card.off('transitionend')
+                        card.off('transitionend',reset_card)
                     }
-                })
+                } 
+            if( starting_class===thumbnail_small){
+                var new_width=card.parent().siblings('.grid-sizer').width()
+            }else{
+                var new_width=''     
+            }
+            card.on('transitionend',reset_container)
+                .on('transitionend',reset_card)
                 .css('width',
-                    card.parent().siblings('.grid-sizer').width()
+                    new_width 
                 )
                 .css('height',
                     this.old_height
@@ -292,6 +301,101 @@ var posts=function(constants,thumbnail_template,selector,type){
                 )
 
         }
+    }.bind(this)
+
+    this.toggle=function(id){  
+        this._toggle(
+            id,
+            '.thumbnail-excerpt',
+            thumbnail_small,
+            thumbnail_medium
+        )
+    }.bind(this)
+
+    this.open=function(id,from){ 
+        if(this.stamp_card){
+            this.iso.unstamp(jQuery(id))
+        }
+        this.iso.arrange({filter:id}) 
+        var container=jQuery(id)
+            .addClass('thumbnail-container-full') 
+        
+        var card=container
+            .children('.thumbnail') 
+
+        card.outerHeight(card.outerHeight())
+            .removeClass(from)
+            .addClass(thumbnail_large)
+
+        var new_height=0
+        card.children(':visible').each(
+            function(){
+                new_height+=jQuery(this).outerHeight(true)
+            })
+        
+        var tmp=card.children(':not(.thumbnail-title):visible')
+        tmp.css('opacity','0')
+        
+        container.outerHeight(new_height) 
+        this.iso.arrange() 
+        
+        card.outerHeight(card.children('.thumbnail-title').outerHeight(true)) 
+        card.on('transitionend',function(e){
+                var prop=e.originalEvent.propertyName 
+                if(['height'].includes(prop)){
+                    card.outerHeight(new_height) 
+                        .off('transitionend')
+                        .on('transitionend',function(e){
+                            var prop=e.originalEvent.propertyName 
+                            if(['height'].includes(prop)){
+                                card.css('height','') 
+                                card.off('transitionend')
+                            }
+                        })
+                    tmp.css('opacity','1') 
+                    container.css('height','')
+                }
+           }.bind(this))
+   
+    }.bind(this)
+
+    this.close=function(id,to){
+        var container=jQuery(id)
+        var card=container.children('.thumbnail') 
+        card.outerHeight(card.outerHeight())
+            .removeClass(thumbnail_large)
+            .addClass(to)
+        
+        var new_height=0
+        card.children(':visible').each(
+            function(){
+                new_height+=jQuery(this).outerHeight(true)
+            })
+         
+        var tmp=card.children(':not(.thumbnail-title):visible')
+        tmp.css('opacity','0')
+
+        container.outerHeight(new_height) 
+        this.iso.arrange() 
+        
+        card.outerHeight(card.children('.thumbnail-title').outerHeight(true)) 
+        card.on('transitionend',function(e){
+                var prop=e.originalEvent.propertyName 
+                if(['height'].includes(prop)){
+                    card.outerHeight(new_height) 
+                        .off('transitionend')
+                        .on('transitionend',function(e){
+                            var prop=e.originalEvent.propertyName 
+                            if(['height'].includes(prop)){
+                                card.css('height','') 
+                                    .off('transitionend')
+                            }
+                        })
+                    tmp.css('opacity','1') 
+                    container.css('height','')
+                }
+           }.bind(this))
+         
     }.bind(this)
 }
 

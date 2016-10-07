@@ -7,33 +7,50 @@ header {
           display:table;
           margin:auto;
           border-bottom-style:$base-border-style;
-          li {
+          @media only screen and (min-width: 500px){
+            li {
+              font-family:sue_ellen_fransisco;
               padding:10px;
               float:left;
-          }
+              font-size:40px;
+            }
+          }  
+          @media only screen and (max-width: 500px){
+            text-align:center; 
+            width:100%;
+            li {
+              font-family:sue_ellen_fransisco;
+              padding:10px;
+              font-size:40px;
+            } 
+          } 
         } 
     }
     .header-menu{
         width:100%;
         ul {
-            list-style-type:none;
-            display:table;
+           font-family:sue_ellen_fransisco;
+           font-size:30px;
+           list-style-type:none;
+            display:table; 
             @media only screen and (min-width: 500px){
               margin:auto;
               li {
                   padding:10px;
                   float:left;
               }
+              li+li:before{
+                content:'| ';
+                font-family:'Varela Round';
+              }
             }
             @media only screen and (max-width: 500px){
               padding-top:10px; 
               li {
                   padding-left:10px;
-              }
-
+              } 
             }
-        }
-
+      }
     }
 }
 

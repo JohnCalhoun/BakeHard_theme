@@ -59,7 +59,7 @@ jQuery(document).ready(function(){
                                             .filter(':not(a)')
                                             .closest('.thumbnail-container') 
                                             .attr('id')
-                                post_thumbnails.open('#'+id)
+                                post_thumbnails.toggle('#'+id)
                             })
         jQuery('.page-thumbnails').on( 'click',    
                             '.thumbnail',
@@ -101,26 +101,29 @@ jQuery(document).ready(function(){
             //------------posts
         routes.register('/posts',function(){
             page_thumbnails.initialized=false 
-            page_show('#posts') 
+            page_show('#posts')
+            
+            if(jQuery('.post-thumbnails .thumbnail-full').length){
+                post_thumbnails.close(
+                        '#'+jQuery('.post-thumbnails .thumbnail-full')
+                                .parent()
+                                .attr('id'),
+                        'thumbnail-medium'
+                        )
+            }
             jQuery('.post-thumbnails .thumbnail-container')
                 .not('.thumbnail-container-full')
                 .children('.thumbnail')
                 .addClass('thumbnail-small')
                 .removeClass('thumbnail-medium')
-                .removeClass('thumbnail-full')
-
-            jQuery('.post-thumbnails .thumbnail-container-full .thumbnail')
-                .removeClass('thumbnail-full')
-                .addClass('thumbnail-medium')
-                
+                .removeClass('thumbnail-full')        
+        
             post_thumbnails.iso.arrange({
                 filter:post_thumbnails.filter_string
             })
             post_thumbnails.IsotopeInit()
 
             jQuery('.blog-load').show()
-            jQuery('.controls').show()
-            jQuery('.category-list').show()
         })
         routes.register('/posts/filter/:Filter',function(Filter){
             routes.redirect('/posts')
@@ -130,30 +133,21 @@ jQuery(document).ready(function(){
             routes.redirect('/posts')
             Promise.all([
                 post_load_promise,
-                post_load_sticky_promise]).then(function(){
-                    var container=jQuery('#'+id)
-                    container.addClass('thumbnail-container-full')
-                        .css('height','') 
-                        .children('.thumbnail')
-                        .addClass('thumbnail-full')
-                        .removeClass('thumbnail-small')
-                        .removeClass('thumbnail-medium')
-                        .css('height','')
-                        .css('width','')
-                    
-                    if(post_thumbnails.stamp_card){
-                        post_thumbnails.iso.unstamp(container)
-                    }
-                    post_thumbnails.iso.arrange({filter:'#'+id})  
+                post_load_sticky_promise]).then(function(){ 
+                    post_thumbnails.open('#'+id,'thumbnail-medium thumbnail-small')  
                     jQuery('.blog-load').hide()
-                    jQuery('.controls').hide()
-                    jQuery('.category-list').hide()
                 }) 
         })
             //------------page
         routes.register('/pages',function(){
             post_thumbnails.initialized=false 
             page_show('#pages') 
+            if(jQuery('.page-thumbnails .thumbnail-full')){
+                post_thumbnails.close(
+                        jQuery('.thumbnail-full').attr('id'),
+                        'thumbnail-medium'
+                        )
+            }
             jQuery('.page-thumbnails .thumbnail')
                 .removeClass('thumbnail-full')
                 .addClass('thumbnail-small')
@@ -169,7 +163,6 @@ jQuery(document).ready(function(){
                 jQuery('#'+id)
                     .removeClass('thumbnail-small')
                     .addClass('thumbnail-full')
-                page_thumbnails.iso.arrange({filter:'#'+id}) 
             }) 
         })
 
