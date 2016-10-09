@@ -64,7 +64,9 @@ jQuery(document).ready(function(){
         jQuery('.page-thumbnails').on( 'click',    
                             '.thumbnail',
                             function(e){  
-                                var id=jQuery(e.target).closest('.thumbnail').attr('id')
+                                var id=jQuery(e.target)
+                                            .closest('.thumbnail-container')
+                                            .attr('id')
                                 history.pushState(null,null,'#/pages/'+id)
                                 routes.onHashChange()
                             })
@@ -78,10 +80,19 @@ jQuery(document).ready(function(){
                             })
 
         var menu_home=new menu(constants,"Home") 
-        menu_home.get_ids().then(function(ids){
-            var selector='#'+ids.join(',#')
-            page_thumbnails.filter(selector)
-        })        
+        var home_menu_promise=
+
+        page_load_promise
+            .then(function(){ 
+                return menu_home.get_ids()
+            })
+            .then(function(ids){ 
+                var selector='#'+ids.join(',#')
+                page_thumbnails.filter(selector)
+                page_thumbnails.iso.arrange({
+                    filter:page_thumbnails.filter_string
+                })
+            })        
         
         //-------------------routing
         var routes_con=require('./routes/routes.js')
@@ -93,22 +104,23 @@ jQuery(document).ready(function(){
             main.children(id).show()  
         }
             //------------front
-        routes.register('/front',function(){
+        var front_function=function(){
             page_thumbnails.initialized=false 
             post_thumbnails.initialized=false 
             page_show('#front-page') 
-        })
+        }
+        routes.register('/front',front_function)
+        routes.register('/',front_function)
             //------------posts
         routes.register('/posts',function(){
             page_thumbnails.initialized=false 
             page_show('#posts')
             
             if(jQuery('.post-thumbnails .thumbnail-full').length){
-                post_thumbnails.close(
+                post_thumbnails.close_medium(
                         '#'+jQuery('.post-thumbnails .thumbnail-full')
                                 .parent()
-                                .attr('id'),
-                        'thumbnail-medium'
+                                .attr('id')
                         )
             }
             jQuery('.post-thumbnails .thumbnail-container')
@@ -116,11 +128,12 @@ jQuery(document).ready(function(){
                 .children('.thumbnail')
                 .addClass('thumbnail-small')
                 .removeClass('thumbnail-medium')
-                .removeClass('thumbnail-full')        
-        
+                .removeClass('thumbnail-full')     
+
             post_thumbnails.iso.arrange({
                 filter:post_thumbnails.filter_string
             })
+
             post_thumbnails.IsotopeInit()
 
             jQuery('.blog-load').show()
@@ -142,27 +155,22 @@ jQuery(document).ready(function(){
         routes.register('/pages',function(){
             post_thumbnails.initialized=false 
             page_show('#pages') 
-            if(jQuery('.page-thumbnails .thumbnail-full')){
-                post_thumbnails.close(
-                        jQuery('.thumbnail-full').attr('id'),
-                        'thumbnail-medium'
+            if(jQuery('.page-thumbnails .thumbnail-full').length){   
+                page_thumbnails.close_small(
+                        '#'+jQuery('.page-thumbnails .thumbnail-full')
+                            .parent()
+                            .attr('id')
                         )
             }
-            jQuery('.page-thumbnails .thumbnail')
-                .removeClass('thumbnail-full')
-                .addClass('thumbnail-small')
-            
-            page_thumbnails.iso.arrange({
-                filter:page_thumbnails.filter_string
-            })
-            page_thumbnails.IsotopeInit()
+            home_menu_promise
+                .then(function(){
+                    page_thumbnails.IsotopeInit()
+                })
         })
         routes.register('/pages/:id',function(id){
             routes.redirect('/pages')
             page_load_promise.then(function(){
-                jQuery('#'+id)
-                    .removeClass('thumbnail-small')
-                    .addClass('thumbnail-full')
+                page_thumbnails.open('#'+id,'thumbnail-small')  
             }) 
         })
 

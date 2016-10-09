@@ -1,14 +1,15 @@
 $card-width: 180px;
+$break-point:365px; 
 
 .content-thumbnail{
     width:100%;
     margin:auto;
    
     .grid-sizer {
-      @media only screen and (max-width:365px){
+      @media only screen and (max-width:$break-point){
         width:100%;
       }
-      @media only screen and (min-width:365px){
+      @media only screen and (min-width:$break-point){
         width:$card-width;
       }
     }
@@ -25,10 +26,10 @@ $card-width: 180px;
 .thumbnail-container{ 
   z-index:0; 
 
-  @media only screen and (max-width:365px){
+  @media only screen and (max-width:$break-point){
     width:100%;
   }
-  @media only screen and (min-width:365px){
+  @media only screen and (min-width:$break-point){
     width:$card-width;
   }
 }
@@ -60,16 +61,33 @@ $card-width: 180px;
 
 .page-thumbnails {
   .grid-sizer {
+    @media only screen and (max-width:$break-point){
+      width:100%;
+    }
+    @media only screen and (min-width:$break-point){
       width:240px;
+    }
   }
-  .thumbnail {
-    min-height:100px;
+  .thumbnail-container{
+    @media only screen and (max-width:$break-point){
+      width:100%;
+    }
+    @media only screen and (min-width:$break-point){
+      width:240px;
+    }
   }
-  
+  .thumbnail-container-full{ 
+    z-index:1; 
+    width:100%;
+    left:0px; 
+  }
+ 
   .thumbnail-small{
     width:240px;
   }
-  
+  .thumbnail-title{
+    width:236px;
+  }
   .thumbail-full{
     width:100%;
   }
@@ -107,6 +125,7 @@ $card-width: 180px;
 
 .thumbnail-small{
   width:$card-width;
+  z-index:0; 
   .thumbnail-title{
     overflow-wrap:break-word;
   }
@@ -130,7 +149,8 @@ $card-width: 180px;
   .thumbnail-content{ display:none; }
 }
 
-.thumbnail-full{         
+.thumbnail-full{  
+  z-index:1;
   overflow-x:hidden; 
   overflow-y:hidden; 
   width:100%;

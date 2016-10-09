@@ -261,7 +261,6 @@ var posts=function(constants,thumbnail_template,selector,type){
         }else{
             var reset_container=function(e){
                     var prop=e.originalEvent.propertyName 
-                    console.log(1,prop) 
                     if(['border-top-width'].includes(prop)){
                         container.css('height',this.old_container_height)
                         
@@ -313,63 +312,78 @@ var posts=function(constants,thumbnail_template,selector,type){
     }.bind(this)
 
     this.open=function(id,from){ 
+        this.iso.arrange({filter:id}) 
         if(this.stamp_card){
             this.iso.unstamp(jQuery(id))
         }
-        this.iso.arrange({filter:id}) 
         var container=jQuery(id)
             .addClass('thumbnail-container-full') 
         
         var card=container
             .children('.thumbnail') 
+        var wipe=card.children(':not(.thumbnail-title,.feature-image):visible').length
 
         card.outerHeight(card.outerHeight())
+            .outerWidth(card.outerWidth())
             .removeClass(from)
             .addClass(thumbnail_large)
+        
+        card.outerWidth(card.parent().width()) 
+            .on('transitionend',function(e){
+                var new_height=0
 
-        var new_height=0
-        card.children(':visible').each(
-            function(){
-                new_height+=jQuery(this).outerHeight(true)
-            })
-        
-        var tmp=card.children(':not(.thumbnail-title):visible')
-        tmp.css('opacity','0')
-        
-        container.outerHeight(new_height) 
-        this.iso.arrange() 
-        
-        card.outerHeight(card.children('.thumbnail-title').outerHeight(true)) 
-        card.on('transitionend',function(e){
+                card.children(':visible').each(
+                    function(){
+                        new_height+=jQuery(this).outerHeight(true)
+                    }) 
                 var prop=e.originalEvent.propertyName 
-                if(['height'].includes(prop)){
-                    card.outerHeight(new_height) 
-                        .off('transitionend')
-                        .on('transitionend',function(e){
-                            var prop=e.originalEvent.propertyName 
-                            if(['height'].includes(prop)){
-                                card.css('height','') 
-                                card.off('transitionend')
-                            }
-                        })
-                    tmp.css('opacity','1') 
-                    container.css('height','')
-                }
-           }.bind(this))
-   
-    }.bind(this)
+                if(['width'].includes(prop)){
+                    var tmp=card.children(':not(.thumbnail-title):visible')
+                    tmp.css('opacity','0')
+                    container.outerHeight(new_height) 
+                    this.iso.arrange({filter:id}) 
 
-    this.close=function(id,to){
+                    var finish=function(){
+                        card.height(new_height) 
+                            .off('transitionend')
+                            .on('transitionend',function(e){
+                                var prop=e.originalEvent.propertyName 
+                                if(['height'].includes(prop)){
+                                    card.css('height','') 
+                                        .css('width','') 
+                                        .off('transitionend')
+                                }
+                            })
+                        tmp.css('opacity','1') 
+                        container.css('height','')
+                    }
+                    if(wipe){
+                        card.outerHeight(card.children('.thumbnail-title').outerHeight(true)) 
+                        card.on('transitionend',function(e){
+                                var prop=e.originalEvent.propertyName 
+                                if(['height'].includes(prop)){
+                                    finish() 
+                                }
+                           }.bind(this))
+                    }else{
+                        finish()
+                    }
+                }
+            }.bind(this))
+           }.bind(this)
+
+    this.close_medium=function(id){
         var container=jQuery(id)
         var card=container.children('.thumbnail') 
         card.outerHeight(card.outerHeight())
             .removeClass(thumbnail_large)
-            .addClass(to)
+            .addClass(thumbnail_medium)
         
         var new_height=0
         card.children(':visible').each(
             function(){
-                new_height+=jQuery(this).outerHeight(true)
+                var child=jQuery(this)
+                new_height+=child.outerHeight(true)
             })
          
         var tmp=card.children(':not(.thumbnail-title):visible')
@@ -395,7 +409,46 @@ var posts=function(constants,thumbnail_template,selector,type){
                     container.css('height','')
                 }
            }.bind(this))
+    }.bind(this)
+    
+    this.close_small=function(id){
+        var container=jQuery(id)
+        var card=container.children('.thumbnail') 
+        card.css('width','auto') 
+
+        card.height(card.height())
+            .width(card.width())
+            .removeClass(thumbnail_large)
+            .addClass(thumbnail_small)
          
+        var new_height=0
+        card.children(':visible').each(
+            function(){
+                new_height+=jQuery(this).outerHeight(true)
+            })
+        var container_height=new_height
+                +parseInt(card.css('margin-top')) 
+                +parseInt(card.css('margin-bottom')) 
+
+        console.log(container_height) 
+        container.outerHeight(container_height )
+            .toggleClass('thumbnail-container-full')  
+        
+        this.iso.arrange({
+            filter:this.filter_string
+        })
+        card.height(new_height) 
+            .css('width','')
+            .css('z-index','1')
+            .on('transitionend',function(e){
+                var prop=e.originalEvent.propertyName 
+                if(['height'].includes(prop)){
+                    card.css('height','') 
+                        .off('transitionend')
+                        .css('z-index','')
+                    container.css('height','')
+                }
+            })
     }.bind(this)
 }
 

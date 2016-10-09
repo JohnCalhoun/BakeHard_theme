@@ -27,6 +27,9 @@ var routes=function(){
         if( window.location.hash !=this._current){
             this.dispatch(window.location.hash.substring(1))
             this._current=window.location.hash
+        }else if(window.location.hash === ''){
+            window.location.hash='#/'
+            this.check_hash()
         }
     }.bind(this)
    

@@ -1,17 +1,14 @@
-<div id='{{id}}' class="thumbnail thumbnail-small {{ category_string }} {{#if img_url}}thumbnail-image{{/if}}">
-    {{#if img_url }}
-        <img class='thumbnail-image' src='{{img_url }}'>
-    {{/if}}
-    <div class="thumbnail-title">
-        <span class="thumbnail-title activate"> {{{ title.rendered }}} </span>
-    </div>
-    <div class="thumbnail-excerpt">
-        <a class='btn page-view-button link-button' href='/pages/{{id}}' >View</a>
-    </div>
-    <div class="thumbnail-content">
-        <h2>{{{ title.rendered }}}</h2>
-        <hr>
-        {{{ excerpt.rendered }}}
+<div id='{{id}}' class="thumbnail-container {{ category_string }} ">
+    <div class="thumbnail thumbnail-small {{#if img_url}}thumbnail-image{{/if}}">
+        {{#if img_url }}
+            <img class='feature-image' src='{{img_url }}'>
+        {{/if}}
+        <div class="thumbnail-title">
+            {{{ title.rendered }}} 
+        </div>
+        <div class="thumbnail-content">
+            {{{ content.rendered }}}
+        </div>
     </div>
 </div>
 
