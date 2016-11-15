@@ -43,7 +43,11 @@ module.exports=function(grunt){
                     mode:"zip"
                 },
                 files:[
-                   {src:['build/bakehard/**']}
+                   {
+                    expand:true,
+                    cwd:'build/bakehard',
+                    src:['**']
+                   }
                 ]
             }
         },
